@@ -25,7 +25,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/tomochain/tomochain/swarm/storage"
+	"github.com/rupaya-project/rupx/swarm/storage"
 )
 
 func manifest(paths ...string) (manifestReader storage.LazySectionReader) {

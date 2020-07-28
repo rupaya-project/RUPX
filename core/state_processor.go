@@ -22,14 +22,14 @@ import (
 	"runtime"
 	"sync"
 
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/consensus"
-	"github.com/tomochain/tomochain/consensus/misc"
-	"github.com/tomochain/tomochain/core/state"
-	"github.com/tomochain/tomochain/core/types"
-	"github.com/tomochain/tomochain/core/vm"
-	"github.com/tomochain/tomochain/crypto"
-	"github.com/tomochain/tomochain/params"
+	"github.com/rupaya-project/rupx/common"
+	"github.com/rupaya-project/rupx/consensus"
+	"github.com/rupaya-project/rupx/consensus/misc"
+	"github.com/rupaya-project/rupx/core/state"
+	"github.com/rupaya-project/rupx/core/types"
+	"github.com/rupaya-project/rupx/core/vm"
+	"github.com/rupaya-project/rupx/crypto"
+	"github.com/rupaya-project/rupx/params"
 )
 
 // StateProcessor is a basic Processor, which takes care of transitioning

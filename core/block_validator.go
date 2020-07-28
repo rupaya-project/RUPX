@@ -18,15 +18,15 @@ package core
 
 import (
 	"fmt"
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/consensus"
-	"github.com/tomochain/tomochain/consensus/posv"
-	"github.com/tomochain/tomochain/core/state"
-	"github.com/tomochain/tomochain/core/types"
-	"github.com/tomochain/tomochain/log"
-	"github.com/tomochain/tomochain/params"
-	"github.com/tomochain/tomochain/tomox/tradingstate"
-	"github.com/tomochain/tomochain/tomoxlending/lendingstate"
+	"github.com/rupaya-project/rupx/common"
+	"github.com/rupaya-project/rupx/consensus"
+	"github.com/rupaya-project/rupx/consensus/posv"
+	"github.com/rupaya-project/rupx/core/state"
+	"github.com/rupaya-project/rupx/core/types"
+	"github.com/rupaya-project/rupx/log"
+	"github.com/rupaya-project/rupx/params"
+	"github.com/rupaya-project/rupx/tomox/tradingstate"
+	"github.com/rupaya-project/rupx/tomoxlending/lendingstate"
 )
 
 // BlockValidator is responsible for validating block headers, uncles and

@@ -21,12 +21,12 @@ import (
 	"testing"
 	"time"
 
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/core"
-	"github.com/tomochain/tomochain/crypto"
-	"github.com/tomochain/tomochain/eth"
-	"github.com/tomochain/tomochain/ethdb"
-	"github.com/tomochain/tomochain/light"
+	"github.com/rupaya-project/rupx/common"
+	"github.com/rupaya-project/rupx/core"
+	"github.com/rupaya-project/rupx/crypto"
+	"github.com/rupaya-project/rupx/eth"
+	"github.com/rupaya-project/rupx/ethdb"
+	"github.com/rupaya-project/rupx/light"
 )
 
 var testBankSecureTrieKey = secAddr(testBankAddress)

@@ -19,7 +19,7 @@ package core
 import (
 	"crypto/ecdsa"
 	"fmt"
-	"github.com/tomochain/tomochain/consensus"
+	"github.com/rupaya-project/rupx/consensus"
 	"io/ioutil"
 	"math/big"
 	"math/rand"
@@ -27,13 +27,13 @@ import (
 	"testing"
 	"time"
 
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/core/state"
-	"github.com/tomochain/tomochain/core/types"
-	"github.com/tomochain/tomochain/crypto"
-	"github.com/tomochain/tomochain/ethdb"
-	"github.com/tomochain/tomochain/event"
-	"github.com/tomochain/tomochain/params"
+	"github.com/rupaya-project/rupx/common"
+	"github.com/rupaya-project/rupx/core/state"
+	"github.com/rupaya-project/rupx/core/types"
+	"github.com/rupaya-project/rupx/crypto"
+	"github.com/rupaya-project/rupx/ethdb"
+	"github.com/rupaya-project/rupx/event"
+	"github.com/rupaya-project/rupx/params"
 )
 
 // testTxPoolConfig is a transaction pool configuration without stateful disk

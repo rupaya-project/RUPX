@@ -17,9 +17,9 @@
 package vm
 
 import (
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/common/math"
-	"github.com/tomochain/tomochain/params"
+	"github.com/rupaya-project/rupx/common"
+	"github.com/rupaya-project/rupx/common/math"
+	"github.com/rupaya-project/rupx/params"
 )
 
 // memoryGasCosts calculates the quadratic gas for memory expansion. It does so

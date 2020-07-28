@@ -5,10 +5,10 @@ import (
 	"math/big"
 
 	"github.com/pkg/errors"
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/core/state"
-	"github.com/tomochain/tomochain/crypto"
-	"github.com/tomochain/tomochain/log"
+	"github.com/rupaya-project/rupx/common"
+	"github.com/rupaya-project/rupx/core/state"
+	"github.com/rupaya-project/rupx/crypto"
+	"github.com/rupaya-project/rupx/log"
 )
 
 func GetLocMappingAtKey(key common.Hash, slot uint64) *big.Int {

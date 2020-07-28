@@ -22,13 +22,13 @@ import (
 	"sync"
 	"time"
 
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/core"
-	"github.com/tomochain/tomochain/core/state"
-	"github.com/tomochain/tomochain/crypto/sha3"
-	"github.com/tomochain/tomochain/ethdb"
-	"github.com/tomochain/tomochain/log"
-	"github.com/tomochain/tomochain/trie"
+	"github.com/rupaya-project/rupx/common"
+	"github.com/rupaya-project/rupx/core"
+	"github.com/rupaya-project/rupx/core/state"
+	"github.com/rupaya-project/rupx/crypto/sha3"
+	"github.com/rupaya-project/rupx/ethdb"
+	"github.com/rupaya-project/rupx/log"
+	"github.com/rupaya-project/rupx/trie"
 )
 
 // stateReq represents a batch of state fetch requests groupped together into

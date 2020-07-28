@@ -3,17 +3,17 @@ package main
 import (
 	"context"
 	"fmt"
-	"github.com/tomochain/tomochain/contracts/tomox/simulation"
+	"github.com/rupaya-project/rupx/contracts/tomox/simulation"
 	"math/big"
 	"os"
 	"strconv"
 	"time"
 
-	"github.com/tomochain/tomochain/accounts/abi/bind"
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/contracts/tomox"
-	"github.com/tomochain/tomochain/crypto"
-	"github.com/tomochain/tomochain/ethclient"
+	"github.com/rupaya-project/rupx/accounts/abi/bind"
+	"github.com/rupaya-project/rupx/common"
+	"github.com/rupaya-project/rupx/contracts/tomox"
+	"github.com/rupaya-project/rupx/crypto"
+	"github.com/rupaya-project/rupx/ethclient"
 )
 
 func main() {

@@ -23,10 +23,10 @@ import (
 	"io/ioutil"
 	"os"
 
-	"github.com/tomochain/tomochain/core/state"
-	"github.com/tomochain/tomochain/core/vm"
-	"github.com/tomochain/tomochain/log"
-	"github.com/tomochain/tomochain/tests"
+	"github.com/rupaya-project/rupx/core/state"
+	"github.com/rupaya-project/rupx/core/vm"
+	"github.com/rupaya-project/rupx/log"
+	"github.com/rupaya-project/rupx/tests"
 
 	cli "gopkg.in/urfave/cli.v1"
 )

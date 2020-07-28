@@ -20,11 +20,11 @@ import (
 	"bytes"
 	"context"
 
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/core"
-	"github.com/tomochain/tomochain/core/types"
-	"github.com/tomochain/tomochain/crypto"
-	"github.com/tomochain/tomochain/rlp"
+	"github.com/rupaya-project/rupx/common"
+	"github.com/rupaya-project/rupx/core"
+	"github.com/rupaya-project/rupx/core/types"
+	"github.com/rupaya-project/rupx/crypto"
+	"github.com/rupaya-project/rupx/rlp"
 )
 
 var sha3_nil = crypto.Keccak256Hash(nil)

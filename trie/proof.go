@@ -20,11 +20,11 @@ import (
 	"bytes"
 	"fmt"
 
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/crypto"
-	"github.com/tomochain/tomochain/ethdb"
-	"github.com/tomochain/tomochain/log"
-	"github.com/tomochain/tomochain/rlp"
+	"github.com/rupaya-project/rupx/common"
+	"github.com/rupaya-project/rupx/crypto"
+	"github.com/rupaya-project/rupx/ethdb"
+	"github.com/rupaya-project/rupx/log"
+	"github.com/rupaya-project/rupx/rlp"
 )
 
 // Prove constructs a merkle proof for key. The result contains all encoded nodes

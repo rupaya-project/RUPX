@@ -28,9 +28,9 @@ import (
 	"strings"
 
 	"github.com/docker/docker/pkg/reexec"
-	"github.com/tomochain/tomochain/log"
-	"github.com/tomochain/tomochain/node"
-	"github.com/tomochain/tomochain/p2p/discover"
+	"github.com/rupaya-project/rupx/log"
+	"github.com/rupaya-project/rupx/node"
+	"github.com/rupaya-project/rupx/p2p/discover"
 )
 
 // DockerAdapter is a NodeAdapter which runs simulation nodes inside Docker

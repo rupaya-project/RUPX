@@ -20,8 +20,8 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/crypto"
+	"github.com/rupaya-project/rupx/common"
+	"github.com/rupaya-project/rupx/crypto"
 )
 
 func TestConfig(t *testing.T) {

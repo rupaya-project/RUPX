@@ -19,10 +19,10 @@ package les
 import (
 	"context"
 
-	"github.com/tomochain/tomochain/core"
-	"github.com/tomochain/tomochain/ethdb"
-	"github.com/tomochain/tomochain/light"
-	"github.com/tomochain/tomochain/log"
+	"github.com/rupaya-project/rupx/core"
+	"github.com/rupaya-project/rupx/ethdb"
+	"github.com/rupaya-project/rupx/light"
+	"github.com/rupaya-project/rupx/log"
 )
 
 // LesOdr implements light.OdrBackend

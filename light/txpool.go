@@ -22,15 +22,15 @@ import (
 	"sync"
 	"time"
 
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/core"
-	"github.com/tomochain/tomochain/core/state"
-	"github.com/tomochain/tomochain/core/types"
-	"github.com/tomochain/tomochain/ethdb"
-	"github.com/tomochain/tomochain/event"
-	"github.com/tomochain/tomochain/log"
-	"github.com/tomochain/tomochain/params"
-	"github.com/tomochain/tomochain/rlp"
+	"github.com/rupaya-project/rupx/common"
+	"github.com/rupaya-project/rupx/core"
+	"github.com/rupaya-project/rupx/core/state"
+	"github.com/rupaya-project/rupx/core/types"
+	"github.com/rupaya-project/rupx/ethdb"
+	"github.com/rupaya-project/rupx/event"
+	"github.com/rupaya-project/rupx/log"
+	"github.com/rupaya-project/rupx/params"
+	"github.com/rupaya-project/rupx/rlp"
 )
 
 const (

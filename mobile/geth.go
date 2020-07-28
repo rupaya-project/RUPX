@@ -24,17 +24,17 @@ import (
 	"fmt"
 	"path/filepath"
 
-	"github.com/tomochain/tomochain/core"
-	"github.com/tomochain/tomochain/eth"
-	"github.com/tomochain/tomochain/eth/downloader"
-	"github.com/tomochain/tomochain/ethclient"
-	"github.com/tomochain/tomochain/ethstats"
-	"github.com/tomochain/tomochain/les"
-	"github.com/tomochain/tomochain/node"
-	"github.com/tomochain/tomochain/p2p"
-	"github.com/tomochain/tomochain/p2p/nat"
-	"github.com/tomochain/tomochain/params"
-	whisper "github.com/tomochain/tomochain/whisper/whisperv6"
+	"github.com/rupaya-project/rupx/core"
+	"github.com/rupaya-project/rupx/eth"
+	"github.com/rupaya-project/rupx/eth/downloader"
+	"github.com/rupaya-project/rupx/ethclient"
+	"github.com/rupaya-project/rupx/ethstats"
+	"github.com/rupaya-project/rupx/les"
+	"github.com/rupaya-project/rupx/node"
+	"github.com/rupaya-project/rupx/p2p"
+	"github.com/rupaya-project/rupx/p2p/nat"
+	"github.com/rupaya-project/rupx/params"
+	whisper "github.com/rupaya-project/rupx/whisper/whisperv6"
 )
 
 // NodeConfig represents the collection of configuration values to fine tune the Geth

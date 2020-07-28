@@ -21,12 +21,12 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/core/state"
-	"github.com/tomochain/tomochain/core/types"
-	"github.com/tomochain/tomochain/crypto"
-	"github.com/tomochain/tomochain/ethdb"
-	"github.com/tomochain/tomochain/trie"
+	"github.com/rupaya-project/rupx/common"
+	"github.com/rupaya-project/rupx/core/state"
+	"github.com/rupaya-project/rupx/core/types"
+	"github.com/rupaya-project/rupx/crypto"
+	"github.com/rupaya-project/rupx/ethdb"
+	"github.com/rupaya-project/rupx/trie"
 )
 
 func NewState(ctx context.Context, head *types.Header, odr OdrBackend) *state.StateDB {

@@ -19,8 +19,8 @@ package trie
 import (
 	"fmt"
 
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/log"
+	"github.com/rupaya-project/rupx/common"
+	"github.com/rupaya-project/rupx/log"
 )
 
 // SecureTrie wraps a trie with key hashing. In a secure trie, all

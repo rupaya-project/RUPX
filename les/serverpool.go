@@ -27,13 +27,13 @@ import (
 	"sync"
 	"time"
 
-	"github.com/tomochain/tomochain/common/mclock"
-	"github.com/tomochain/tomochain/ethdb"
-	"github.com/tomochain/tomochain/log"
-	"github.com/tomochain/tomochain/p2p"
-	"github.com/tomochain/tomochain/p2p/discover"
-	"github.com/tomochain/tomochain/p2p/discv5"
-	"github.com/tomochain/tomochain/rlp"
+	"github.com/rupaya-project/rupx/common/mclock"
+	"github.com/rupaya-project/rupx/ethdb"
+	"github.com/rupaya-project/rupx/log"
+	"github.com/rupaya-project/rupx/p2p"
+	"github.com/rupaya-project/rupx/p2p/discover"
+	"github.com/rupaya-project/rupx/p2p/discv5"
+	"github.com/rupaya-project/rupx/rlp"
 )
 
 const (

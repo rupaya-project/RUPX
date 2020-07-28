@@ -3,8 +3,8 @@ package lendingstate
 import (
 	"encoding/json"
 	"errors"
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/log"
+	"github.com/rupaya-project/rupx/common"
+	"github.com/rupaya-project/rupx/log"
 	"math/big"
 )
 

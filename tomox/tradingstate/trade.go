@@ -5,8 +5,8 @@ import (
 	"time"
 
 	"github.com/globalsign/mgo/bson"
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/crypto/sha3"
+	"github.com/rupaya-project/rupx/common"
+	"github.com/rupaya-project/rupx/crypto/sha3"
 )
 
 const (

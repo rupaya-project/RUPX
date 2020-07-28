@@ -21,11 +21,11 @@ import (
 	"net"
 	"time"
 
-	"github.com/tomochain/tomochain/contracts/chequebook"
-	"github.com/tomochain/tomochain/p2p/discover"
-	"github.com/tomochain/tomochain/swarm/network/kademlia"
-	"github.com/tomochain/tomochain/swarm/services/swap"
-	"github.com/tomochain/tomochain/swarm/storage"
+	"github.com/rupaya-project/rupx/contracts/chequebook"
+	"github.com/rupaya-project/rupx/p2p/discover"
+	"github.com/rupaya-project/rupx/swarm/network/kademlia"
+	"github.com/rupaya-project/rupx/swarm/services/swap"
+	"github.com/rupaya-project/rupx/swarm/storage"
 )
 
 /*

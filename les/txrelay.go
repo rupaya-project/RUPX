@@ -19,8 +19,8 @@ package les
 import (
 	"sync"
 
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/core/types"
+	"github.com/rupaya-project/rupx/common"
+	"github.com/rupaya-project/rupx/core/types"
 )
 
 type ltrInfo struct {

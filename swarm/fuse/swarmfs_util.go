@@ -24,7 +24,7 @@ import (
 	"os/exec"
 	"runtime"
 
-	"github.com/tomochain/tomochain/log"
+	"github.com/rupaya-project/rupx/log"
 )
 
 func externalUnmount(mountPoint string) error {

@@ -19,13 +19,13 @@ package eth
 import (
 	"time"
 
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/common/bitutil"
-	"github.com/tomochain/tomochain/core"
-	"github.com/tomochain/tomochain/core/bloombits"
-	"github.com/tomochain/tomochain/core/types"
-	"github.com/tomochain/tomochain/ethdb"
-	"github.com/tomochain/tomochain/params"
+	"github.com/rupaya-project/rupx/common"
+	"github.com/rupaya-project/rupx/common/bitutil"
+	"github.com/rupaya-project/rupx/core"
+	"github.com/rupaya-project/rupx/core/bloombits"
+	"github.com/rupaya-project/rupx/core/types"
+	"github.com/rupaya-project/rupx/ethdb"
+	"github.com/rupaya-project/rupx/params"
 )
 
 const (

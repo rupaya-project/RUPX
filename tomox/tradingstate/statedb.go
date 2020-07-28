@@ -23,10 +23,10 @@ import (
 	"sort"
 	"sync"
 
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/log"
-	"github.com/tomochain/tomochain/rlp"
-	"github.com/tomochain/tomochain/trie"
+	"github.com/rupaya-project/rupx/common"
+	"github.com/rupaya-project/rupx/log"
+	"github.com/rupaya-project/rupx/rlp"
+	"github.com/rupaya-project/rupx/trie"
 )
 
 type revision struct {

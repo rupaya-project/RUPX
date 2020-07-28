@@ -29,15 +29,15 @@ import (
 	"unicode"
 
 	"github.com/naoina/toml"
-	"github.com/tomochain/tomochain/cmd/utils"
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/eth"
-	"github.com/tomochain/tomochain/internal/debug"
-	"github.com/tomochain/tomochain/log"
-	"github.com/tomochain/tomochain/node"
-	"github.com/tomochain/tomochain/params"
-	"github.com/tomochain/tomochain/tomox"
-	whisper "github.com/tomochain/tomochain/whisper/whisperv6"
+	"github.com/rupaya-project/rupx/cmd/utils"
+	"github.com/rupaya-project/rupx/common"
+	"github.com/rupaya-project/rupx/eth"
+	"github.com/rupaya-project/rupx/internal/debug"
+	"github.com/rupaya-project/rupx/log"
+	"github.com/rupaya-project/rupx/node"
+	"github.com/rupaya-project/rupx/params"
+	"github.com/rupaya-project/rupx/tomox"
+	whisper "github.com/rupaya-project/rupx/whisper/whisperv6"
 )
 
 var (

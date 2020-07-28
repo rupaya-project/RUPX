@@ -20,14 +20,14 @@ import (
 	"fmt"
 	"math/big"
 
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/consensus"
-	"github.com/tomochain/tomochain/consensus/misc"
-	"github.com/tomochain/tomochain/core/state"
-	"github.com/tomochain/tomochain/core/types"
-	"github.com/tomochain/tomochain/core/vm"
-	"github.com/tomochain/tomochain/ethdb"
-	"github.com/tomochain/tomochain/params"
+	"github.com/rupaya-project/rupx/common"
+	"github.com/rupaya-project/rupx/consensus"
+	"github.com/rupaya-project/rupx/consensus/misc"
+	"github.com/rupaya-project/rupx/core/state"
+	"github.com/rupaya-project/rupx/core/types"
+	"github.com/rupaya-project/rupx/core/vm"
+	"github.com/rupaya-project/rupx/ethdb"
+	"github.com/rupaya-project/rupx/params"
 )
 
 // So we can deterministically seed different blockchains

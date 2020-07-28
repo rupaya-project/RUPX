@@ -24,7 +24,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/tomochain/tomochain/metrics"
+	"github.com/rupaya-project/rupx/metrics"
 )
 
 /*

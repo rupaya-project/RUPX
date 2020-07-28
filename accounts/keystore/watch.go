@@ -21,7 +21,7 @@ package keystore
 import (
 	"time"
 
-	"github.com/tomochain/tomochain/log"
+	"github.com/rupaya-project/rupx/log"
 	"github.com/rjeczalik/notify"
 )
 

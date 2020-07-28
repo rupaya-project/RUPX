@@ -20,10 +20,10 @@ import (
 	"math/big"
 	"testing"
 
-	"github.com/tomochain/tomochain/consensus/ethash"
-	"github.com/tomochain/tomochain/core/vm"
-	"github.com/tomochain/tomochain/ethdb"
-	"github.com/tomochain/tomochain/params"
+	"github.com/rupaya-project/rupx/consensus/ethash"
+	"github.com/rupaya-project/rupx/core/vm"
+	"github.com/rupaya-project/rupx/ethdb"
+	"github.com/rupaya-project/rupx/params"
 )
 
 // Tests that DAO-fork enabled clients can properly filter out fork-commencing

@@ -25,14 +25,14 @@ import (
 	"runtime"
 	"strings"
 
-	"github.com/tomochain/tomochain/accounts"
-	"github.com/tomochain/tomochain/accounts/keystore"
-	"github.com/tomochain/tomochain/accounts/usbwallet"
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/crypto"
-	"github.com/tomochain/tomochain/log"
-	"github.com/tomochain/tomochain/p2p"
-	"github.com/tomochain/tomochain/p2p/discover"
+	"github.com/rupaya-project/rupx/accounts"
+	"github.com/rupaya-project/rupx/accounts/keystore"
+	"github.com/rupaya-project/rupx/accounts/usbwallet"
+	"github.com/rupaya-project/rupx/common"
+	"github.com/rupaya-project/rupx/crypto"
+	"github.com/rupaya-project/rupx/log"
+	"github.com/rupaya-project/rupx/p2p"
+	"github.com/rupaya-project/rupx/p2p/discover"
 )
 
 const (

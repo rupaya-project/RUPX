@@ -19,9 +19,9 @@ package keystore
 import (
 	"math/big"
 
-	ethereum "github.com/tomochain/tomochain"
-	"github.com/tomochain/tomochain/accounts"
-	"github.com/tomochain/tomochain/core/types"
+	ethereum "github.com/rupaya-project/rupx"
+	"github.com/rupaya-project/rupx/accounts"
+	"github.com/rupaya-project/rupx/core/types"
 )
 
 // keystoreWallet implements the accounts.Wallet interface for the original

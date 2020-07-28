@@ -26,8 +26,8 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/log"
+	"github.com/rupaya-project/rupx/common"
+	"github.com/rupaya-project/rupx/log"
 )
 
 // faucetDockerfile is the Dockerfile required to build an faucet container to

@@ -6,8 +6,8 @@ import (
 	"encoding/json"
 	"math/big"
 
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/common/math"
+	"github.com/rupaya-project/rupx/common"
+	"github.com/rupaya-project/rupx/common/math"
 )
 
 var _ = (*difficultyTestMarshaling)(nil)

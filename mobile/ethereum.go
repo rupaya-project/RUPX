@@ -21,8 +21,8 @@ package geth
 import (
 	"errors"
 
-	ethereum "github.com/tomochain/tomochain"
-	"github.com/tomochain/tomochain/common"
+	ethereum "github.com/rupaya-project/rupx"
+	"github.com/rupaya-project/rupx/common"
 )
 
 // Subscription represents an event subscription where events are

@@ -32,9 +32,9 @@ import (
 	"io/ioutil"
 	"sync"
 
-	"github.com/tomochain/tomochain/log"
-	"github.com/tomochain/tomochain/metrics"
-	"github.com/tomochain/tomochain/rlp"
+	"github.com/rupaya-project/rupx/log"
+	"github.com/rupaya-project/rupx/metrics"
+	"github.com/rupaya-project/rupx/rlp"
 	"github.com/syndtr/goleveldb/leveldb"
 	"github.com/syndtr/goleveldb/leveldb/iterator"
 )

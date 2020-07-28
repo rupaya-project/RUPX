@@ -30,8 +30,8 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/tomochain/tomochain/cmd/utils"
-	swarm "github.com/tomochain/tomochain/swarm/api/client"
+	"github.com/rupaya-project/rupx/cmd/utils"
+	swarm "github.com/rupaya-project/rupx/swarm/api/client"
 	"gopkg.in/urfave/cli.v1"
 )
 

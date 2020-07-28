@@ -20,8 +20,8 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/ethdb"
+	"github.com/rupaya-project/rupx/common"
+	"github.com/rupaya-project/rupx/ethdb"
 	"gopkg.in/karalabe/cookiejar.v2/collections/prque"
 )
 

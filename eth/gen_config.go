@@ -5,12 +5,12 @@ package eth
 import (
 	"math/big"
 
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/common/hexutil"
-	"github.com/tomochain/tomochain/consensus/ethash"
-	"github.com/tomochain/tomochain/core"
-	"github.com/tomochain/tomochain/eth/downloader"
-	"github.com/tomochain/tomochain/eth/gasprice"
+	"github.com/rupaya-project/rupx/common"
+	"github.com/rupaya-project/rupx/common/hexutil"
+	"github.com/rupaya-project/rupx/consensus/ethash"
+	"github.com/rupaya-project/rupx/core"
+	"github.com/rupaya-project/rupx/eth/downloader"
+	"github.com/rupaya-project/rupx/eth/gasprice"
 )
 
 var _ = (*configMarshaling)(nil)

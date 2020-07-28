@@ -23,8 +23,8 @@ import (
 	"math/rand"
 	"reflect"
 
-	"github.com/tomochain/tomochain/common/hexutil"
-	"github.com/tomochain/tomochain/crypto/sha3"
+	"github.com/rupaya-project/rupx/common/hexutil"
+	"github.com/rupaya-project/rupx/crypto/sha3"
 )
 
 const (

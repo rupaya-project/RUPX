@@ -4,8 +4,8 @@ import (
 	"math/big"
 	"os"
 
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/crypto"
+	"github.com/rupaya-project/rupx/common"
+	"github.com/rupaya-project/rupx/crypto"
 )
 
 var (

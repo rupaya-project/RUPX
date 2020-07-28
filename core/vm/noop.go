@@ -19,8 +19,8 @@ package vm
 import (
 	"math/big"
 
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/core/types"
+	"github.com/rupaya-project/rupx/common"
+	"github.com/rupaya-project/rupx/core/types"
 )
 
 func NoopCanTransfer(db StateDB, from common.Address, balance *big.Int) bool {

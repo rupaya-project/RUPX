@@ -20,17 +20,17 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/tomochain/tomochain/log"
+	"github.com/rupaya-project/rupx/log"
 )
 
 /*
 http roundtripper to register for bzz url scheme
-see https://github.com/tomochain/tomochain/issues/2040
+see https://github.com/rupaya-project/rupx/issues/2040
 Usage:
 
 import (
- "github.com/tomochain/tomochain/common/httpclient"
- "github.com/tomochain/tomochain/swarm/api/http"
+ "github.com/rupaya-project/rupx/common/httpclient"
+ "github.com/rupaya-project/rupx/swarm/api/http"
 )
 client := httpclient.New()
 // for (private) swarm proxy running locally

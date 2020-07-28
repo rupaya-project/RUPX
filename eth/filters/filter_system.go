@@ -25,12 +25,12 @@ import (
 	"sync"
 	"time"
 
-	ethereum "github.com/tomochain/tomochain"
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/core"
-	"github.com/tomochain/tomochain/core/types"
-	"github.com/tomochain/tomochain/event"
-	"github.com/tomochain/tomochain/rpc"
+	ethereum "github.com/rupaya-project/rupx"
+	"github.com/rupaya-project/rupx/common"
+	"github.com/rupaya-project/rupx/core"
+	"github.com/rupaya-project/rupx/core/types"
+	"github.com/rupaya-project/rupx/event"
+	"github.com/rupaya-project/rupx/rpc"
 )
 
 // Type determines the kind of filter and is used to put the filter in to

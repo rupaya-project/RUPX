@@ -23,13 +23,13 @@ import (
 	"testing"
 	"time"
 
-	"github.com/tomochain/tomochain/accounts/abi/bind"
-	"github.com/tomochain/tomochain/accounts/abi/bind/backends"
-	"github.com/tomochain/tomochain/common"
-	contractValidator "github.com/tomochain/tomochain/contracts/validator/contract"
-	"github.com/tomochain/tomochain/core"
-	"github.com/tomochain/tomochain/crypto"
-	"github.com/tomochain/tomochain/log"
+	"github.com/rupaya-project/rupx/accounts/abi/bind"
+	"github.com/rupaya-project/rupx/accounts/abi/bind/backends"
+	"github.com/rupaya-project/rupx/common"
+	contractValidator "github.com/rupaya-project/rupx/contracts/validator/contract"
+	"github.com/rupaya-project/rupx/core"
+	"github.com/rupaya-project/rupx/crypto"
+	"github.com/rupaya-project/rupx/log"
 )
 
 var (

@@ -7,8 +7,8 @@ import (
 	"errors"
 	"math/big"
 
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/common/hexutil"
+	"github.com/rupaya-project/rupx/common"
+	"github.com/rupaya-project/rupx/common/hexutil"
 )
 
 var _ = (*headerMarshaling)(nil)

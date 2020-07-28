@@ -5,9 +5,9 @@ import (
 	"math/big"
 	"testing"
 
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/core/types"
-	"github.com/tomochain/tomochain/params"
+	"github.com/rupaya-project/rupx/common"
+	"github.com/rupaya-project/rupx/core/types"
+	"github.com/rupaya-project/rupx/params"
 )
 
 func TestGetM1M2FromCheckpointHeader(t *testing.T) {

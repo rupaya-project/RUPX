@@ -28,9 +28,9 @@ import (
 	"strings"
 	"time"
 
-	"github.com/tomochain/tomochain/log"
-	"github.com/tomochain/tomochain/metrics"
-	"github.com/tomochain/tomochain/swarm/api"
+	"github.com/rupaya-project/rupx/log"
+	"github.com/rupaya-project/rupx/metrics"
+	"github.com/rupaya-project/rupx/swarm/api"
 )
 
 //templateMap holds a mapping of an HTTP error code to a template

@@ -28,10 +28,10 @@ import (
 	mrand "math/rand"
 	"strconv"
 
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/crypto"
-	"github.com/tomochain/tomochain/crypto/ecies"
-	"github.com/tomochain/tomochain/log"
+	"github.com/rupaya-project/rupx/common"
+	"github.com/rupaya-project/rupx/crypto"
+	"github.com/rupaya-project/rupx/crypto/ecies"
+	"github.com/rupaya-project/rupx/log"
 )
 
 // MessageParams specifies the exact way a message should be wrapped

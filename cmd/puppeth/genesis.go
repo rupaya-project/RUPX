@@ -21,11 +21,11 @@ import (
 	"errors"
 	"math"
 
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/common/hexutil"
-	"github.com/tomochain/tomochain/consensus/ethash"
-	"github.com/tomochain/tomochain/core"
-	"github.com/tomochain/tomochain/params"
+	"github.com/rupaya-project/rupx/common"
+	"github.com/rupaya-project/rupx/common/hexutil"
+	"github.com/rupaya-project/rupx/consensus/ethash"
+	"github.com/rupaya-project/rupx/core"
+	"github.com/rupaya-project/rupx/params"
 )
 
 // cppEthereumGenesisSpec represents the genesis specification format used by the

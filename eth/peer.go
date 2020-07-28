@@ -24,10 +24,10 @@ import (
 	"time"
 
 	mapset "github.com/deckarep/golang-set"
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/core/types"
-	"github.com/tomochain/tomochain/p2p"
-	"github.com/tomochain/tomochain/rlp"
+	"github.com/rupaya-project/rupx/common"
+	"github.com/rupaya-project/rupx/core/types"
+	"github.com/rupaya-project/rupx/p2p"
+	"github.com/rupaya-project/rupx/rlp"
 )
 
 var (

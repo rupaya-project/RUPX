@@ -7,10 +7,10 @@ import (
 	"errors"
 	"math/big"
 
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/common/hexutil"
-	"github.com/tomochain/tomochain/common/math"
-	"github.com/tomochain/tomochain/params"
+	"github.com/rupaya-project/rupx/common"
+	"github.com/rupaya-project/rupx/common/hexutil"
+	"github.com/rupaya-project/rupx/common/math"
+	"github.com/rupaya-project/rupx/params"
 )
 
 var _ = (*genesisSpecMarshaling)(nil)

@@ -22,7 +22,7 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/tomochain/tomochain/common"
+	"github.com/rupaya-project/rupx/common"
 )
 
 type keyStorePlain struct {

@@ -21,11 +21,11 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/core/types"
-	"github.com/tomochain/tomochain/eth/downloader"
-	"github.com/tomochain/tomochain/log"
-	"github.com/tomochain/tomochain/p2p/discover"
+	"github.com/rupaya-project/rupx/common"
+	"github.com/rupaya-project/rupx/core/types"
+	"github.com/rupaya-project/rupx/eth/downloader"
+	"github.com/rupaya-project/rupx/log"
+	"github.com/rupaya-project/rupx/p2p/discover"
 )
 
 const (

@@ -20,7 +20,7 @@ import (
 	"fmt"
 	"math/big"
 
-	"github.com/tomochain/tomochain/common"
+	"github.com/rupaya-project/rupx/common"
 )
 
 var (

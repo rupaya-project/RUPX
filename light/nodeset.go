@@ -20,10 +20,10 @@ import (
 	"errors"
 	"sync"
 
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/crypto"
-	"github.com/tomochain/tomochain/ethdb"
-	"github.com/tomochain/tomochain/rlp"
+	"github.com/rupaya-project/rupx/common"
+	"github.com/rupaya-project/rupx/crypto"
+	"github.com/rupaya-project/rupx/ethdb"
+	"github.com/rupaya-project/rupx/rlp"
 )
 
 // NodeSet stores a set of trie nodes. It implements trie.Database and can also

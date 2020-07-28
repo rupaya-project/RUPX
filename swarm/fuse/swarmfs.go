@@ -17,7 +17,7 @@
 package fuse
 
 import (
-	"github.com/tomochain/tomochain/swarm/api"
+	"github.com/rupaya-project/rupx/swarm/api"
 	"sync"
 	"time"
 )

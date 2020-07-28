@@ -20,7 +20,7 @@ import (
 	"fmt"
 	"sort"
 
-	"github.com/tomochain/tomochain/log"
+	"github.com/rupaya-project/rupx/log"
 )
 
 // deployEthstats queries the user for various input on deploying an ethstats

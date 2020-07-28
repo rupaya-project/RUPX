@@ -17,7 +17,7 @@
 package lendingstate
 
 import (
-	"github.com/tomochain/tomochain/common"
+	"github.com/rupaya-project/rupx/common"
 	"math/big"
 )
 

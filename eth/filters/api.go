@@ -25,13 +25,13 @@ import (
 	"sync"
 	"time"
 
-	ethereum "github.com/tomochain/tomochain"
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/common/hexutil"
-	"github.com/tomochain/tomochain/core/types"
-	"github.com/tomochain/tomochain/ethdb"
-	"github.com/tomochain/tomochain/event"
-	"github.com/tomochain/tomochain/rpc"
+	ethereum "github.com/rupaya-project/rupx"
+	"github.com/rupaya-project/rupx/common"
+	"github.com/rupaya-project/rupx/common/hexutil"
+	"github.com/rupaya-project/rupx/core/types"
+	"github.com/rupaya-project/rupx/ethdb"
+	"github.com/rupaya-project/rupx/event"
+	"github.com/rupaya-project/rupx/rpc"
 )
 
 var (

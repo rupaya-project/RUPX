@@ -22,8 +22,8 @@ import (
 	"io"
 	"sort"
 
-	"github.com/tomochain/tomochain/cmd/utils"
-	"github.com/tomochain/tomochain/internal/debug"
+	"github.com/rupaya-project/rupx/cmd/utils"
+	"github.com/rupaya-project/rupx/internal/debug"
 	"gopkg.in/urfave/cli.v1"
 )
 

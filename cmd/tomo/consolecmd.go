@@ -24,10 +24,10 @@ import (
 	"strings"
 	"syscall"
 
-	"github.com/tomochain/tomochain/cmd/utils"
-	"github.com/tomochain/tomochain/console"
-	"github.com/tomochain/tomochain/node"
-	"github.com/tomochain/tomochain/rpc"
+	"github.com/rupaya-project/rupx/cmd/utils"
+	"github.com/rupaya-project/rupx/console"
+	"github.com/rupaya-project/rupx/node"
+	"github.com/rupaya-project/rupx/rpc"
 	"gopkg.in/urfave/cli.v1"
 )
 
@@ -43,7 +43,7 @@ var (
 		Description: `
 The Tomo console is an interactive shell for the JavaScript runtime environment
 which exposes a node admin interface as well as the Ðapp JavaScript API.
-See https://github.com/tomochain/tomochain/wiki/JavaScript-Console.`,
+See https://github.com/rupaya-project/rupx/wiki/JavaScript-Console.`,
 	}
 
 	attachCommand = cli.Command{
@@ -56,7 +56,7 @@ See https://github.com/tomochain/tomochain/wiki/JavaScript-Console.`,
 		Description: `
 The Tomo console is an interactive shell for the JavaScript runtime environment
 which exposes a node admin interface as well as the Ðapp JavaScript API.
-See https://github.com/tomochain/tomochain/wiki/JavaScript-Console.
+See https://github.com/rupaya-project/rupx/wiki/JavaScript-Console.
 This command allows to open a console on a running tomo node.`,
 	}
 
@@ -69,7 +69,7 @@ This command allows to open a console on a running tomo node.`,
 		Category:  "CONSOLE COMMANDS",
 		Description: `
 The JavaScript VM exposes a node admin interface as well as the Ðapp
-JavaScript API. See https://github.com/tomochain/tomochain/wiki/JavaScript-Console`,
+JavaScript API. See https://github.com/rupaya-project/rupx/wiki/JavaScript-Console`,
 	}
 )
 

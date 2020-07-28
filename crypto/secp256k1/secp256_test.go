@@ -24,8 +24,8 @@ import (
 	"encoding/hex"
 	"testing"
 
-	"github.com/tomochain/tomochain/common/math"
-	"github.com/tomochain/tomochain/crypto/randentropy"
+	"github.com/rupaya-project/rupx/common/math"
+	"github.com/rupaya-project/rupx/crypto/randentropy"
 )
 
 const TestCount = 1000

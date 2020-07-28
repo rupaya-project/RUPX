@@ -20,9 +20,9 @@ import (
 	"context"
 	"time"
 
-	"github.com/tomochain/tomochain/core"
-	"github.com/tomochain/tomochain/eth/downloader"
-	"github.com/tomochain/tomochain/light"
+	"github.com/rupaya-project/rupx/core"
+	"github.com/rupaya-project/rupx/eth/downloader"
+	"github.com/rupaya-project/rupx/light"
 )
 
 const (

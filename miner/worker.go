@@ -21,8 +21,8 @@ import (
 	"encoding/binary"
 	"fmt"
 
-	"github.com/tomochain/tomochain/accounts"
-	"github.com/tomochain/tomochain/tomoxlending/lendingstate"
+	"github.com/rupaya-project/rupx/accounts"
+	"github.com/rupaya-project/rupx/tomoxlending/lendingstate"
 
 	"math/big"
 	"os"
@@ -30,22 +30,22 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/tomochain/tomochain/tomox/tradingstate"
+	"github.com/rupaya-project/rupx/tomox/tradingstate"
 
 	mapset "github.com/deckarep/golang-set"
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/consensus"
-	"github.com/tomochain/tomochain/consensus/misc"
-	"github.com/tomochain/tomochain/consensus/posv"
-	"github.com/tomochain/tomochain/contracts"
-	"github.com/tomochain/tomochain/core"
-	"github.com/tomochain/tomochain/core/state"
-	"github.com/tomochain/tomochain/core/types"
-	"github.com/tomochain/tomochain/core/vm"
-	"github.com/tomochain/tomochain/ethdb"
-	"github.com/tomochain/tomochain/event"
-	"github.com/tomochain/tomochain/log"
-	"github.com/tomochain/tomochain/params"
+	"github.com/rupaya-project/rupx/common"
+	"github.com/rupaya-project/rupx/consensus"
+	"github.com/rupaya-project/rupx/consensus/misc"
+	"github.com/rupaya-project/rupx/consensus/posv"
+	"github.com/rupaya-project/rupx/contracts"
+	"github.com/rupaya-project/rupx/core"
+	"github.com/rupaya-project/rupx/core/state"
+	"github.com/rupaya-project/rupx/core/types"
+	"github.com/rupaya-project/rupx/core/vm"
+	"github.com/rupaya-project/rupx/ethdb"
+	"github.com/rupaya-project/rupx/event"
+	"github.com/rupaya-project/rupx/log"
+	"github.com/rupaya-project/rupx/params"
 )
 
 const (
@@ -663,7 +663,7 @@ func (self *worker) commitNewWork() {
 					}
 				}
 				// won't grasp tx at checkpoint
-				//https://github.com/tomochain/tomochain-v1/pull/416
+				//https://github.com/rupaya-project/rupx-v1/pull/416
 				if header.Number.Uint64()%self.config.Posv.Epoch != 0 {
 					log.Debug("Start processing order pending")
 					tradingOrderPending, _ := self.eth.OrderPool().Pending()

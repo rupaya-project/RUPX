@@ -23,8 +23,8 @@ import (
 	"math/rand"
 	"time"
 
-	"github.com/tomochain/tomochain/common/mclock"
-	"github.com/tomochain/tomochain/log"
+	"github.com/rupaya-project/rupx/common/mclock"
+	"github.com/rupaya-project/rupx/log"
 )
 
 const (

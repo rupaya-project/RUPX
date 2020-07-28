@@ -19,7 +19,7 @@ package trie
 import (
 	"fmt"
 
-	"github.com/tomochain/tomochain/common"
+	"github.com/rupaya-project/rupx/common"
 )
 
 // MissingNodeError is returned by the trie functions (TryGet, TryUpdate, TryDelete)

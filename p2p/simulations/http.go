@@ -29,11 +29,11 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/tomochain/tomochain/event"
-	"github.com/tomochain/tomochain/p2p"
-	"github.com/tomochain/tomochain/p2p/discover"
-	"github.com/tomochain/tomochain/p2p/simulations/adapters"
-	"github.com/tomochain/tomochain/rpc"
+	"github.com/rupaya-project/rupx/event"
+	"github.com/rupaya-project/rupx/p2p"
+	"github.com/rupaya-project/rupx/p2p/discover"
+	"github.com/rupaya-project/rupx/p2p/simulations/adapters"
+	"github.com/rupaya-project/rupx/rpc"
 	"github.com/julienschmidt/httprouter"
 	"golang.org/x/net/websocket"
 )

@@ -26,14 +26,14 @@ import (
 	"sync"
 	"time"
 
-	"github.com/tomochain/tomochain/accounts/abi/bind"
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/contracts/chequebook"
-	"github.com/tomochain/tomochain/contracts/chequebook/contract"
-	"github.com/tomochain/tomochain/core/types"
-	"github.com/tomochain/tomochain/crypto"
-	"github.com/tomochain/tomochain/log"
-	"github.com/tomochain/tomochain/swarm/services/swap/swap"
+	"github.com/rupaya-project/rupx/accounts/abi/bind"
+	"github.com/rupaya-project/rupx/common"
+	"github.com/rupaya-project/rupx/contracts/chequebook"
+	"github.com/rupaya-project/rupx/contracts/chequebook/contract"
+	"github.com/rupaya-project/rupx/core/types"
+	"github.com/rupaya-project/rupx/crypto"
+	"github.com/rupaya-project/rupx/log"
+	"github.com/rupaya-project/rupx/swarm/services/swap/swap"
 )
 
 // SwAP       Swarm Accounting Protocol with

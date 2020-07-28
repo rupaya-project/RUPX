@@ -7,7 +7,7 @@ import (
 	"regexp"
 	"time"
 
-	"github.com/tomochain/tomochain/metrics"
+	"github.com/rupaya-project/rupx/metrics"
 )
 
 // a regexp for extracting the unit from time.Duration.String

@@ -24,11 +24,11 @@ import (
 	"sync"
 	"time"
 
-	"github.com/tomochain/tomochain/event"
-	"github.com/tomochain/tomochain/log"
-	"github.com/tomochain/tomochain/p2p"
-	"github.com/tomochain/tomochain/p2p/discover"
-	"github.com/tomochain/tomochain/p2p/simulations/adapters"
+	"github.com/rupaya-project/rupx/event"
+	"github.com/rupaya-project/rupx/log"
+	"github.com/rupaya-project/rupx/p2p"
+	"github.com/rupaya-project/rupx/p2p/discover"
+	"github.com/rupaya-project/rupx/p2p/simulations/adapters"
 )
 
 var dialBanTimeout = 200 * time.Millisecond

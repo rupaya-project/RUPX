@@ -19,7 +19,7 @@ package vm
 import (
 	"math/big"
 
-	"github.com/tomochain/tomochain/common"
+	"github.com/rupaya-project/rupx/common"
 )
 
 // ContractRef is a reference to the contract's backing object

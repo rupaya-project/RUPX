@@ -21,8 +21,8 @@ import (
 
 	"sync/atomic"
 
-	"github.com/tomochain/tomochain/consensus"
-	"github.com/tomochain/tomochain/log"
+	"github.com/rupaya-project/rupx/consensus"
+	"github.com/rupaya-project/rupx/log"
 )
 
 type CpuAgent struct {

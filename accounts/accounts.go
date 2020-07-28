@@ -20,10 +20,10 @@ package accounts
 import (
 	"math/big"
 
-	ethereum "github.com/tomochain/tomochain"
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/core/types"
-	"github.com/tomochain/tomochain/event"
+	ethereum "github.com/rupaya-project/rupx"
+	"github.com/rupaya-project/rupx/common"
+	"github.com/rupaya-project/rupx/core/types"
+	"github.com/rupaya-project/rupx/event"
 )
 
 // Account represents an Ethereum account located at a specific location defined

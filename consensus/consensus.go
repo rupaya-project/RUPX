@@ -18,11 +18,11 @@
 package consensus
 
 import (
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/core/state"
-	"github.com/tomochain/tomochain/core/types"
-	"github.com/tomochain/tomochain/params"
-	"github.com/tomochain/tomochain/rpc"
+	"github.com/rupaya-project/rupx/common"
+	"github.com/rupaya-project/rupx/core/state"
+	"github.com/rupaya-project/rupx/core/types"
+	"github.com/rupaya-project/rupx/params"
+	"github.com/rupaya-project/rupx/rpc"
 	"math/big"
 )
 

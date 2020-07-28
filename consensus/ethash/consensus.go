@@ -25,13 +25,13 @@ import (
 	"time"
 
 	mapset "github.com/deckarep/golang-set"
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/common/math"
-	"github.com/tomochain/tomochain/consensus"
-	"github.com/tomochain/tomochain/consensus/misc"
-	"github.com/tomochain/tomochain/core/state"
-	"github.com/tomochain/tomochain/core/types"
-	"github.com/tomochain/tomochain/params"
+	"github.com/rupaya-project/rupx/common"
+	"github.com/rupaya-project/rupx/common/math"
+	"github.com/rupaya-project/rupx/consensus"
+	"github.com/rupaya-project/rupx/consensus/misc"
+	"github.com/rupaya-project/rupx/core/state"
+	"github.com/rupaya-project/rupx/core/types"
+	"github.com/rupaya-project/rupx/params"
 )
 
 // Ethash proof-of-work protocol constants.

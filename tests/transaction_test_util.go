@@ -22,12 +22,12 @@ import (
 	"fmt"
 	"math/big"
 
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/common/hexutil"
-	"github.com/tomochain/tomochain/common/math"
-	"github.com/tomochain/tomochain/core/types"
-	"github.com/tomochain/tomochain/params"
-	"github.com/tomochain/tomochain/rlp"
+	"github.com/rupaya-project/rupx/common"
+	"github.com/rupaya-project/rupx/common/hexutil"
+	"github.com/rupaya-project/rupx/common/math"
+	"github.com/rupaya-project/rupx/core/types"
+	"github.com/rupaya-project/rupx/params"
+	"github.com/rupaya-project/rupx/rlp"
 )
 
 // TransactionTest checks RLP decoding and sender derivation of transactions.

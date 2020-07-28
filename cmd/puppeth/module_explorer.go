@@ -25,7 +25,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/tomochain/tomochain/log"
+	"github.com/rupaya-project/rupx/log"
 )
 
 // explorerDockerfile is the Dockerfile required to run a block explorer.

@@ -3,10 +3,10 @@ package state
 import (
 	"math/big"
 
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/core/types"
+	"github.com/rupaya-project/rupx/common"
+	"github.com/rupaya-project/rupx/core/types"
 
-	"github.com/tomochain/tomochain/crypto"
+	"github.com/rupaya-project/rupx/crypto"
 )
 
 var (

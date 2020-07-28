@@ -20,7 +20,7 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/tomochain/tomochain/core/asm"
+	"github.com/rupaya-project/rupx/core/asm"
 )
 
 func Compile(fn string, src []byte, debug bool) (string, error) {

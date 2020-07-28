@@ -20,9 +20,9 @@ import (
 	"container/list"
 	"fmt"
 
-	"github.com/tomochain/tomochain/core/types"
-	"github.com/tomochain/tomochain/ethdb"
-	"github.com/tomochain/tomochain/event"
+	"github.com/rupaya-project/rupx/core/types"
+	"github.com/rupaya-project/rupx/ethdb"
+	"github.com/rupaya-project/rupx/event"
 )
 
 // Implement our EthTest Manager

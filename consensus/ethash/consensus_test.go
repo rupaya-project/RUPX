@@ -23,9 +23,9 @@ import (
 	"path/filepath"
 	"testing"
 
-	"github.com/tomochain/tomochain/common/math"
-	"github.com/tomochain/tomochain/core/types"
-	"github.com/tomochain/tomochain/params"
+	"github.com/rupaya-project/rupx/common/math"
+	"github.com/rupaya-project/rupx/core/types"
+	"github.com/rupaya-project/rupx/params"
 )
 
 type diffTest struct {

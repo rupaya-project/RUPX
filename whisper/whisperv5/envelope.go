@@ -26,11 +26,11 @@ import (
 	"math/big"
 	"time"
 
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/common/math"
-	"github.com/tomochain/tomochain/crypto"
-	"github.com/tomochain/tomochain/crypto/ecies"
-	"github.com/tomochain/tomochain/rlp"
+	"github.com/rupaya-project/rupx/common"
+	"github.com/rupaya-project/rupx/common/math"
+	"github.com/rupaya-project/rupx/crypto"
+	"github.com/rupaya-project/rupx/crypto/ecies"
+	"github.com/rupaya-project/rupx/rlp"
 )
 
 // Envelope represents a clear-text data packet to transmit through the Whisper

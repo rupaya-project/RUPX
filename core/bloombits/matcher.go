@@ -26,8 +26,8 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/tomochain/tomochain/common/bitutil"
-	"github.com/tomochain/tomochain/crypto"
+	"github.com/rupaya-project/rupx/common/bitutil"
+	"github.com/rupaya-project/rupx/crypto"
 )
 
 // bloomIndexes represents the bit indexes inside the bloom filter that belong

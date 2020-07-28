@@ -19,7 +19,7 @@
 package fetcher
 
 import (
-	"github.com/tomochain/tomochain/metrics"
+	"github.com/rupaya-project/rupx/metrics"
 )
 
 var (

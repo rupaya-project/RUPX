@@ -24,22 +24,22 @@ import (
 	"math/rand"
 	"time"
 
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/core"
-	"github.com/tomochain/tomochain/log"
-	"github.com/tomochain/tomochain/params"
+	"github.com/rupaya-project/rupx/common"
+	"github.com/rupaya-project/rupx/core"
+	"github.com/rupaya-project/rupx/log"
+	"github.com/rupaya-project/rupx/params"
 
 	"context"
 	"math/big"
 
-	"github.com/tomochain/tomochain/accounts/abi/bind"
-	"github.com/tomochain/tomochain/accounts/abi/bind/backends"
-	blockSignerContract "github.com/tomochain/tomochain/contracts/blocksigner"
-	multiSignWalletContract "github.com/tomochain/tomochain/contracts/multisigwallet"
-	randomizeContract "github.com/tomochain/tomochain/contracts/randomize"
-	validatorContract "github.com/tomochain/tomochain/contracts/validator"
-	"github.com/tomochain/tomochain/crypto"
-	"github.com/tomochain/tomochain/rlp"
+	"github.com/rupaya-project/rupx/accounts/abi/bind"
+	"github.com/rupaya-project/rupx/accounts/abi/bind/backends"
+	blockSignerContract "github.com/rupaya-project/rupx/contracts/blocksigner"
+	multiSignWalletContract "github.com/rupaya-project/rupx/contracts/multisigwallet"
+	randomizeContract "github.com/rupaya-project/rupx/contracts/randomize"
+	validatorContract "github.com/rupaya-project/rupx/contracts/validator"
+	"github.com/rupaya-project/rupx/crypto"
+	"github.com/rupaya-project/rupx/rlp"
 )
 
 // makeGenesis creates a new genesis struct based on some user input.

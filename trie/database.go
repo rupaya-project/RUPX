@@ -20,9 +20,9 @@ import (
 	"sync"
 	"time"
 
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/ethdb"
-	"github.com/tomochain/tomochain/log"
+	"github.com/rupaya-project/rupx/common"
+	"github.com/rupaya-project/rupx/ethdb"
+	"github.com/rupaya-project/rupx/log"
 )
 
 // secureKeyPrefix is the database key prefix used to store trie node preimages.

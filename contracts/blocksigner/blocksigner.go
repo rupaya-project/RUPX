@@ -16,9 +16,9 @@
 package blocksigner
 
 import (
-	"github.com/tomochain/tomochain/accounts/abi/bind"
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/contracts/blocksigner/contract"
+	"github.com/rupaya-project/rupx/accounts/abi/bind"
+	"github.com/rupaya-project/rupx/common"
+	"github.com/rupaya-project/rupx/contracts/blocksigner/contract"
 	"math/big"
 )
 

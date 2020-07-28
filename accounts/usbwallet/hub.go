@@ -22,9 +22,9 @@ import (
 	"sync"
 	"time"
 
-	"github.com/tomochain/tomochain/accounts"
-	"github.com/tomochain/tomochain/event"
-	"github.com/tomochain/tomochain/log"
+	"github.com/rupaya-project/rupx/accounts"
+	"github.com/rupaya-project/rupx/event"
+	"github.com/rupaya-project/rupx/log"
 	"github.com/karalabe/hid"
 )
 

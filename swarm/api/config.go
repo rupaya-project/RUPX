@@ -22,14 +22,14 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/contracts/ens"
-	"github.com/tomochain/tomochain/crypto"
-	"github.com/tomochain/tomochain/log"
-	"github.com/tomochain/tomochain/node"
-	"github.com/tomochain/tomochain/swarm/network"
-	"github.com/tomochain/tomochain/swarm/services/swap"
-	"github.com/tomochain/tomochain/swarm/storage"
+	"github.com/rupaya-project/rupx/common"
+	"github.com/rupaya-project/rupx/contracts/ens"
+	"github.com/rupaya-project/rupx/crypto"
+	"github.com/rupaya-project/rupx/log"
+	"github.com/rupaya-project/rupx/node"
+	"github.com/rupaya-project/rupx/swarm/network"
+	"github.com/rupaya-project/rupx/swarm/services/swap"
+	"github.com/rupaya-project/rupx/swarm/storage"
 )
 
 const (

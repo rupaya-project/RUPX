@@ -23,14 +23,14 @@ import (
 	"os"
 	"testing"
 
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/common/math"
-	"github.com/tomochain/tomochain/consensus/ethash"
-	"github.com/tomochain/tomochain/core/types"
-	"github.com/tomochain/tomochain/core/vm"
-	"github.com/tomochain/tomochain/crypto"
-	"github.com/tomochain/tomochain/ethdb"
-	"github.com/tomochain/tomochain/params"
+	"github.com/rupaya-project/rupx/common"
+	"github.com/rupaya-project/rupx/common/math"
+	"github.com/rupaya-project/rupx/consensus/ethash"
+	"github.com/rupaya-project/rupx/core/types"
+	"github.com/rupaya-project/rupx/core/vm"
+	"github.com/rupaya-project/rupx/crypto"
+	"github.com/rupaya-project/rupx/ethdb"
+	"github.com/rupaya-project/rupx/params"
 )
 
 func BenchmarkInsertChain_empty_memdb(b *testing.B) {

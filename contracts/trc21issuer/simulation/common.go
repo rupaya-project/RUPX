@@ -1,7 +1,7 @@
 package simulation
 
 import (
-	"github.com/tomochain/tomochain/crypto"
+	"github.com/rupaya-project/rupx/crypto"
 	"math/big"
 )
 

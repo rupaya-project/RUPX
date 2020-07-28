@@ -27,9 +27,9 @@ import (
 	"sync"
 	"time"
 
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/log"
-	"github.com/tomochain/tomochain/swarm/storage"
+	"github.com/rupaya-project/rupx/common"
+	"github.com/rupaya-project/rupx/log"
+	"github.com/rupaya-project/rupx/swarm/storage"
 )
 
 const (

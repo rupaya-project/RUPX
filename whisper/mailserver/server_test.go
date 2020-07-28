@@ -25,9 +25,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/crypto"
-	whisper "github.com/tomochain/tomochain/whisper/whisperv6"
+	"github.com/rupaya-project/rupx/common"
+	"github.com/rupaya-project/rupx/crypto"
+	whisper "github.com/rupaya-project/rupx/whisper/whisperv6"
 )
 
 const powRequirement = 0.00001

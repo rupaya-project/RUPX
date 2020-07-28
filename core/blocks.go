@@ -16,7 +16,7 @@
 
 package core
 
-import "github.com/tomochain/tomochain/common"
+import "github.com/rupaya-project/rupx/common"
 
 // BadHashes represent a set of manually tracked bad hashes (usually hard forks)
 var BadHashes = map[common.Hash]bool{

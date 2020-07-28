@@ -26,7 +26,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/tomochain/tomochain/common"
+	"github.com/rupaya-project/rupx/common"
 	"golang.org/x/tools/imports"
 )
 

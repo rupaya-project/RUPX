@@ -1,17 +1,17 @@
 package tomox
 
 import (
-	"github.com/tomochain/tomochain/contracts/tomox/contract"
-	"github.com/tomochain/tomochain/log"
+	"github.com/rupaya-project/rupx/contracts/tomox/contract"
+	"github.com/rupaya-project/rupx/log"
 	"math/big"
 	"strings"
 
-	"github.com/tomochain/tomochain"
-	"github.com/tomochain/tomochain/accounts/abi"
-	"github.com/tomochain/tomochain/accounts/abi/bind/backends"
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/consensus"
-	"github.com/tomochain/tomochain/core/state"
+	"github.com/rupaya-project/rupx"
+	"github.com/rupaya-project/rupx/accounts/abi"
+	"github.com/rupaya-project/rupx/accounts/abi/bind/backends"
+	"github.com/rupaya-project/rupx/common"
+	"github.com/rupaya-project/rupx/consensus"
+	"github.com/rupaya-project/rupx/core/state"
 )
 
 

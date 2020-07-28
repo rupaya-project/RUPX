@@ -24,10 +24,10 @@ import (
 	"os"
 	"runtime"
 
-	"github.com/tomochain/tomochain/log"
-	"github.com/tomochain/tomochain/log/term"
-	"github.com/tomochain/tomochain/metrics"
-	"github.com/tomochain/tomochain/metrics/exp"
+	"github.com/rupaya-project/rupx/log"
+	"github.com/rupaya-project/rupx/log/term"
+	"github.com/rupaya-project/rupx/metrics"
+	"github.com/rupaya-project/rupx/metrics/exp"
 	colorable "github.com/mattn/go-colorable"
 	"gopkg.in/urfave/cli.v1"
 )

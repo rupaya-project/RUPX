@@ -18,9 +18,9 @@ package tradingstate
 
 import (
 	"fmt"
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/common/math"
-	"github.com/tomochain/tomochain/ethdb"
+	"github.com/rupaya-project/rupx/common"
+	"github.com/rupaya-project/rupx/common/math"
+	"github.com/rupaya-project/rupx/ethdb"
 	"math/big"
 	"testing"
 )

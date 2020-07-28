@@ -19,8 +19,8 @@ package vm
 import (
 	"math/big"
 
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/common/math"
+	"github.com/rupaya-project/rupx/common"
+	"github.com/rupaya-project/rupx/common/math"
 )
 
 // calculates the memory size required for a step

@@ -20,8 +20,8 @@ import (
 	"bytes"
 	"testing"
 
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/ethdb"
+	"github.com/rupaya-project/rupx/common"
+	"github.com/rupaya-project/rupx/ethdb"
 )
 
 // makeTestTrie create a sample test trie to test node-wise reconstruction.

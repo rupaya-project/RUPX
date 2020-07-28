@@ -22,7 +22,7 @@ import (
 	"os"
 	"runtime"
 
-	"github.com/tomochain/tomochain/log"
+	"github.com/rupaya-project/rupx/log"
 )
 
 func init() {

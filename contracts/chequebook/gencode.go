@@ -25,11 +25,11 @@ import (
 	"io/ioutil"
 	"math/big"
 
-	"github.com/tomochain/tomochain/accounts/abi/bind"
-	"github.com/tomochain/tomochain/accounts/abi/bind/backends"
-	"github.com/tomochain/tomochain/contracts/chequebook/contract"
-	"github.com/tomochain/tomochain/core"
-	"github.com/tomochain/tomochain/crypto"
+	"github.com/rupaya-project/rupx/accounts/abi/bind"
+	"github.com/rupaya-project/rupx/accounts/abi/bind/backends"
+	"github.com/rupaya-project/rupx/contracts/chequebook/contract"
+	"github.com/rupaya-project/rupx/core"
+	"github.com/rupaya-project/rupx/crypto"
 )
 
 var (

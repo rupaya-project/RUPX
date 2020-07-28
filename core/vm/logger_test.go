@@ -20,8 +20,8 @@ import (
 	"math/big"
 	"testing"
 
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/params"
+	"github.com/rupaya-project/rupx/common"
+	"github.com/rupaya-project/rupx/params"
 )
 
 type dummyContractRef struct {

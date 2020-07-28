@@ -21,11 +21,11 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/tomochain/tomochain/accounts/abi"
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/core/state"
-	"github.com/tomochain/tomochain/core/vm"
-	"github.com/tomochain/tomochain/ethdb"
+	"github.com/rupaya-project/rupx/accounts/abi"
+	"github.com/rupaya-project/rupx/common"
+	"github.com/rupaya-project/rupx/core/state"
+	"github.com/rupaya-project/rupx/core/vm"
+	"github.com/rupaya-project/rupx/ethdb"
 )
 
 func TestDefaults(t *testing.T) {

@@ -24,7 +24,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/tomochain/tomochain/common"
+	"github.com/rupaya-project/rupx/common"
 )
 
 // Hash represents the 32 byte Keccak256 hash of arbitrary data.

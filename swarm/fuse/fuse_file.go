@@ -26,8 +26,8 @@ import (
 
 	"bazil.org/fuse"
 	"bazil.org/fuse/fs"
-	"github.com/tomochain/tomochain/log"
-	"github.com/tomochain/tomochain/swarm/storage"
+	"github.com/rupaya-project/rupx/log"
+	"github.com/rupaya-project/rupx/swarm/storage"
 	"golang.org/x/net/context"
 )
 

@@ -1,8 +1,8 @@
 package tomox
 
 import (
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/tomox/tradingstate"
+	"github.com/rupaya-project/rupx/common"
+	"github.com/rupaya-project/rupx/tomox/tradingstate"
 	"math/big"
 	"reflect"
 	"testing"

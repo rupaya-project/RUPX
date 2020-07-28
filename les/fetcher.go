@@ -22,13 +22,13 @@ import (
 	"sync"
 	"time"
 
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/common/mclock"
-	"github.com/tomochain/tomochain/consensus"
-	"github.com/tomochain/tomochain/core"
-	"github.com/tomochain/tomochain/core/types"
-	"github.com/tomochain/tomochain/light"
-	"github.com/tomochain/tomochain/log"
+	"github.com/rupaya-project/rupx/common"
+	"github.com/rupaya-project/rupx/common/mclock"
+	"github.com/rupaya-project/rupx/consensus"
+	"github.com/rupaya-project/rupx/core"
+	"github.com/rupaya-project/rupx/core/types"
+	"github.com/rupaya-project/rupx/light"
+	"github.com/rupaya-project/rupx/log"
 )
 
 const (

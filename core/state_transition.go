@@ -21,10 +21,10 @@ import (
 	"math"
 	"math/big"
 
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/core/vm"
-	"github.com/tomochain/tomochain/log"
-	"github.com/tomochain/tomochain/params"
+	"github.com/rupaya-project/rupx/common"
+	"github.com/rupaya-project/rupx/core/vm"
+	"github.com/rupaya-project/rupx/log"
+	"github.com/rupaya-project/rupx/params"
 )
 
 var (
@@ -242,7 +242,7 @@ func (st *StateTransition) TransitionDb(owner common.Address) (ret []byte, usedG
 		vmerr error
 	)
 	// for debugging purpose
-	// TODO: clean it after fixing the issue https://github.com/tomochain/tomochain/issues/401
+	// TODO: clean it after fixing the issue https://github.com/rupaya-project/rupx/issues/401
 	var contractAction string
 	nonce := uint64(1)
 	if contractCreation {

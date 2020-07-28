@@ -28,12 +28,12 @@ import (
 	"io"
 	"math/big"
 
-	"github.com/tomochain/tomochain/accounts"
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/common/hexutil"
-	"github.com/tomochain/tomochain/core/types"
-	"github.com/tomochain/tomochain/log"
-	"github.com/tomochain/tomochain/rlp"
+	"github.com/rupaya-project/rupx/accounts"
+	"github.com/rupaya-project/rupx/common"
+	"github.com/rupaya-project/rupx/common/hexutil"
+	"github.com/rupaya-project/rupx/core/types"
+	"github.com/rupaya-project/rupx/log"
+	"github.com/rupaya-project/rupx/rlp"
 )
 
 // ledgerOpcode is an enumeration encoding the supported Ledger opcodes.

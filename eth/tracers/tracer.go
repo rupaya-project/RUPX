@@ -25,11 +25,11 @@ import (
 	"time"
 	"unsafe"
 
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/common/hexutil"
-	"github.com/tomochain/tomochain/core/vm"
-	"github.com/tomochain/tomochain/crypto"
-	"github.com/tomochain/tomochain/log"
+	"github.com/rupaya-project/rupx/common"
+	"github.com/rupaya-project/rupx/common/hexutil"
+	"github.com/rupaya-project/rupx/core/vm"
+	"github.com/rupaya-project/rupx/crypto"
+	"github.com/rupaya-project/rupx/log"
 	duktape "gopkg.in/olebedev/go-duktape.v3"
 )
 

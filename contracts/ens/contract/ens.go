@@ -6,12 +6,12 @@ package contract
 import (
 	"strings"
 
-	ethereum "github.com/tomochain/tomochain"
-	"github.com/tomochain/tomochain/accounts/abi"
-	"github.com/tomochain/tomochain/accounts/abi/bind"
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/core/types"
-	"github.com/tomochain/tomochain/event"
+	ethereum "github.com/rupaya-project/rupx"
+	"github.com/rupaya-project/rupx/accounts/abi"
+	"github.com/rupaya-project/rupx/accounts/abi/bind"
+	"github.com/rupaya-project/rupx/common"
+	"github.com/rupaya-project/rupx/core/types"
+	"github.com/rupaya-project/rupx/event"
 )
 
 // ENSABI is the input ABI used to generate the binding from.

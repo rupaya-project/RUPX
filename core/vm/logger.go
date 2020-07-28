@@ -23,10 +23,10 @@ import (
 	"math/big"
 	"time"
 
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/common/hexutil"
-	"github.com/tomochain/tomochain/common/math"
-	"github.com/tomochain/tomochain/core/types"
+	"github.com/rupaya-project/rupx/common"
+	"github.com/rupaya-project/rupx/common/hexutil"
+	"github.com/rupaya-project/rupx/common/math"
+	"github.com/rupaya-project/rupx/core/types"
 )
 
 type Storage map[common.Hash]common.Hash

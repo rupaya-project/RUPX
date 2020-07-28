@@ -22,7 +22,7 @@ import (
 	"math/big"
 	"testing"
 
-	"github.com/tomochain/tomochain/common"
+	"github.com/rupaya-project/rupx/common"
 )
 
 func TestHexOrDecimal256(t *testing.T) {

@@ -27,16 +27,16 @@ import (
 
 	goruntime "runtime"
 
-	"github.com/tomochain/tomochain/cmd/evm/internal/compiler"
-	"github.com/tomochain/tomochain/cmd/utils"
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/core"
-	"github.com/tomochain/tomochain/core/state"
-	"github.com/tomochain/tomochain/core/vm"
-	"github.com/tomochain/tomochain/core/vm/runtime"
-	"github.com/tomochain/tomochain/ethdb"
-	"github.com/tomochain/tomochain/log"
-	"github.com/tomochain/tomochain/params"
+	"github.com/rupaya-project/rupx/cmd/evm/internal/compiler"
+	"github.com/rupaya-project/rupx/cmd/utils"
+	"github.com/rupaya-project/rupx/common"
+	"github.com/rupaya-project/rupx/core"
+	"github.com/rupaya-project/rupx/core/state"
+	"github.com/rupaya-project/rupx/core/vm"
+	"github.com/rupaya-project/rupx/core/vm/runtime"
+	"github.com/rupaya-project/rupx/ethdb"
+	"github.com/rupaya-project/rupx/log"
+	"github.com/rupaya-project/rupx/params"
 	cli "gopkg.in/urfave/cli.v1"
 )
 

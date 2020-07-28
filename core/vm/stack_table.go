@@ -19,7 +19,7 @@ package vm
 import (
 	"fmt"
 
-	"github.com/tomochain/tomochain/params"
+	"github.com/rupaya-project/rupx/params"
 )
 
 func makeStackFunc(pop, push int) stackValidationFunc {

@@ -19,8 +19,8 @@ package les
 import (
 	"time"
 
-	"github.com/tomochain/tomochain/common/bitutil"
-	"github.com/tomochain/tomochain/light"
+	"github.com/rupaya-project/rupx/common/bitutil"
+	"github.com/rupaya-project/rupx/light"
 )
 
 const (

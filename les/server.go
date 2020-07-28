@@ -23,17 +23,17 @@ import (
 	"math"
 	"sync"
 
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/core"
-	"github.com/tomochain/tomochain/core/types"
-	"github.com/tomochain/tomochain/eth"
-	"github.com/tomochain/tomochain/ethdb"
-	"github.com/tomochain/tomochain/les/flowcontrol"
-	"github.com/tomochain/tomochain/light"
-	"github.com/tomochain/tomochain/log"
-	"github.com/tomochain/tomochain/p2p"
-	"github.com/tomochain/tomochain/p2p/discv5"
-	"github.com/tomochain/tomochain/rlp"
+	"github.com/rupaya-project/rupx/common"
+	"github.com/rupaya-project/rupx/core"
+	"github.com/rupaya-project/rupx/core/types"
+	"github.com/rupaya-project/rupx/eth"
+	"github.com/rupaya-project/rupx/ethdb"
+	"github.com/rupaya-project/rupx/les/flowcontrol"
+	"github.com/rupaya-project/rupx/light"
+	"github.com/rupaya-project/rupx/log"
+	"github.com/rupaya-project/rupx/p2p"
+	"github.com/rupaya-project/rupx/p2p/discv5"
+	"github.com/rupaya-project/rupx/rlp"
 )
 
 type LesServer struct {

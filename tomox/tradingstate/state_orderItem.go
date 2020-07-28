@@ -20,8 +20,8 @@ import (
 	"io"
 	"math/big"
 
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/rlp"
+	"github.com/rupaya-project/rupx/common"
+	"github.com/rupaya-project/rupx/rlp"
 )
 
 // stateObject represents an Ethereum orderId which is being modified.

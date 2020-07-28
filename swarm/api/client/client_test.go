@@ -25,8 +25,8 @@ import (
 	"sort"
 	"testing"
 
-	"github.com/tomochain/tomochain/swarm/api"
-	"github.com/tomochain/tomochain/swarm/testutil"
+	"github.com/rupaya-project/rupx/swarm/api"
+	"github.com/rupaya-project/rupx/swarm/testutil"
 )
 
 // TestClientUploadDownloadRaw test uploading and downloading raw data to swarm

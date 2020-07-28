@@ -19,8 +19,8 @@ package miner
 import (
 	"testing"
 
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/core/types"
+	"github.com/rupaya-project/rupx/common"
+	"github.com/rupaya-project/rupx/core/types"
 )
 
 // noopHeaderRetriever is an implementation of headerRetriever that always

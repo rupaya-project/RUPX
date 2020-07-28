@@ -24,9 +24,9 @@ import (
 	"io"
 	"sync"
 
-	"github.com/tomochain/tomochain/bmt"
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/crypto/sha3"
+	"github.com/rupaya-project/rupx/bmt"
+	"github.com/rupaya-project/rupx/common"
+	"github.com/rupaya-project/rupx/crypto/sha3"
 )
 
 type Hasher func() hash.Hash

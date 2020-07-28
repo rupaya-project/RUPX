@@ -7,10 +7,10 @@ import (
 	"math/big"
 	"strings"
 
-	"github.com/tomochain/tomochain/accounts/abi"
-	"github.com/tomochain/tomochain/accounts/abi/bind"
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/core/types"
+	"github.com/rupaya-project/rupx/accounts/abi"
+	"github.com/rupaya-project/rupx/accounts/abi/bind"
+	"github.com/rupaya-project/rupx/common"
+	"github.com/rupaya-project/rupx/core/types"
 )
 
 // LAbstractRegistrationABI is the input ABI used to generate the binding from.

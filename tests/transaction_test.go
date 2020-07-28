@@ -20,7 +20,7 @@ import (
 	"math/big"
 	"testing"
 
-	"github.com/tomochain/tomochain/params"
+	"github.com/rupaya-project/rupx/params"
 )
 
 func TestTransaction(t *testing.T) {

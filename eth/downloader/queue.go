@@ -25,10 +25,10 @@ import (
 	"sync"
 	"time"
 
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/core/types"
-	"github.com/tomochain/tomochain/log"
-	"github.com/tomochain/tomochain/metrics"
+	"github.com/rupaya-project/rupx/common"
+	"github.com/rupaya-project/rupx/core/types"
+	"github.com/rupaya-project/rupx/log"
+	"github.com/rupaya-project/rupx/metrics"
 	"gopkg.in/karalabe/cookiejar.v2/collections/prque"
 )
 

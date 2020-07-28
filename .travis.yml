@@ -1,6 +1,6 @@
 sudo: required
 language: go
-go_import_path: github.com/tomochain/tomochain
+go_import_path: github.com/rupaya-project/rupx
 
 env:
   global:

@@ -1,8 +1,8 @@
 # TomoChain
 
-[![Build Status](https://travis-ci.org/tomochain/tomochain.svg?branch=master)](https://travis-ci.org/tomochain/tomochain)
-[![codecov](https://codecov.io/gh/tomochain/tomochain/branch/master/graph/badge.svg)](https://codecov.io/gh/tomochain/tomochain)
-[![Join the chat at https://gitter.im/tomochain/tomochain](https://badges.gitter.im/tomochain/tomochain.svg)](https://gitter.im/tomochain/tomochain?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Build Status](https://travis-ci.org/rupaya-project/rupx.svg?branch=master)](https://travis-ci.org/rupaya-project/rupx)
+[![codecov](https://codecov.io/gh/rupaya-project/rupx/branch/master/graph/badge.svg)](https://codecov.io/gh/rupaya-project/rupx)
+[![Join the chat at https://gitter.im/rupaya-project/rupx](https://badges.gitter.im/rupaya-project/rupx.svg)](https://gitter.im/rupaya-project/rupx?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 ## About TomoChain
 
@@ -32,12 +32,12 @@ Building `tomo` requires both a Go (1.7+) and C compiler; install both of these.
 Once the dependencies are installed, just run the below commands:
 
 ```bash
-$ git clone https://github.com/tomochain/tomochain tomochain
+$ git clone https://github.com/rupaya-project/rupx tomochain
 $ cd tomochain
 $ make tomo
 ```
 
-Alternatively, you could quickly download our pre-complied binary from our [github release page](https://github.com/tomochain/tomochain/releases)
+Alternatively, you could quickly download our pre-complied binary from our [github release page](https://github.com/rupaya-project/rupx/releases)
 
 ## Running `tomo`
 
@@ -68,12 +68,12 @@ export GENESIS_PATH=path/to/genesis.json
 ```
 - Testnet
 ```bash
-curl -L https://raw.githubusercontent.com/tomochain/tomochain/master/genesis/testnet.json -o $GENESIS_PATH
+curl -L https://raw.githubusercontent.com/rupaya-project/rupx/master/genesis/testnet.json -o $GENESIS_PATH
 ```
 
 - Mainnet
 ```bash
-curl -L https://raw.githubusercontent.com/tomochain/tomochain/master/genesis/mainnet.json -o $GENESIS_PATH
+curl -L https://raw.githubusercontent.com/rupaya-project/rupx/master/genesis/mainnet.json -o $GENESIS_PATH
 ```
 
 #### Create datadir
@@ -161,7 +161,7 @@ tomo  --syncmode "full" \
 --targetgaslimit: Target gas limit sets the artificial target gas floor for the blocks to mine (default: 4712388)
 --bootnode: bootnode information to help to discover other nodes in the network
 --gcmode: blockchain garbage collection mode ("full", "archive")
---synmode: blockchain sync mode ("fast", "full", or "light". More detail: https://github.com/tomochain/tomochain/blob/master/eth/downloader/modes.go#L24)           
+--synmode: blockchain sync mode ("fast", "full", or "light". More detail: https://github.com/rupaya-project/rupx/blob/master/eth/downloader/modes.go#L24)           
 --ethstats: send data to stats website
 ```
 To see all flags usage
@@ -188,7 +188,7 @@ Please also make sure your contributions adhere to the base coding guidelines:
 - Code must adhere to official Go [formatting](https://golang.org/doc/effective_go.html#formatting) guidelines (i.e uses [gofmt](https://golang.org/cmd/gofmt/)).
 - Code comments must adhere to the official Go [commentary](https://golang.org/doc/effective_go.html#commentary) guidelines.
 - Pull requests need to be based on and opened against the `master` branch.
-- Any code you are trying to contribute must be well-explained as an issue on our [github issue page](https://github.com/tomochain/tomochain/issues)
+- Any code you are trying to contribute must be well-explained as an issue on our [github issue page](https://github.com/rupaya-project/rupx/issues)
 - Commit messages should be short but clear enough and should refer to the corresponding pre-logged issue mentioned above.
 
-For technical discussion, feel free to join our chat at [Gitter](https://gitter.im/tomochain/tomochain).
+For technical discussion, feel free to join our chat at [Gitter](https://gitter.im/rupaya-project/rupx).

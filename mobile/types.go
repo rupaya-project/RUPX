@@ -23,9 +23,9 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/core/types"
-	"github.com/tomochain/tomochain/rlp"
+	"github.com/rupaya-project/rupx/common"
+	"github.com/rupaya-project/rupx/core/types"
+	"github.com/rupaya-project/rupx/rlp"
 )
 
 // A Nonce is a 64-bit hash which proves (combined with the mix-hash) that

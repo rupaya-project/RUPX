@@ -22,11 +22,11 @@ import (
 	"sort"
 	"sync"
 
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/core/types"
-	"github.com/tomochain/tomochain/internal/ethapi"
-	"github.com/tomochain/tomochain/params"
-	"github.com/tomochain/tomochain/rpc"
+	"github.com/rupaya-project/rupx/common"
+	"github.com/rupaya-project/rupx/core/types"
+	"github.com/rupaya-project/rupx/internal/ethapi"
+	"github.com/rupaya-project/rupx/params"
+	"github.com/rupaya-project/rupx/rpc"
 )
 
 var maxPrice = big.NewInt(500 * params.Shannon)

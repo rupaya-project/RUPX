@@ -20,12 +20,12 @@ import (
 	"encoding/binary"
 	"fmt"
 
-	"github.com/tomochain/tomochain/cmd/utils"
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/crypto"
-	"github.com/tomochain/tomochain/log"
-	"github.com/tomochain/tomochain/rlp"
-	whisper "github.com/tomochain/tomochain/whisper/whisperv6"
+	"github.com/rupaya-project/rupx/cmd/utils"
+	"github.com/rupaya-project/rupx/common"
+	"github.com/rupaya-project/rupx/crypto"
+	"github.com/rupaya-project/rupx/log"
+	"github.com/rupaya-project/rupx/rlp"
+	whisper "github.com/rupaya-project/rupx/whisper/whisperv6"
 	"github.com/syndtr/goleveldb/leveldb"
 	"github.com/syndtr/goleveldb/leveldb/util"
 )

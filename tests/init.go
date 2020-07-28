@@ -20,7 +20,7 @@ import (
 	"fmt"
 	"math/big"
 
-	"github.com/tomochain/tomochain/params"
+	"github.com/rupaya-project/rupx/params"
 )
 
 // This table defines supported forks and their chain config.

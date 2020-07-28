@@ -23,12 +23,12 @@ import (
 	"net"
 	"sync"
 
-	"github.com/tomochain/tomochain/event"
-	"github.com/tomochain/tomochain/log"
-	"github.com/tomochain/tomochain/node"
-	"github.com/tomochain/tomochain/p2p"
-	"github.com/tomochain/tomochain/p2p/discover"
-	"github.com/tomochain/tomochain/rpc"
+	"github.com/rupaya-project/rupx/event"
+	"github.com/rupaya-project/rupx/log"
+	"github.com/rupaya-project/rupx/node"
+	"github.com/rupaya-project/rupx/p2p"
+	"github.com/rupaya-project/rupx/p2p/discover"
+	"github.com/rupaya-project/rupx/rpc"
 )
 
 // SimAdapter is a NodeAdapter which creates in-memory simulation nodes and

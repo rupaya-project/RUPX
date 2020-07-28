@@ -1,9 +1,9 @@
 package tomoxlending
 
 import (
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/tomox/tradingstate"
-	"github.com/tomochain/tomochain/tomoxlending/lendingstate"
+	"github.com/rupaya-project/rupx/common"
+	"github.com/rupaya-project/rupx/tomox/tradingstate"
+	"github.com/rupaya-project/rupx/tomoxlending/lendingstate"
 	"math/big"
 	"reflect"
 	"testing"

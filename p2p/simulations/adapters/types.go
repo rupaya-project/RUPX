@@ -25,11 +25,11 @@ import (
 	"os"
 
 	"github.com/docker/docker/pkg/reexec"
-	"github.com/tomochain/tomochain/crypto"
-	"github.com/tomochain/tomochain/node"
-	"github.com/tomochain/tomochain/p2p"
-	"github.com/tomochain/tomochain/p2p/discover"
-	"github.com/tomochain/tomochain/rpc"
+	"github.com/rupaya-project/rupx/crypto"
+	"github.com/rupaya-project/rupx/node"
+	"github.com/rupaya-project/rupx/p2p"
+	"github.com/rupaya-project/rupx/p2p/discover"
+	"github.com/rupaya-project/rupx/rpc"
 )
 
 // Node represents a node in a simulation network which is created by a

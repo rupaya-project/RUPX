@@ -26,11 +26,11 @@ import (
 	"io"
 	"math/big"
 
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/core"
-	"github.com/tomochain/tomochain/crypto"
-	"github.com/tomochain/tomochain/crypto/secp256k1"
-	"github.com/tomochain/tomochain/rlp"
+	"github.com/rupaya-project/rupx/common"
+	"github.com/rupaya-project/rupx/core"
+	"github.com/rupaya-project/rupx/crypto"
+	"github.com/rupaya-project/rupx/crypto/secp256k1"
+	"github.com/rupaya-project/rupx/rlp"
 )
 
 // Constants to match up protocol versions and messages

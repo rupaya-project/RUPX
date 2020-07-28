@@ -20,8 +20,8 @@ import (
 	"encoding/binary"
 	"fmt"
 
-	"github.com/tomochain/tomochain/log"
-	"github.com/tomochain/tomochain/swarm/storage"
+	"github.com/rupaya-project/rupx/log"
+	"github.com/rupaya-project/rupx/swarm/storage"
 	"github.com/syndtr/goleveldb/leveldb"
 	"github.com/syndtr/goleveldb/leveldb/iterator"
 )

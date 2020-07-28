@@ -19,8 +19,8 @@ package state
 import (
 	"testing"
 
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/ethdb"
+	"github.com/rupaya-project/rupx/common"
+	"github.com/rupaya-project/rupx/ethdb"
 )
 
 var addr = common.BytesToAddress([]byte("test"))

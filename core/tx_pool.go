@@ -19,20 +19,20 @@ package core
 import (
 	"errors"
 	"fmt"
-	"github.com/tomochain/tomochain/consensus"
+	"github.com/rupaya-project/rupx/consensus"
 	"math"
 	"math/big"
 	"sort"
 	"sync"
 	"time"
 
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/core/state"
-	"github.com/tomochain/tomochain/core/types"
-	"github.com/tomochain/tomochain/event"
-	"github.com/tomochain/tomochain/log"
-	"github.com/tomochain/tomochain/metrics"
-	"github.com/tomochain/tomochain/params"
+	"github.com/rupaya-project/rupx/common"
+	"github.com/rupaya-project/rupx/core/state"
+	"github.com/rupaya-project/rupx/core/types"
+	"github.com/rupaya-project/rupx/event"
+	"github.com/rupaya-project/rupx/log"
+	"github.com/rupaya-project/rupx/metrics"
+	"github.com/rupaya-project/rupx/params"
 	"gopkg.in/karalabe/cookiejar.v2/collections/prque"
 )
 

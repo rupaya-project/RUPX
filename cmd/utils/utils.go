@@ -1,14 +1,14 @@
 package utils
 
 import (
-	"github.com/tomochain/tomochain/eth"
-	"github.com/tomochain/tomochain/eth/downloader"
-	"github.com/tomochain/tomochain/ethstats"
-	"github.com/tomochain/tomochain/les"
-	"github.com/tomochain/tomochain/node"
-	"github.com/tomochain/tomochain/tomox"
-	"github.com/tomochain/tomochain/tomoxlending"
-	whisper "github.com/tomochain/tomochain/whisper/whisperv6"
+	"github.com/rupaya-project/rupx/eth"
+	"github.com/rupaya-project/rupx/eth/downloader"
+	"github.com/rupaya-project/rupx/ethstats"
+	"github.com/rupaya-project/rupx/les"
+	"github.com/rupaya-project/rupx/node"
+	"github.com/rupaya-project/rupx/tomox"
+	"github.com/rupaya-project/rupx/tomoxlending"
+	whisper "github.com/rupaya-project/rupx/whisper/whisperv6"
 )
 
 // RegisterEthService adds an Ethereum client to the stack.

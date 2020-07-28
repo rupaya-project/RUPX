@@ -20,9 +20,9 @@ import (
 	"bytes"
 	"fmt"
 
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/rlp"
-	"github.com/tomochain/tomochain/trie"
+	"github.com/rupaya-project/rupx/common"
+	"github.com/rupaya-project/rupx/rlp"
+	"github.com/rupaya-project/rupx/trie"
 )
 
 // NodeIterator is an iterator to traverse the entire state trie post-order,

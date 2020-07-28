@@ -24,11 +24,11 @@ import (
 	"sync"
 	"time"
 
-	"github.com/tomochain/tomochain/common/mclock"
-	"github.com/tomochain/tomochain/event"
-	"github.com/tomochain/tomochain/log"
-	"github.com/tomochain/tomochain/p2p/discover"
-	"github.com/tomochain/tomochain/rlp"
+	"github.com/rupaya-project/rupx/common/mclock"
+	"github.com/rupaya-project/rupx/event"
+	"github.com/rupaya-project/rupx/log"
+	"github.com/rupaya-project/rupx/p2p/discover"
+	"github.com/rupaya-project/rupx/rlp"
 )
 
 const (

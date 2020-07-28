@@ -23,7 +23,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/tomochain/tomochain/log"
+	"github.com/rupaya-project/rupx/log"
 )
 
 /*

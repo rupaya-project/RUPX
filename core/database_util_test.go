@@ -21,11 +21,11 @@ import (
 	"math/big"
 	"testing"
 
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/core/types"
-	"github.com/tomochain/tomochain/crypto/sha3"
-	"github.com/tomochain/tomochain/ethdb"
-	"github.com/tomochain/tomochain/rlp"
+	"github.com/rupaya-project/rupx/common"
+	"github.com/rupaya-project/rupx/core/types"
+	"github.com/rupaya-project/rupx/crypto/sha3"
+	"github.com/rupaya-project/rupx/ethdb"
+	"github.com/rupaya-project/rupx/rlp"
 )
 
 // Tests block header storage and retrieval operations.

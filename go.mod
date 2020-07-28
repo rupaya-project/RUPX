@@ -1,4 +1,4 @@
-module github.com/tomochain/tomochain
+module github.com/rupaya-project/rupx
 
 go 1.12
 

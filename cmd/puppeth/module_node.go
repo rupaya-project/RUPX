@@ -26,8 +26,8 @@ import (
 	"strings"
 	"text/template"
 
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/log"
+	"github.com/rupaya-project/rupx/common"
+	"github.com/rupaya-project/rupx/log"
 )
 
 // nodeDockerfile is the Dockerfile required to run an Ethereum node.

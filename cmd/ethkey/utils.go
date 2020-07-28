@@ -22,9 +22,9 @@ import (
 	"io/ioutil"
 	"strings"
 
-	"github.com/tomochain/tomochain/cmd/utils"
-	"github.com/tomochain/tomochain/console"
-	"github.com/tomochain/tomochain/crypto"
+	"github.com/rupaya-project/rupx/cmd/utils"
+	"github.com/rupaya-project/rupx/console"
+	"github.com/rupaya-project/rupx/crypto"
 	"gopkg.in/urfave/cli.v1"
 )
 

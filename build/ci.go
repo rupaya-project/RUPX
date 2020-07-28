@@ -47,7 +47,7 @@ import (
 	"runtime"
 	"strings"
 
-	"github.com/tomochain/tomochain/internal/build"
+	"github.com/rupaya-project/rupx/internal/build"
 )
 
 var (

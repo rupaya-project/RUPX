@@ -28,7 +28,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/tomochain/tomochain/crypto/sha3"
+	"github.com/rupaya-project/rupx/crypto/sha3"
 )
 
 const (

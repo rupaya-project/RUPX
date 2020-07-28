@@ -26,11 +26,11 @@ import (
 	"sync"
 	"testing"
 
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/swarm/api"
-	swarm "github.com/tomochain/tomochain/swarm/api/client"
-	"github.com/tomochain/tomochain/swarm/storage"
-	"github.com/tomochain/tomochain/swarm/testutil"
+	"github.com/rupaya-project/rupx/common"
+	"github.com/rupaya-project/rupx/swarm/api"
+	swarm "github.com/rupaya-project/rupx/swarm/api/client"
+	"github.com/rupaya-project/rupx/swarm/storage"
+	"github.com/rupaya-project/rupx/swarm/testutil"
 )
 
 func TestBzzGetPath(t *testing.T) {

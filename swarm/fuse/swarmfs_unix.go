@@ -29,9 +29,9 @@ import (
 
 	"bazil.org/fuse"
 	"bazil.org/fuse/fs"
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/log"
-	"github.com/tomochain/tomochain/swarm/api"
+	"github.com/rupaya-project/rupx/common"
+	"github.com/rupaya-project/rupx/log"
+	"github.com/rupaya-project/rupx/swarm/api"
 )
 
 var (

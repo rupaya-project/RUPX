@@ -23,10 +23,10 @@ import (
 	"math/rand"
 	"time"
 
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/consensus"
-	"github.com/tomochain/tomochain/core/types"
-	"github.com/tomochain/tomochain/log"
+	"github.com/rupaya-project/rupx/common"
+	"github.com/rupaya-project/rupx/consensus"
+	"github.com/rupaya-project/rupx/core/types"
+	"github.com/rupaya-project/rupx/log"
 	"gopkg.in/karalabe/cookiejar.v2/collections/prque"
 )
 

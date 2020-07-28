@@ -30,8 +30,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/tomochain/tomochain/accounts/keystore"
-	"github.com/tomochain/tomochain/core/types"
+	"github.com/rupaya-project/rupx/accounts/keystore"
+	"github.com/rupaya-project/rupx/core/types"
 )
 
 // Tests that the account management snippets work correctly.

@@ -21,10 +21,10 @@ import (
 	"io"
 	"os"
 
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/core/types"
-	"github.com/tomochain/tomochain/log"
-	"github.com/tomochain/tomochain/rlp"
+	"github.com/rupaya-project/rupx/common"
+	"github.com/rupaya-project/rupx/core/types"
+	"github.com/rupaya-project/rupx/log"
+	"github.com/rupaya-project/rupx/rlp"
 )
 
 // errNoActiveJournal is returned if a transaction is attempted to be inserted

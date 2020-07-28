@@ -24,12 +24,12 @@ import (
 	"fmt"
 	"math/big"
 
-	ethereum "github.com/tomochain/tomochain"
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/common/hexutil"
-	"github.com/tomochain/tomochain/core/types"
-	"github.com/tomochain/tomochain/rlp"
-	"github.com/tomochain/tomochain/rpc"
+	ethereum "github.com/rupaya-project/rupx"
+	"github.com/rupaya-project/rupx/common"
+	"github.com/rupaya-project/rupx/common/hexutil"
+	"github.com/rupaya-project/rupx/core/types"
+	"github.com/rupaya-project/rupx/rlp"
+	"github.com/rupaya-project/rupx/rpc"
 )
 
 // Client defines typed wrappers for the Ethereum RPC API.

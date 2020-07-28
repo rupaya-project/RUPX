@@ -21,9 +21,9 @@ package geth
 import (
 	"encoding/json"
 
-	"github.com/tomochain/tomochain/core"
-	"github.com/tomochain/tomochain/p2p/discv5"
-	"github.com/tomochain/tomochain/params"
+	"github.com/rupaya-project/rupx/core"
+	"github.com/rupaya-project/rupx/p2p/discv5"
+	"github.com/rupaya-project/rupx/params"
 )
 
 // MainnetGenesis returns the JSON spec to use for the main Ethereum network. It

@@ -41,23 +41,23 @@ import (
 	"sync"
 	"time"
 
-	"github.com/tomochain/tomochain/accounts"
-	"github.com/tomochain/tomochain/accounts/keystore"
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/core"
-	"github.com/tomochain/tomochain/core/types"
-	"github.com/tomochain/tomochain/eth"
-	"github.com/tomochain/tomochain/eth/downloader"
-	"github.com/tomochain/tomochain/ethclient"
-	"github.com/tomochain/tomochain/ethstats"
-	"github.com/tomochain/tomochain/les"
-	"github.com/tomochain/tomochain/log"
-	"github.com/tomochain/tomochain/node"
-	"github.com/tomochain/tomochain/p2p"
-	"github.com/tomochain/tomochain/p2p/discover"
-	"github.com/tomochain/tomochain/p2p/discv5"
-	"github.com/tomochain/tomochain/p2p/nat"
-	"github.com/tomochain/tomochain/params"
+	"github.com/rupaya-project/rupx/accounts"
+	"github.com/rupaya-project/rupx/accounts/keystore"
+	"github.com/rupaya-project/rupx/common"
+	"github.com/rupaya-project/rupx/core"
+	"github.com/rupaya-project/rupx/core/types"
+	"github.com/rupaya-project/rupx/eth"
+	"github.com/rupaya-project/rupx/eth/downloader"
+	"github.com/rupaya-project/rupx/ethclient"
+	"github.com/rupaya-project/rupx/ethstats"
+	"github.com/rupaya-project/rupx/les"
+	"github.com/rupaya-project/rupx/log"
+	"github.com/rupaya-project/rupx/node"
+	"github.com/rupaya-project/rupx/p2p"
+	"github.com/rupaya-project/rupx/p2p/discover"
+	"github.com/rupaya-project/rupx/p2p/discv5"
+	"github.com/rupaya-project/rupx/p2p/nat"
+	"github.com/rupaya-project/rupx/params"
 	"golang.org/x/net/websocket"
 )
 
@@ -450,7 +450,7 @@ func (f *faucet) apiHandler(conn *websocket.Conn) {
 		case *noauthFlag:
 			username, avatar, address, err = authNoAuth(msg.URL)
 		default:
-			err = errors.New("Something funky happened, please open an issue at https://github.com/tomochain/tomochain/issues")
+			err = errors.New("Something funky happened, please open an issue at https://github.com/rupaya-project/rupx/issues")
 		}
 		if err != nil {
 			if err = sendError(conn, err); err != nil {

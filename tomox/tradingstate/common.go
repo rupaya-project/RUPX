@@ -3,11 +3,11 @@ package tradingstate
 import (
 	"encoding/json"
 	"errors"
-	"github.com/tomochain/tomochain/crypto"
+	"github.com/rupaya-project/rupx/crypto"
 	"math/big"
 	"time"
 
-	"github.com/tomochain/tomochain/common"
+	"github.com/rupaya-project/rupx/common"
 )
 
 const (

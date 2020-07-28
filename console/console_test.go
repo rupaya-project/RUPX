@@ -19,20 +19,20 @@ package console
 import (
 	"bytes"
 	"errors"
-	"github.com/tomochain/tomochain/tomox"
-	"github.com/tomochain/tomochain/tomoxlending"
+	"github.com/rupaya-project/rupx/tomox"
+	"github.com/rupaya-project/rupx/tomoxlending"
 	"io/ioutil"
 	"os"
 	"strings"
 	"testing"
 	"time"
 
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/consensus/ethash"
-	"github.com/tomochain/tomochain/core"
-	"github.com/tomochain/tomochain/eth"
-	"github.com/tomochain/tomochain/internal/jsre"
-	"github.com/tomochain/tomochain/node"
+	"github.com/rupaya-project/rupx/common"
+	"github.com/rupaya-project/rupx/consensus/ethash"
+	"github.com/rupaya-project/rupx/core"
+	"github.com/rupaya-project/rupx/eth"
+	"github.com/rupaya-project/rupx/internal/jsre"
+	"github.com/rupaya-project/rupx/node"
 )
 
 const (

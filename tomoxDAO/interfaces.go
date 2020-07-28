@@ -5,8 +5,8 @@
 package tomoxDAO
 
 import (
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/ethdb"
+	"github.com/rupaya-project/rupx/common"
+	"github.com/rupaya-project/rupx/ethdb"
 )
 
 const defaultCacheLimit = 1024

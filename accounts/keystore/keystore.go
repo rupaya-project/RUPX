@@ -33,11 +33,11 @@ import (
 	"sync"
 	"time"
 
-	"github.com/tomochain/tomochain/accounts"
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/core/types"
-	"github.com/tomochain/tomochain/crypto"
-	"github.com/tomochain/tomochain/event"
+	"github.com/rupaya-project/rupx/accounts"
+	"github.com/rupaya-project/rupx/common"
+	"github.com/rupaya-project/rupx/core/types"
+	"github.com/rupaya-project/rupx/crypto"
+	"github.com/rupaya-project/rupx/event"
 )
 
 var (

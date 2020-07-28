@@ -21,7 +21,7 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/tomochain/tomochain/common"
+	"github.com/rupaya-project/rupx/common"
 )
 
 func (Address) Generate(rand *rand.Rand, size int) reflect.Value {

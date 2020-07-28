@@ -22,13 +22,13 @@ import (
 	"path/filepath"
 	"time"
 
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/log"
-	"github.com/tomochain/tomochain/metrics"
-	"github.com/tomochain/tomochain/p2p/discover"
-	"github.com/tomochain/tomochain/p2p/netutil"
-	"github.com/tomochain/tomochain/swarm/network/kademlia"
-	"github.com/tomochain/tomochain/swarm/storage"
+	"github.com/rupaya-project/rupx/common"
+	"github.com/rupaya-project/rupx/log"
+	"github.com/rupaya-project/rupx/metrics"
+	"github.com/rupaya-project/rupx/p2p/discover"
+	"github.com/rupaya-project/rupx/p2p/netutil"
+	"github.com/rupaya-project/rupx/swarm/network/kademlia"
+	"github.com/rupaya-project/rupx/swarm/storage"
 )
 
 // Hive is the logistic manager of the swarm

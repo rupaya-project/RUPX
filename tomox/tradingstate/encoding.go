@@ -1,7 +1,7 @@
 package tradingstate
 
 import (
-	"github.com/tomochain/tomochain/rlp"
+	"github.com/rupaya-project/rupx/rlp"
 )
 
 func EncodeBytesItem(val interface{}) ([]byte, error) {

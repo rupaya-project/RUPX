@@ -22,7 +22,7 @@ import (
 	"io/ioutil"
 	"strings"
 
-	"github.com/tomochain/tomochain/core/asm"
+	"github.com/rupaya-project/rupx/core/asm"
 	cli "gopkg.in/urfave/cli.v1"
 )
 

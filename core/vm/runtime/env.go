@@ -17,9 +17,9 @@
 package runtime
 
 import (
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/core"
-	"github.com/tomochain/tomochain/core/vm"
+	"github.com/rupaya-project/rupx/common"
+	"github.com/rupaya-project/rupx/core"
+	"github.com/rupaya-project/rupx/core/vm"
 )
 
 func NewEnv(cfg *Config) *vm.EVM {

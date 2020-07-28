@@ -21,8 +21,8 @@ import (
 	"math/rand"
 	"time"
 
-	"github.com/tomochain/tomochain/log"
-	"github.com/tomochain/tomochain/swarm/storage"
+	"github.com/rupaya-project/rupx/log"
+	"github.com/rupaya-project/rupx/swarm/storage"
 )
 
 const requesterCount = 3

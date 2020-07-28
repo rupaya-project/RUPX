@@ -24,9 +24,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/core/vm"
-	"github.com/tomochain/tomochain/params"
+	"github.com/rupaya-project/rupx/common"
+	"github.com/rupaya-project/rupx/core/vm"
+	"github.com/rupaya-project/rupx/params"
 )
 
 type account struct{}

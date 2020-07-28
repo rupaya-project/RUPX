@@ -24,13 +24,13 @@ import (
 	"net"
 	"os"
 
-	"github.com/tomochain/tomochain/cmd/utils"
-	"github.com/tomochain/tomochain/crypto"
-	"github.com/tomochain/tomochain/log"
-	"github.com/tomochain/tomochain/p2p/discover"
-	"github.com/tomochain/tomochain/p2p/discv5"
-	"github.com/tomochain/tomochain/p2p/nat"
-	"github.com/tomochain/tomochain/p2p/netutil"
+	"github.com/rupaya-project/rupx/cmd/utils"
+	"github.com/rupaya-project/rupx/crypto"
+	"github.com/rupaya-project/rupx/log"
+	"github.com/rupaya-project/rupx/p2p/discover"
+	"github.com/rupaya-project/rupx/p2p/discv5"
+	"github.com/rupaya-project/rupx/p2p/nat"
+	"github.com/rupaya-project/rupx/p2p/netutil"
 )
 
 func main() {

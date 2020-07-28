@@ -26,7 +26,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/tomochain/tomochain/common/mclock"
+	"github.com/rupaya-project/rupx/common/mclock"
 )
 
 var (

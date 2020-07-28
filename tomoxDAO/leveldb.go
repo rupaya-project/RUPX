@@ -3,12 +3,12 @@ package tomoxDAO
 import (
 	"bytes"
 	"encoding/hex"
-	"github.com/tomochain/tomochain/common"
+	"github.com/rupaya-project/rupx/common"
 	"sync"
 
 	lru "github.com/hashicorp/golang-lru"
-	"github.com/tomochain/tomochain/ethdb"
-	"github.com/tomochain/tomochain/log"
+	"github.com/rupaya-project/rupx/ethdb"
+	"github.com/rupaya-project/rupx/log"
 )
 
 type BatchItem struct {

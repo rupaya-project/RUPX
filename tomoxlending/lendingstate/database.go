@@ -21,9 +21,9 @@ import (
 	"sync"
 
 	lru "github.com/hashicorp/golang-lru"
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/ethdb"
-	"github.com/tomochain/tomochain/trie"
+	"github.com/rupaya-project/rupx/common"
+	"github.com/rupaya-project/rupx/ethdb"
+	"github.com/rupaya-project/rupx/trie"
 )
 
 // Trie cache generation limit after which to evic trie nodes from memory.

@@ -27,9 +27,9 @@ import (
 	"sync"
 	"time"
 
-	"github.com/tomochain/tomochain/accounts"
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/log"
+	"github.com/rupaya-project/rupx/accounts"
+	"github.com/rupaya-project/rupx/common"
+	"github.com/rupaya-project/rupx/log"
 	mapset "github.com/deckarep/golang-set"
 )
 

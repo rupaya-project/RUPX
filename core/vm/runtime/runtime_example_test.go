@@ -19,8 +19,8 @@ package runtime_test
 import (
 	"fmt"
 
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/core/vm/runtime"
+	"github.com/rupaya-project/rupx/common"
+	"github.com/rupaya-project/rupx/core/vm/runtime"
 )
 
 func ExampleExecute() {

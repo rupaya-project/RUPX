@@ -25,7 +25,7 @@ import (
 	"strings"
 	"text/template"
 
-	"github.com/tomochain/tomochain/log"
+	"github.com/rupaya-project/rupx/log"
 )
 
 // ethstatsDockerfile is the Dockerfile required to build an ethstats backend

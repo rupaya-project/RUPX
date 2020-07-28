@@ -22,8 +22,8 @@ import (
 	"fmt"
 	"sync"
 
-	"github.com/tomochain/tomochain/log"
-	"github.com/tomochain/tomochain/metrics"
+	"github.com/rupaya-project/rupx/log"
+	"github.com/rupaya-project/rupx/metrics"
 )
 
 //metrics variables

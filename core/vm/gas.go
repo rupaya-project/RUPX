@@ -19,7 +19,7 @@ package vm
 import (
 	"math/big"
 
-	"github.com/tomochain/tomochain/params"
+	"github.com/rupaya-project/rupx/params"
 )
 
 const (

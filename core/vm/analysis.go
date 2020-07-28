@@ -19,7 +19,7 @@ package vm
 import (
 	"math/big"
 
-	"github.com/tomochain/tomochain/common"
+	"github.com/rupaya-project/rupx/common"
 )
 
 // destinations stores one map per contract (keyed by hash of code).

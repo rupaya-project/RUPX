@@ -18,11 +18,11 @@ package tradingstate
 
 import (
 	"fmt"
-	"github.com/tomochain/tomochain/ethdb"
-	"github.com/tomochain/tomochain/trie"
+	"github.com/rupaya-project/rupx/ethdb"
+	"github.com/rupaya-project/rupx/trie"
 
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/log"
+	"github.com/rupaya-project/rupx/common"
+	"github.com/rupaya-project/rupx/log"
 )
 
 // TomoXTrie wraps a trie with key hashing. In a secure trie, all

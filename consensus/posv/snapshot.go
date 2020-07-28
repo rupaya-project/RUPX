@@ -19,11 +19,11 @@ import (
 	"bytes"
 	"encoding/json"
 
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/consensus/clique"
-	"github.com/tomochain/tomochain/core/types"
-	"github.com/tomochain/tomochain/ethdb"
-	"github.com/tomochain/tomochain/params"
+	"github.com/rupaya-project/rupx/common"
+	"github.com/rupaya-project/rupx/consensus/clique"
+	"github.com/rupaya-project/rupx/core/types"
+	"github.com/rupaya-project/rupx/ethdb"
+	"github.com/rupaya-project/rupx/params"
 	lru "github.com/hashicorp/golang-lru"
 )
 

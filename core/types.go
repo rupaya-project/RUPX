@@ -17,12 +17,12 @@
 package core
 
 import (
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/core/state"
-	"github.com/tomochain/tomochain/core/types"
-	"github.com/tomochain/tomochain/core/vm"
-	"github.com/tomochain/tomochain/tomox/tradingstate"
-	"github.com/tomochain/tomochain/tomoxlending/lendingstate"
+	"github.com/rupaya-project/rupx/common"
+	"github.com/rupaya-project/rupx/core/state"
+	"github.com/rupaya-project/rupx/core/types"
+	"github.com/rupaya-project/rupx/core/vm"
+	"github.com/rupaya-project/rupx/tomox/tradingstate"
+	"github.com/rupaya-project/rupx/tomoxlending/lendingstate"
 	"math/big"
 )
 

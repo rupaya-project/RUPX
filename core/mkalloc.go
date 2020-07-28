@@ -34,8 +34,8 @@ import (
 	"sort"
 	"strconv"
 
-	"github.com/tomochain/tomochain/core"
-	"github.com/tomochain/tomochain/rlp"
+	"github.com/rupaya-project/rupx/core"
+	"github.com/rupaya-project/rupx/rlp"
 )
 
 type allocItem struct{ Addr, Balance *big.Int }

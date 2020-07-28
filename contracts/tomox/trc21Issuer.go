@@ -1,9 +1,9 @@
 package tomox
 
 import (
-	"github.com/tomochain/tomochain/accounts/abi/bind"
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/contracts/tomox/contract"
+	"github.com/rupaya-project/rupx/accounts/abi/bind"
+	"github.com/rupaya-project/rupx/common"
+	"github.com/rupaya-project/rupx/contracts/tomox/contract"
 	"math/big"
 )
 

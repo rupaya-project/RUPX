@@ -20,7 +20,7 @@ import (
 	"html/template"
 	"path"
 
-	"github.com/tomochain/tomochain/swarm/api"
+	"github.com/rupaya-project/rupx/swarm/api"
 )
 
 type htmlListData struct {

@@ -26,7 +26,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/tomochain/tomochain/common"
+	"github.com/rupaya-project/rupx/common"
 	"github.com/stretchr/testify/require"
 )
 

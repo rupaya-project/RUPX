@@ -2,11 +2,11 @@ package core
 
 import (
 	"context"
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/core/types"
-	"github.com/tomochain/tomochain/crypto"
-	"github.com/tomochain/tomochain/ethclient"
-	"github.com/tomochain/tomochain/rpc"
+	"github.com/rupaya-project/rupx/common"
+	"github.com/rupaya-project/rupx/core/types"
+	"github.com/rupaya-project/rupx/crypto"
+	"github.com/rupaya-project/rupx/ethclient"
+	"github.com/rupaya-project/rupx/rpc"
 	"log"
 	"math/big"
 	"strconv"

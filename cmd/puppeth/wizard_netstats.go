@@ -23,8 +23,8 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/tomochain/tomochain/core"
-	"github.com/tomochain/tomochain/log"
+	"github.com/rupaya-project/rupx/core"
+	"github.com/rupaya-project/rupx/log"
 	"github.com/olekukonko/tablewriter"
 )
 

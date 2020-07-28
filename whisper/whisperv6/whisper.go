@@ -28,12 +28,12 @@ import (
 
 	mapset "github.com/deckarep/golang-set"
 	"github.com/syndtr/goleveldb/leveldb/errors"
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/crypto"
-	"github.com/tomochain/tomochain/log"
-	"github.com/tomochain/tomochain/p2p"
-	"github.com/tomochain/tomochain/rlp"
-	"github.com/tomochain/tomochain/rpc"
+	"github.com/rupaya-project/rupx/common"
+	"github.com/rupaya-project/rupx/crypto"
+	"github.com/rupaya-project/rupx/log"
+	"github.com/rupaya-project/rupx/p2p"
+	"github.com/rupaya-project/rupx/rlp"
+	"github.com/rupaya-project/rupx/rpc"
 	"golang.org/x/crypto/pbkdf2"
 	"golang.org/x/sync/syncmap"
 )

@@ -25,9 +25,9 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/tomochain/tomochain/event"
-	"github.com/tomochain/tomochain/p2p/discover"
-	"github.com/tomochain/tomochain/rlp"
+	"github.com/rupaya-project/rupx/event"
+	"github.com/rupaya-project/rupx/p2p/discover"
+	"github.com/rupaya-project/rupx/rlp"
 )
 
 // Msg defines the structure of a p2p message.

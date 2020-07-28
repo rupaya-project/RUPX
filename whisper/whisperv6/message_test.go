@@ -23,9 +23,9 @@ import (
 	mrand "math/rand"
 	"testing"
 
-	"github.com/tomochain/tomochain/common/hexutil"
-	"github.com/tomochain/tomochain/crypto"
-	"github.com/tomochain/tomochain/rlp"
+	"github.com/rupaya-project/rupx/common/hexutil"
+	"github.com/rupaya-project/rupx/crypto"
+	"github.com/rupaya-project/rupx/rlp"
 )
 
 func generateMessageParams() (*MessageParams, error) {

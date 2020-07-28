@@ -20,11 +20,11 @@ import (
 	"math/big"
 	"testing"
 
-	"github.com/tomochain/tomochain/accounts/abi/bind"
-	"github.com/tomochain/tomochain/accounts/abi/bind/backends"
-	"github.com/tomochain/tomochain/contracts/ens/contract"
-	"github.com/tomochain/tomochain/core"
-	"github.com/tomochain/tomochain/crypto"
+	"github.com/rupaya-project/rupx/accounts/abi/bind"
+	"github.com/rupaya-project/rupx/accounts/abi/bind/backends"
+	"github.com/rupaya-project/rupx/contracts/ens/contract"
+	"github.com/rupaya-project/rupx/core"
+	"github.com/rupaya-project/rupx/crypto"
 )
 
 var (
