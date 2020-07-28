@@ -604,7 +604,7 @@ func (s *TradingStateDB) Commit() (root common.Hash, err error) {
 		}
 		return nil
 	})
-	log.Debug("TomoX Trie cache stats after commit", "misses", trie.CacheMisses(), "unloads", trie.CacheUnloads(), "root", root.Hex())
+	log.Debug("RupeX Trie cache stats after commit", "misses", trie.CacheMisses(), "unloads", trie.CacheUnloads(), "root", root.Hex())
 	return root, err
 }
 

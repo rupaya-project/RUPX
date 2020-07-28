@@ -36,8 +36,8 @@ ADD genesis.json /genesis.json
 
 RUN \
   echo 'node server.js &'                     > wallet.sh && \
-	echo 'tomo --cache 512 init /genesis.json' >> wallet.sh && \
-	echo $'tomo --networkid {{.NetworkID}} --port {{.NodePort}} --bootnodes {{.Bootnodes}} --ethstats \'{{.Ethstats}}\' --cache=512 --rpc --rpcaddr=0.0.0.0 --rpccorsdomain "*" --rpcvhosts "*"' >> wallet.sh
+	echo 'rupaya --cache 512 init /genesis.json' >> wallet.sh && \
+	echo $'rupaya --networkid {{.NetworkID}} --port {{.NodePort}} --bootnodes {{.Bootnodes}} --ethstats \'{{.Ethstats}}\' --cache=512 --rpc --rpcaddr=0.0.0.0 --rpccorsdomain "*" --rpcvhosts "*"' >> wallet.sh
 
 RUN \
 	sed -i 's/PuppethNetworkID/{{.NetworkID}}/g' dist/js/etherwallet-master.js && \
@@ -60,7 +60,7 @@ services:
     ports:
       - "{{.NodePort}}:{{.NodePort}}"
       - "{{.NodePort}}:{{.NodePort}}/udp"
-      - "{{.RPCPort}}:8545"{{if not .VHost}}
+      - "{{.RPCPort}}:7050"{{if not .VHost}}
       - "{{.WebPort}}:80"{{end}}
     volumes:
       - {{.Datadir}}:/root/.ethereum
@@ -183,7 +183,7 @@ func checkWallet(client *sshClient, network string) (*walletInfos, error) {
 	if err = checkPort(client.server, nodePort); err != nil {
 		log.Warn(fmt.Sprintf("Wallet devp2p port seems unreachable"), "server", client.server, "port", nodePort, "err", err)
 	}
-	rpcPort := infos.portmap["8545/tcp"]
+	rpcPort := infos.portmap["7050/tcp"]
 	if err = checkPort(client.server, rpcPort); err != nil {
 		log.Warn(fmt.Sprintf("Wallet RPC port seems unreachable"), "server", client.server, "port", rpcPort, "err", err)
 	}

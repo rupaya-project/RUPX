@@ -10,7 +10,7 @@ import (
 	"time"
 )
 
-func TestTomoxTrieTest(t *testing.T) {
+func TestRupexTrieTest(t *testing.T) {
 	t.SkipNow()
 	db, _ := ethdb.NewMemDatabase()
 	stateCache := NewDatabase(db)

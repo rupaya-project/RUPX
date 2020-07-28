@@ -110,7 +110,7 @@ func NewApp(gitCommit, usage string) *cli.App {
 // are the same for all commands.
 
 var (
-	// Tomo flags.
+	// Rupaya flags.
 	RollbackFlag = cli.StringFlag{
 		Name:  "rollback",
 		Usage: "Rollback chain at hash",
@@ -140,16 +140,16 @@ var (
 	}
 	NetworkIdFlag = cli.Uint64Flag{
 		Name:  "networkid",
-		Usage: "Network identifier (integer, 89=Tomochain)",
+		Usage: "Network identifier (integer, 89=Rupaya)",
 		Value: eth.DefaultConfig.NetworkId,
 	}
 	TestnetFlag = cli.BoolFlag{
 		Name:  "testnet",
 		Usage: "Ropsten network: pre-configured proof-of-work test network",
 	}
-	TomoTestnetFlag = cli.BoolFlag{
-		Name:  "tomo-testnet",
-		Usage: "Tomo test network",
+	RupayaTestnetFlag = cli.BoolFlag{
+		Name:  "rupaya-testnet",
+		Usage: "Rupaya test network",
 	}
 	RinkebyFlag = cli.BoolFlag{
 		Name:  "rinkeby",
@@ -205,10 +205,10 @@ var (
 		Name:  "lightkdf",
 		Usage: "Reduce key-derivation RAM & CPU usage at some expense of KDF strength",
 	}
-	// TomoX settings
-	TomoXEnabledFlag = cli.BoolFlag{
-		Name:  "tomox",
-		Usage: "Enable the tomoX protocol",
+	// RupeX settings
+	RupeXEnabledFlag = cli.BoolFlag{
+		Name:  "rupex",
+		Usage: "Enable the rupayaX protocol",
 	}
 	// Ethash settings
 	EthashCacheDirFlag = DirectoryFlag{
@@ -324,7 +324,7 @@ var (
 	TargetGasLimitFlag = cli.Uint64Flag{
 		Name:  "targetgaslimit",
 		Usage: "Target gas limit sets the artificial target gas floor for the blocks to mine",
-		Value: params.TomoGenesisGasLimit,
+		Value: params.RupayaGenesisGasLimit,
 	}
 	EtherbaseFlag = cli.StringFlag{
 		Name:  "etherbase",
@@ -463,7 +463,7 @@ var (
 	ListenPortFlag = cli.IntFlag{
 		Name:  "port",
 		Usage: "Network listening port",
-		Value: 30303,
+		Value: 9050,
 	}
 	BootnodesFlag = cli.StringFlag{
 		Name:  "bootnodes",
@@ -538,31 +538,31 @@ var (
 		Usage: "Minimum POW accepted",
 		Value: whisper.DefaultMinimumPoW,
 	}
-	TomoXDataDirFlag = DirectoryFlag{
-		Name:  "tomox.datadir",
-		Usage: "Data directory for the TomoX databases",
-		Value: DirectoryString{filepath.Join(DataDirFlag.Value.String(), "tomox")},
+	RupeXDataDirFlag = DirectoryFlag{
+		Name:  "rupex.datadir",
+		Usage: "Data directory for the RupeX databases",
+		Value: DirectoryString{filepath.Join(DataDirFlag.Value.String(), "rupex")},
 	}
-	TomoXDBEngineFlag = cli.StringFlag{
-		Name:  "tomox.dbengine",
-		Usage: "Database engine for TomoX (leveldb, mongodb)",
+	RupeXDBEngineFlag = cli.StringFlag{
+		Name:  "rupex.dbengine",
+		Usage: "Database engine for RupeX (leveldb, mongodb)",
 		Value: "leveldb",
 	}
-	TomoXDBNameFlag = cli.StringFlag{
-		Name:  "tomox.dbName",
-		Usage: "Database name for TomoX",
-		Value: "tomodex",
+	RupeXDBNameFlag = cli.StringFlag{
+		Name:  "rupex.dbName",
+		Usage: "Database name for RupeX",
+		Value: "rupayadex",
 	}
-	TomoXDBConnectionUrlFlag = cli.StringFlag{
-		Name:  "tomox.dbConnectionUrl",
+	RupeXDBConnectionUrlFlag = cli.StringFlag{
+		Name:  "rupex.dbConnectionUrl",
 		Usage: "ConnectionUrl to database if dbEngine is mongodb. Host:port. If there are multiple instances, separated by comma. Eg: localhost:27017,localhost:27018",
 		Value: "localhost:27017",
 	}
-	TomoXDBReplicaSetNameFlag = cli.StringFlag{
-		Name:  "tomox.dbReplicaSetName",
+	RupeXDBReplicaSetNameFlag = cli.StringFlag{
+		Name:  "rupex.dbReplicaSetName",
 		Usage: "ReplicaSetName if Master-Slave is setup",
 	}
-	TomoSlaveModeFlag = cli.BoolFlag{
+	RupayaSlaveModeFlag = cli.BoolFlag{
 		Name:  "slave",
 		Usage: "Enable slave mode",
 	}
@@ -637,7 +637,7 @@ func setBootstrapNodes(ctx *cli.Context, cfg *p2p.Config) {
 		return // already set, don't apply defaults.
 	case !ctx.GlobalIsSet(BootnodesFlag.Name):
 		urls = params.MainnetBootnodes
-	case ctx.GlobalBool(TomoTestnetFlag.Name):
+	case ctx.GlobalBool(RupayaTestnetFlag.Name):
 		urls = params.TestnetBootnodes
 	}
 	cfg.BootstrapNodes = make([]*discover.Node, 0, len(urls))
@@ -767,7 +767,7 @@ func setIPC(ctx *cli.Context, cfg *node.Config) {
 }
 
 // MakeDatabaseHandles raises out the number of allowed file handles per process
-// for tomo and returns half of the allowance to assign to the database.
+// for rupaya and returns half of the allowance to assign to the database.
 func MakeDatabaseHandles() int {
 	limit, err := fdlimit.Current()
 	if err != nil {
@@ -799,7 +799,7 @@ func MakeAddress(ks *keystore.KeyStore, account string) (accounts.Account, error
 	log.Warn("-------------------------------------------------------------------")
 	log.Warn("Referring to accounts by order in the keystore folder is dangerous!")
 	log.Warn("This functionality is deprecated and will be removed in the future!")
-	log.Warn("Please use explicit addresses! (can search via `tomo account list`)")
+	log.Warn("Please use explicit addresses! (can search via `rupaya account list`)")
 	log.Warn("-------------------------------------------------------------------")
 
 	accs := ks.Accounts()
@@ -1050,39 +1050,39 @@ func SetShhConfig(ctx *cli.Context, stack *node.Node, cfg *whisper.Config) {
 	}
 }
 
-func SetTomoXConfig(ctx *cli.Context, cfg *tomox.Config, tomoDataDir string) {
-	if ctx.GlobalIsSet(TomoXDataDirFlag.Name) {
-		cfg.DataDir = ctx.GlobalString(TomoXDataDirFlag.Name)
+func SetRupeXConfig(ctx *cli.Context, cfg *rupex.Config, rupayaDataDir string) {
+	if ctx.GlobalIsSet(RupeXDataDirFlag.Name) {
+		cfg.DataDir = ctx.GlobalString(RupeXDataDirFlag.Name)
 	} else {
-		// default tomox datadir: DATADIR/tomox
-		defaultTomoXDataDir := filepath.Join(tomoDataDir, "tomox")
+		// default rupex datadir: DATADIR/rupex
+		defaultRupeXDataDir := filepath.Join(rupayaDataDir, "rupex")
 
-		filesInTomoXDefaultDir, _ := WalkMatch(defaultTomoXDataDir, "*.ldb")
+		filesInRupeXDefaultDir, _ := WalkMatch(defaultRupeXDataDir, "*.ldb")
 		filesInNodeDefaultDir, _ := WalkMatch(node.DefaultDataDir(), "*.ldb")
-		if len(filesInTomoXDefaultDir) == 0 && len(filesInNodeDefaultDir) > 0 {
+		if len(filesInRupeXDefaultDir) == 0 && len(filesInNodeDefaultDir) > 0 {
 			cfg.DataDir = node.DefaultDataDir()
 		} else {
-			cfg.DataDir = defaultTomoXDataDir
+			cfg.DataDir = defaultRupeXDataDir
 		}
 	}
-	log.Info("TomoX datadir", "path", cfg.DataDir)
-	if ctx.GlobalIsSet(TomoXDBEngineFlag.Name) {
-		cfg.DBEngine = ctx.GlobalString(TomoXDBEngineFlag.Name)
+	log.Info("RupeX datadir", "path", cfg.DataDir)
+	if ctx.GlobalIsSet(RupeXDBEngineFlag.Name) {
+		cfg.DBEngine = ctx.GlobalString(RupeXDBEngineFlag.Name)
 	} else {
-		cfg.DBEngine = TomoXDBEngineFlag.Value
+		cfg.DBEngine = RupeXDBEngineFlag.Value
 	}
-	if ctx.GlobalIsSet(TomoXDBNameFlag.Name) {
-		cfg.DBName = ctx.GlobalString(TomoXDBNameFlag.Name)
+	if ctx.GlobalIsSet(RupeXDBNameFlag.Name) {
+		cfg.DBName = ctx.GlobalString(RupeXDBNameFlag.Name)
 	} else {
-		cfg.DBName = TomoXDBNameFlag.Value
+		cfg.DBName = RupeXDBNameFlag.Value
 	}
-	if ctx.GlobalIsSet(TomoXDBConnectionUrlFlag.Name) {
-		cfg.ConnectionUrl = ctx.GlobalString(TomoXDBConnectionUrlFlag.Name)
+	if ctx.GlobalIsSet(RupeXDBConnectionUrlFlag.Name) {
+		cfg.ConnectionUrl = ctx.GlobalString(RupeXDBConnectionUrlFlag.Name)
 	} else {
-		cfg.ConnectionUrl = TomoXDBConnectionUrlFlag.Value
+		cfg.ConnectionUrl = RupeXDBConnectionUrlFlag.Value
 	}
-	if ctx.GlobalIsSet(TomoXDBReplicaSetNameFlag.Name) {
-		cfg.ReplicaSetName = ctx.GlobalString(TomoXDBReplicaSetNameFlag.Name)
+	if ctx.GlobalIsSet(RupeXDBReplicaSetNameFlag.Name) {
+		cfg.ReplicaSetName = ctx.GlobalString(RupeXDBReplicaSetNameFlag.Name)
 	}
 }
 
@@ -1148,7 +1148,7 @@ func SetEthConfig(ctx *cli.Context, stack *node.Node, cfg *eth.Config) {
 		cfg.EnablePreimageRecording = ctx.GlobalBool(VMEnableDebugFlag.Name)
 	}
 	if ctx.GlobalIsSet(StoreRewardFlag.Name) {
-		common.StoreRewardFolder = filepath.Join(stack.DataDir(), "tomo", "rewards")
+		common.StoreRewardFolder = filepath.Join(stack.DataDir(), "rupaya", "rewards")
 		if _, err := os.Stat(common.StoreRewardFolder); os.IsNotExist(err) {
 			os.Mkdir(common.StoreRewardFolder, os.ModePerm)
 		}
@@ -1297,11 +1297,11 @@ func MakeConsolePreloads(ctx *cli.Context) []string {
 // This is a temporary function used for migrating old command/flags to the
 // new format.
 //
-// e.g. tomo account new --keystore /tmp/mykeystore --lightkdf
+// e.g. rupaya account new --keystore /tmp/mykeystore --lightkdf
 //
 // is equivalent after calling this method with:
 //
-// tomo --keystore /tmp/mykeystore --lightkdf account new
+// rupaya --keystore /tmp/mykeystore --lightkdf account new
 //
 // This allows the use of the existing configuration functionality.
 // When all flags are migrated this function can be removed and the existing

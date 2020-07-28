@@ -105,14 +105,14 @@ func (v *BlockValidator) ValidateState(block, parent *types.Block, statedb *stat
 	return nil
 }
 
-func (v *BlockValidator) ValidateTradingOrder(statedb *state.StateDB, tomoxStatedb *tradingstate.TradingStateDB, txMatchBatch tradingstate.TxMatchBatch, coinbase common.Address) error {
+func (v *BlockValidator) ValidateTradingOrder(statedb *state.StateDB, rupexStatedb *tradingstate.TradingStateDB, txMatchBatch tradingstate.TxMatchBatch, coinbase common.Address) error {
 	posvEngine, ok := v.bc.Engine().(*posv.Posv)
 	if posvEngine == nil || !ok {
 		return ErrNotPoSV
 	}
-	tomoXService := posvEngine.GetTomoXService()
-	if tomoXService == nil {
-		return fmt.Errorf("tomox not found")
+	rupayaXService := posvEngine.GetRupeXService()
+	if rupayaXService == nil {
+		return fmt.Errorf("rupex not found")
 	}
 	log.Debug("verify matching transaction found a TxMatches Batch", "numTxMatches", len(txMatchBatch.Data))
 	tradingResult := map[common.Hash]tradingstate.MatchingResult{}
@@ -126,7 +126,7 @@ func (v *BlockValidator) ValidateTradingOrder(statedb *state.StateDB, tomoxState
 
 		log.Debug("process tx match", "order", order)
 		// process Matching Engine
-		newTrades, newRejectedOrders, err := tomoXService.ApplyOrder(coinbase, v.bc, statedb, tomoxStatedb, tradingstate.GetTradingOrderBookHash(order.BaseToken, order.QuoteToken), order)
+		newTrades, newRejectedOrders, err := rupayaXService.ApplyOrder(coinbase, v.bc, statedb, rupexStatedb, tradingstate.GetTradingOrderBookHash(order.BaseToken, order.QuoteToken), order)
 		if err != nil {
 			return err
 		}
@@ -135,20 +135,20 @@ func (v *BlockValidator) ValidateTradingOrder(statedb *state.StateDB, tomoxState
 			Rejects: newRejectedOrders,
 		}
 	}
-	if tomoXService.IsSDKNode() {
+	if rupayaXService.IsSDKNode() {
 		v.bc.AddMatchingResult(txMatchBatch.TxHash, tradingResult)
 	}
 	return nil
 }
 
-func (v *BlockValidator) ValidateLendingOrder(statedb *state.StateDB, lendingStateDb *lendingstate.LendingStateDB, tomoxStatedb *tradingstate.TradingStateDB, batch lendingstate.TxLendingBatch, coinbase common.Address, header *types.Header) error {
+func (v *BlockValidator) ValidateLendingOrder(statedb *state.StateDB, lendingStateDb *lendingstate.LendingStateDB, rupexStatedb *tradingstate.TradingStateDB, batch lendingstate.TxLendingBatch, coinbase common.Address, header *types.Header) error {
 	posvEngine, ok := v.bc.Engine().(*posv.Posv)
 	if posvEngine == nil || !ok {
 		return ErrNotPoSV
 	}
-	tomoXService := posvEngine.GetTomoXService()
-	if tomoXService == nil {
-		return fmt.Errorf("tomox not found")
+	rupayaXService := posvEngine.GetRupeXService()
+	if rupayaXService == nil {
+		return fmt.Errorf("rupex not found")
 	}
 	lendingService := posvEngine.GetLendingService()
 	if lendingService == nil {
@@ -161,7 +161,7 @@ func (v *BlockValidator) ValidateLendingOrder(statedb *state.StateDB, lendingSta
 
 		log.Debug("process lending tx", "lendingItem", lendingstate.ToJSON(l))
 		// process Matching Engine
-		newTrades, newRejectedOrders, err := lendingService.ApplyOrder(header, coinbase, v.bc, statedb, lendingStateDb, tomoxStatedb, lendingstate.GetLendingOrderBookHash(l.LendingToken, l.Term), l)
+		newTrades, newRejectedOrders, err := lendingService.ApplyOrder(header, coinbase, v.bc, statedb, lendingStateDb, rupexStatedb, lendingstate.GetLendingOrderBookHash(l.LendingToken, l.Term), l)
 		if err != nil {
 			return err
 		}
@@ -170,7 +170,7 @@ func (v *BlockValidator) ValidateLendingOrder(statedb *state.StateDB, lendingSta
 			Rejects: newRejectedOrders,
 		}
 	}
-	if tomoXService.IsSDKNode() {
+	if rupayaXService.IsSDKNode() {
 		v.bc.AddLendingResult(batch.TxHash, lendingResult)
 	}
 	return nil

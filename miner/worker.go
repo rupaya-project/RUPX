@@ -313,7 +313,7 @@ func (self *worker) update() {
 				self.currentMu.Lock()
 				acc, _ := types.Sender(self.current.signer, ev.Tx)
 				txs := map[common.Address]types.Transactions{acc: {ev.Tx}}
-				feeCapacity := state.GetTRC21FeeCapacityFromState(self.current.state)
+				feeCapacity := state.GetRRC21FeeCapacityFromState(self.current.state)
 				txset, specialTxs := types.NewTransactionsByPriceAndNonce(self.current.signer, txs, nil, feeCapacity)
 				self.current.commitTransactions(self.mux, feeCapacity, txset, specialTxs, self.chain, self.coinbase)
 				self.currentMu.Unlock()
@@ -455,16 +455,16 @@ func (self *worker) makeCurrent(parent *types.Block, header *types.Header) error
 		return err
 	}
 	author, _ := self.chain.Engine().Author(parent.Header())
-	var tomoxState *tradingstate.TradingStateDB
+	var rupexState *tradingstate.TradingStateDB
 	var lendingState *lendingstate.LendingStateDB
 	if self.config.Posv != nil {
-		tomoX := self.eth.GetTomoX()
-		tomoxState, err = tomoX.GetTradingState(parent, author)
+		rupayaX := self.eth.GetRupeX()
+		rupexState, err = rupayaX.GetTradingState(parent, author)
 		if err != nil {
-			log.Error("Failed to get tomox state ", "number", parent.Number(), "err", err)
+			log.Error("Failed to get rupex state ", "number", parent.Number(), "err", err)
 			return err
 		}
-		lending := self.eth.GetTomoXLending()
+		lending := self.eth.GetRupeXLending()
 		lendingState, err = lending.GetLendingState(parent, author)
 		if err != nil {
 			log.Error("Failed to get lending state ", "number", parent.Number(), "err", err)
@@ -477,7 +477,7 @@ func (self *worker) makeCurrent(parent *types.Block, header *types.Header) error
 		signer:       types.NewEIP155Signer(self.config.ChainId),
 		state:        state,
 		parentState:  state.Copy(),
-		tradingState: tomoxState,
+		tradingState: rupexState,
 		lendingState: lendingState,
 		ancestors:    mapset.NewSet(),
 		family:       mapset.NewSet(),
@@ -636,7 +636,7 @@ func (self *worker) commitNewWork() {
 		liquidatedTrades, autoRepayTrades, autoTopUpTrades, autoRecallTrades []*lendingstate.LendingTrade
 		lendingFinalizedTradeTransaction                                     *types.Transaction
 	)
-	feeCapacity := state.GetTRC21FeeCapacityFromStateWithCache(parent.Root(), work.state)
+	feeCapacity := state.GetRRC21FeeCapacityFromStateWithCache(parent.Root(), work.state)
 	if self.config.Posv != nil && header.Number.Uint64()%self.config.Posv.Epoch != 0 {
 		pending, err := self.eth.TxPool().Pending()
 		if err != nil {
@@ -651,12 +651,12 @@ func (self *worker) commitNewWork() {
 			log.Warn("Can't find coinbase account wallet", "coinbase", self.coinbase, "err", err)
 			return
 		}
-		if self.config.Posv != nil && self.chain.Config().IsTIPTomoX(header.Number) {
-			tomoX := self.eth.GetTomoX()
-			tomoXLending := self.eth.GetTomoXLending()
-			if tomoX != nil && header.Number.Uint64() > self.config.Posv.Epoch {
+		if self.config.Posv != nil && self.chain.Config().IsTIPRupeX(header.Number) {
+			rupayaX := self.eth.GetRupeX()
+			rupayaXLending := self.eth.GetRupeXLending()
+			if rupayaX != nil && header.Number.Uint64() > self.config.Posv.Epoch {
 				if header.Number.Uint64()%self.config.Posv.Epoch == 0 {
-					err := tomoX.UpdateMediumPriceBeforeEpoch(header.Number.Uint64()/self.config.Posv.Epoch, work.tradingState, work.state)
+					err := rupayaX.UpdateMediumPriceBeforeEpoch(header.Number.Uint64()/self.config.Posv.Epoch, work.tradingState, work.state)
 					if err != nil {
 						log.Error("Fail when update medium price last epoch", "error", err)
 						return
@@ -668,14 +668,14 @@ func (self *worker) commitNewWork() {
 					log.Debug("Start processing order pending")
 					tradingOrderPending, _ := self.eth.OrderPool().Pending()
 					log.Debug("Start processing order pending", "len", len(tradingOrderPending))
-					tradingTxMatches, tradingMatchingResults = tomoX.ProcessOrderPending(self.coinbase, self.chain, tradingOrderPending, work.state, work.tradingState)
+					tradingTxMatches, tradingMatchingResults = rupayaX.ProcessOrderPending(self.coinbase, self.chain, tradingOrderPending, work.state, work.tradingState)
 					log.Debug("trading transaction matches found", "tradingTxMatches", len(tradingTxMatches))
 
 					lendingOrderPending, _ := self.eth.LendingPool().Pending()
-					lendingInput, lendingMatchingResults = tomoXLending.ProcessOrderPending(header, self.coinbase, self.chain, lendingOrderPending, work.state, work.lendingState, work.tradingState)
+					lendingInput, lendingMatchingResults = rupayaXLending.ProcessOrderPending(header, self.coinbase, self.chain, lendingOrderPending, work.state, work.lendingState, work.tradingState)
 					log.Debug("lending transaction matches found", "lendingInput", len(lendingInput), "lendingMatchingResults", len(lendingMatchingResults))
 					if header.Number.Uint64()%self.config.Posv.Epoch == common.LiquidateLendingTradeBlock {
-						updatedTrades, liquidatedTrades, autoRepayTrades, autoTopUpTrades, autoRecallTrades, err = tomoXLending.ProcessLiquidationData(header, self.chain, work.state, work.tradingState, work.lendingState)
+						updatedTrades, liquidatedTrades, autoRepayTrades, autoTopUpTrades, autoRecallTrades, err = rupayaXLending.ProcessLiquidationData(header, self.chain, work.state, work.tradingState, work.lendingState)
 						if err != nil {
 							log.Error("Fail when process lending liquidation data ", "error", err)
 							return
@@ -694,14 +694,14 @@ func (self *worker) commitNewWork() {
 						return
 					}
 					nonce := work.state.GetNonce(self.coinbase)
-					tx := types.NewTransaction(nonce, common.HexToAddress(common.TomoXAddr), big.NewInt(0), txMatchGasLimit, big.NewInt(0), txMatchBytes)
+					tx := types.NewTransaction(nonce, common.HexToAddress(common.RupeXAddr), big.NewInt(0), txMatchGasLimit, big.NewInt(0), txMatchBytes)
 					txM, err := wallet.SignTx(accounts.Account{Address: self.coinbase}, tx, self.config.ChainId)
 					if err != nil {
 						log.Error("Fail to create tx matches", "error", err)
 						return
 					} else {
 						tradingTransaction = txM
-						if tomoX.IsSDKNode() {
+						if rupayaX.IsSDKNode() {
 							self.chain.AddMatchingResult(tradingTransaction.Hash(), tradingMatchingResults)
 						}
 					}
@@ -719,14 +719,14 @@ func (self *worker) commitNewWork() {
 						return
 					}
 					nonce := work.state.GetNonce(self.coinbase)
-					lendingTx := types.NewTransaction(nonce, common.HexToAddress(common.TomoXLendingAddress), big.NewInt(0), txMatchGasLimit, big.NewInt(0), lendingDataBytes)
+					lendingTx := types.NewTransaction(nonce, common.HexToAddress(common.RupeXLendingAddress), big.NewInt(0), txMatchGasLimit, big.NewInt(0), lendingDataBytes)
 					signedLendingTx, err := wallet.SignTx(accounts.Account{Address: self.coinbase}, lendingTx, self.config.ChainId)
 					if err != nil {
 						log.Error("Fail to create lending tx", "error", err)
 						return
 					} else {
 						lendingTransaction = signedLendingTx
-						if tomoX.IsSDKNode() {
+						if rupayaX.IsSDKNode() {
 							self.chain.AddLendingResult(lendingTransaction.Hash(), lendingMatchingResults)
 						}
 					}
@@ -740,14 +740,14 @@ func (self *worker) commitNewWork() {
 						return
 					}
 					nonce := work.state.GetNonce(self.coinbase)
-					finalizedTx := types.NewTransaction(nonce, common.HexToAddress(common.TomoXLendingFinalizedTradeAddress), big.NewInt(0), txMatchGasLimit, big.NewInt(0), finalizedTradeData)
+					finalizedTx := types.NewTransaction(nonce, common.HexToAddress(common.RupeXLendingFinalizedTradeAddress), big.NewInt(0), txMatchGasLimit, big.NewInt(0), finalizedTradeData)
 					signedFinalizedTx, err := wallet.SignTx(accounts.Account{Address: self.coinbase}, finalizedTx, self.config.ChainId)
 					if err != nil {
 						log.Error("Fail to create lending tx", "error", err)
 						return
 					} else {
 						lendingFinalizedTradeTransaction = signedFinalizedTx
-						if tomoX.IsSDKNode() {
+						if rupayaX.IsSDKNode() {
 							self.chain.AddFinalizedTrades(lendingFinalizedTradeTransaction.Hash(), updatedTrades)
 						}
 					}
@@ -766,9 +766,9 @@ func (self *worker) commitNewWork() {
 			specialTxs = append(specialTxs, lendingFinalizedTradeTransaction)
 		}
 
-		TomoxStateRoot := work.tradingState.IntermediateRoot()
+		RupexStateRoot := work.tradingState.IntermediateRoot()
 		LendingStateRoot := work.lendingState.IntermediateRoot()
-		txData := append(TomoxStateRoot.Bytes(), LendingStateRoot.Bytes()...)
+		txData := append(RupexStateRoot.Bytes(), LendingStateRoot.Bytes()...)
 		tx := types.NewTransaction(work.state.GetNonce(self.coinbase), common.HexToAddress(common.TradingStateAddr), big.NewInt(0), txMatchGasLimit, big.NewInt(0), txData)
 		txStateRoot, err := wallet.SignTx(accounts.Account{Address: self.coinbase}, tx, self.config.ChainId)
 		if err != nil {
@@ -852,20 +852,20 @@ func (env *Work) commitTransactions(mux *event.TypeMux, balanceFee map[common.Ad
 			}
 		}
 
-		// validate minFee slot for TomoZ
-		if tx.IsTomoZApplyTransaction() {
+		// validate minFee slot for RupayaZ
+		if tx.IsRupayaZApplyTransaction() {
 			copyState, _ := bc.State()
-			if err := core.ValidateTomoZApplyTransaction(bc, nil, copyState, common.BytesToAddress(tx.Data()[4:])); err != nil {
-				log.Debug("TomoZApply: invalid token", "token", common.BytesToAddress(tx.Data()[4:]).Hex())
+			if err := core.ValidateRupayaZApplyTransaction(bc, nil, copyState, common.BytesToAddress(tx.Data()[4:])); err != nil {
+				log.Debug("RupayaZApply: invalid token", "token", common.BytesToAddress(tx.Data()[4:]).Hex())
 				txs.Pop()
 				continue
 			}
 		}
-		// validate balance slot, token decimal for TomoX
-		if tx.IsTomoXApplyTransaction() {
+		// validate balance slot, token decimal for RupeX
+		if tx.IsRupeXApplyTransaction() {
 			copyState, _ := bc.State()
-			if err := core.ValidateTomoXApplyTransaction(bc, nil, copyState, common.BytesToAddress(tx.Data()[4:])); err != nil {
-				log.Debug("TomoXApply: invalid token", "token", common.BytesToAddress(tx.Data()[4:]).Hex())
+			if err := core.ValidateRupeXApplyTransaction(bc, nil, copyState, common.BytesToAddress(tx.Data()[4:])); err != nil {
+				log.Debug("RupeXApply: invalid token", "token", common.BytesToAddress(tx.Data()[4:]).Hex())
 				txs.Pop()
 				continue
 			}
@@ -926,8 +926,8 @@ func (env *Work) commitTransactions(mux *event.TypeMux, balanceFee map[common.Ad
 		}
 		if tokenFeeUsed {
 			fee := new(big.Int).SetUint64(gas)
-			if env.header.Number.Cmp(common.TIPTRC21Fee) > 0 {
-				fee = fee.Mul(fee, common.TRC21GasPrice)
+			if env.header.Number.Cmp(common.TIPRRC21Fee) > 0 {
+				fee = fee.Mul(fee, common.RRC21GasPrice)
 			}
 			balanceFee[*tx.To()] = new(big.Int).Sub(balanceFee[*tx.To()], fee)
 			balanceUpdated[*tx.To()] = balanceFee[*tx.To()]
@@ -967,20 +967,20 @@ func (env *Work) commitTransactions(mux *event.TypeMux, balanceFee map[common.Ad
 			}
 		}
 
-		// validate minFee slot for TomoZ
-		if tx.IsTomoZApplyTransaction() {
+		// validate minFee slot for RupayaZ
+		if tx.IsRupayaZApplyTransaction() {
 			copyState, _ := bc.State()
-			if err := core.ValidateTomoZApplyTransaction(bc, nil, copyState, common.BytesToAddress(tx.Data()[4:])); err != nil {
-				log.Debug("TomoZApply: invalid token", "token", common.BytesToAddress(tx.Data()[4:]).Hex())
+			if err := core.ValidateRupayaZApplyTransaction(bc, nil, copyState, common.BytesToAddress(tx.Data()[4:])); err != nil {
+				log.Debug("RupayaZApply: invalid token", "token", common.BytesToAddress(tx.Data()[4:]).Hex())
 				txs.Pop()
 				continue
 			}
 		}
-		// validate balance slot, token decimal for TomoX
-		if tx.IsTomoXApplyTransaction() {
+		// validate balance slot, token decimal for RupeX
+		if tx.IsRupeXApplyTransaction() {
 			copyState, _ := bc.State()
-			if err := core.ValidateTomoXApplyTransaction(bc, nil, copyState, common.BytesToAddress(tx.Data()[4:])); err != nil {
-				log.Debug("TomoXApply: invalid token", "token", common.BytesToAddress(tx.Data()[4:]).Hex())
+			if err := core.ValidateRupeXApplyTransaction(bc, nil, copyState, common.BytesToAddress(tx.Data()[4:])); err != nil {
+				log.Debug("RupeXApply: invalid token", "token", common.BytesToAddress(tx.Data()[4:]).Hex())
 				txs.Pop()
 				continue
 			}
@@ -1044,15 +1044,15 @@ func (env *Work) commitTransactions(mux *event.TypeMux, balanceFee map[common.Ad
 		}
 		if tokenFeeUsed {
 			fee := new(big.Int).SetUint64(gas)
-			if env.header.Number.Cmp(common.TIPTRC21Fee) > 0 {
-				fee = fee.Mul(fee, common.TRC21GasPrice)
+			if env.header.Number.Cmp(common.TIPRRC21Fee) > 0 {
+				fee = fee.Mul(fee, common.RRC21GasPrice)
 			}
 			balanceFee[*tx.To()] = new(big.Int).Sub(balanceFee[*tx.To()], fee)
 			balanceUpdated[*tx.To()] = balanceFee[*tx.To()]
 			totalFeeUsed = totalFeeUsed.Add(totalFeeUsed, fee)
 		}
 	}
-	state.UpdateTRC21Fee(env.state, balanceUpdated, totalFeeUsed)
+	state.UpdateRRC21Fee(env.state, balanceUpdated, totalFeeUsed)
 	if len(coalescedLogs) > 0 || env.tcount > 0 {
 		// make a copy, the state caches the logs and these logs get "upgraded" from pending to mined
 		// logs by filling in the block hash when the block was mined by the local miner. This can

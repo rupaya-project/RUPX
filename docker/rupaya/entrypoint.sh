@@ -22,7 +22,7 @@ KEYSTORE_DIR="keystore"
 genesisPath=""
 params=""
 accountsCount=$(
-  tomo account list --datadir $DATA_DIR  --keystore $KEYSTORE_DIR \
+  rupaya account list --datadir $DATA_DIR  --keystore $KEYSTORE_DIR \
   2> /dev/null \
   | wc -l
 )
@@ -56,7 +56,7 @@ if [[ ! -z $NETWORK_ID ]]; then
       ;;
     89 )
       genesisPath="testnet.json"
-      params="$params --tomo-testnet --gcmode archive --rpcapi db,eth,net,web3,debug,posv"
+      params="$params --rupaya-testnet --gcmode archive --rpcapi db,eth,net,web3,debug,posv"
       ;;
     90 )
       genesisPath="devnet.json"
@@ -74,9 +74,9 @@ if [[ ! -z $GENESIS_PATH ]]; then
 fi
 
 # data dir
-if [[ ! -d $DATA_DIR/tomo ]]; then
+if [[ ! -d $DATA_DIR/rupaya ]]; then
   echo "No blockchain data, creating genesis block."
-  tomo init $genesisPath --datadir $DATA_DIR 2> /dev/null
+  rupaya init $genesisPath --datadir $DATA_DIR 2> /dev/null
 fi
 
 # identity
@@ -101,21 +101,21 @@ if [[ $accountsCount -le 0 ]]; then
   if [[ ! -z $PRIVATE_KEY ]]; then
     echo "Creating account from private key"
     echo "$PRIVATE_KEY" > ./private_key
-    tomo  account import ./private_key \
+    rupaya  account import ./private_key \
       --datadir $DATA_DIR \
       --keystore $KEYSTORE_DIR \
       --password ./password
     rm ./private_key
   else
     echo "Creating new account"
-    tomo account new \
+    rupaya account new \
       --datadir $DATA_DIR \
       --keystore $KEYSTORE_DIR \
       --password ./password
   fi
 fi
 account=$(
-  tomo account list --datadir $DATA_DIR  --keystore $KEYSTORE_DIR \
+  rupaya account list --datadir $DATA_DIR  --keystore $KEYSTORE_DIR \
   2> /dev/null \
   | head -n 1 \
   | cut -d"{" -f 2 | cut -d"}" -f 1
@@ -171,24 +171,24 @@ echo "dump: $IDENTITY $account $BOOTNODES"
 
 set -x
 
-exec tomo $params \
+exec rupaya $params \
   --verbosity $VERBOSITY \
   --datadir $DATA_DIR \
   --keystore $KEYSTORE_DIR \
   --identity $IDENTITY \
   --maxpeers $MAXPEERS \
   --password ./password \
-  --port 30303 \
+  --port 9050 \
   --txpool.globalqueue 5000 \
   --txpool.globalslots 5000 \
   --rpc \
   --rpccorsdomain "*" \
   --rpcaddr 0.0.0.0 \
-  --rpcport 8545 \
+  --rpcport 7050 \
   --rpcvhosts "*" \
   --ws \
   --wsaddr 0.0.0.0 \
-  --wsport 8546 \
+  --wsport 8050 \
   --wsorigins "*" \
   --mine \
   --gasprice "250000000" \

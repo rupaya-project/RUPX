@@ -1,4 +1,4 @@
-package tomoxDAO
+package rupexDAO
 
 import (
 	"bytes"
@@ -321,7 +321,7 @@ func (db *MongoDatabase) DeleteObject(hash common.Hash, val interface{}) error {
 		case *tradingstate.Trade:
 			err = sc.DB(db.dbName).C(tradesCollection).Remove(query)
 			if err != nil && err != mgo.ErrNotFound {
-				return fmt.Errorf("failed to delete tomox trade. Err: %v", err)
+				return fmt.Errorf("failed to delete rupex trade. Err: %v", err)
 			}
 		case *lendingstate.LendingItem:
 			item := val.(*lendingstate.LendingItem)

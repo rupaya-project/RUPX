@@ -354,18 +354,18 @@ func VerifyPair(statedb *state.StateDB, exchangeAddress, baseToken, quoteToken c
 	return fmt.Errorf("invalid exchange pair. Base: %s. Quote: %s. Exchange: %s", baseToken.Hex(), quoteToken.Hex(), exchangeAddress.Hex())
 }
 
-func VerifyBalance(statedb *state.StateDB, tomoxStateDb *TradingStateDB, order *types.OrderTransaction, baseDecimal, quoteDecimal *big.Int) error {
+func VerifyBalance(statedb *state.StateDB, rupexStateDb *TradingStateDB, order *types.OrderTransaction, baseDecimal, quoteDecimal *big.Int) error {
 	var quotePrice *big.Int
-	if order.QuoteToken().String() != common.TomoNativeAddress {
-		quotePrice = tomoxStateDb.GetLastPrice(GetTradingOrderBookHash(order.QuoteToken(), common.HexToAddress(common.TomoNativeAddress)))
-		log.Debug("TryGet quotePrice QuoteToken/TOMO", "quotePrice", quotePrice)
+	if order.QuoteToken().String() != common.RupayaNativeAddress {
+		quotePrice = rupexStateDb.GetLastPrice(GetTradingOrderBookHash(order.QuoteToken(), common.HexToAddress(common.RupayaNativeAddress)))
+		log.Debug("TryGet quotePrice QuoteToken/RUPX", "quotePrice", quotePrice)
 		if quotePrice == nil || quotePrice.Sign() == 0 {
-			inversePrice := tomoxStateDb.GetLastPrice(GetTradingOrderBookHash(common.HexToAddress(common.TomoNativeAddress), order.QuoteToken()))
-			log.Debug("TryGet inversePrice TOMO/QuoteToken", "inversePrice", inversePrice)
+			inversePrice := rupexStateDb.GetLastPrice(GetTradingOrderBookHash(common.HexToAddress(common.RupayaNativeAddress), order.QuoteToken()))
+			log.Debug("TryGet inversePrice RUPX/QuoteToken", "inversePrice", inversePrice)
 			if inversePrice != nil && inversePrice.Sign() > 0 {
 				quotePrice = new(big.Int).Mul(common.BasePrice, quoteDecimal)
 				quotePrice = new(big.Int).Div(quotePrice, inversePrice)
-				log.Debug("TryGet quotePrice after get inversePrice TOMO/QuoteToken", "quotePrice", quotePrice, "quoteTokenDecimal", quoteDecimal)
+				log.Debug("TryGet quotePrice after get inversePrice RUPX/QuoteToken", "quotePrice", quotePrice, "quoteTokenDecimal", quoteDecimal)
 			}
 		}
 	} else {

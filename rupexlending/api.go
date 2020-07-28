@@ -1,4 +1,4 @@
-package tomoxlending
+package rupexlending
 
 import (
 	"context"
@@ -14,18 +14,18 @@ var (
 	ErrOrderNonceTooHigh = errors.New("OrderNonce too high")
 )
 
-// PublicTomoXLendingAPI provides the tomoX RPC service that can be
+// PublicRupeXLendingAPI provides the rupayaX RPC service that can be
 // use publicly without security implications.
-type PublicTomoXLendingAPI struct {
+type PublicRupeXLendingAPI struct {
 	t        *Lending
 	mu       sync.Mutex
 	lastUsed map[string]time.Time // keeps track when a filter was polled for the last time.
 
 }
 
-// NewPublicTomoXLendingAPI create a new RPC tomoX service.
-func NewPublicTomoXLendingAPI(t *Lending) *PublicTomoXLendingAPI {
-	api := &PublicTomoXLendingAPI{
+// NewPublicRupeXLendingAPI create a new RPC rupayaX service.
+func NewPublicRupeXLendingAPI(t *Lending) *PublicRupeXLendingAPI {
+	api := &PublicRupeXLendingAPI{
 		t:        t,
 		lastUsed: make(map[string]time.Time),
 	}
@@ -33,6 +33,6 @@ func NewPublicTomoXLendingAPI(t *Lending) *PublicTomoXLendingAPI {
 }
 
 // Version returns the Lending sub-protocol version.
-func (api *PublicTomoXLendingAPI) Version(ctx context.Context) string {
+func (api *PublicRupeXLendingAPI) Version(ctx context.Context) string {
 	return ProtocolVersionStr
 }

@@ -1,4 +1,4 @@
-package tomox
+package rupex
 
 import (
 	"github.com/rupaya-project/rupx/common"

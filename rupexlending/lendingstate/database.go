@@ -69,7 +69,7 @@ type Trie interface {
 	Commit(onleaf trie.LeafCallback) (common.Hash, error)
 	Hash() common.Hash
 	NodeIterator(startKey []byte) trie.NodeIterator
-	GetKey([]byte) []byte // TODO(fjl): remove this when TomoXTrie is removed
+	GetKey([]byte) []byte // TODO(fjl): remove this when RupeXTrie is removed
 	Prove(key []byte, fromLevel uint, proofDb ethdb.Putter) error
 }
 
@@ -88,7 +88,7 @@ func NewDatabase(db ethdb.Database) Database {
 type cachingDB struct {
 	db            *trie.Database
 	mu            sync.Mutex
-	pastTries     []*TomoXTrie
+	pastTries     []*RupeXTrie
 	codeSizeCache *lru.Cache
 }
 
@@ -102,14 +102,14 @@ func (db *cachingDB) OpenTrie(root common.Hash) (Trie, error) {
 			return cachedTrie{db.pastTries[i].Copy(), db}, nil
 		}
 	}
-	tr, err := NewTomoXTrie(root, db.db, MaxTrieCacheGen)
+	tr, err := NewRupeXTrie(root, db.db, MaxTrieCacheGen)
 	if err != nil {
 		return nil, err
 	}
 	return cachedTrie{tr, db}, nil
 }
 
-func (db *cachingDB) pushTrie(t *TomoXTrie) {
+func (db *cachingDB) pushTrie(t *RupeXTrie) {
 	db.mu.Lock()
 	defer db.mu.Unlock()
 	if len(db.pastTries) >= maxPastTries {
@@ -122,15 +122,15 @@ func (db *cachingDB) pushTrie(t *TomoXTrie) {
 
 // OpenStorageTrie opens the storage trie of an account.
 func (db *cachingDB) OpenStorageTrie(addrHash, root common.Hash) (Trie, error) {
-	return NewTomoXTrie(root, db.db, 0)
+	return NewRupeXTrie(root, db.db, 0)
 }
 
 // CopyTrie returns an independent copy of the given trie.
 func (db *cachingDB) CopyTrie(t Trie) Trie {
 	switch t := t.(type) {
 	case cachedTrie:
-		return cachedTrie{t.TomoXTrie.Copy(), db}
-	case *TomoXTrie:
+		return cachedTrie{t.RupeXTrie.Copy(), db}
+	case *RupeXTrie:
 		return t.Copy()
 	default:
 		panic(fmt.Errorf("unknown trie type %T", t))
@@ -154,18 +154,18 @@ func (db *cachingDB) TrieDB() *trie.Database {
 
 // cachedTrie inserts its trie into a cachingDB on commit.
 type cachedTrie struct {
-	*TomoXTrie
+	*RupeXTrie
 	db *cachingDB
 }
 
 func (m cachedTrie) Commit(onleaf trie.LeafCallback) (common.Hash, error) {
-	root, err := m.TomoXTrie.Commit(onleaf)
+	root, err := m.RupeXTrie.Commit(onleaf)
 	if err == nil {
-		m.db.pushTrie(m.TomoXTrie)
+		m.db.pushTrie(m.RupeXTrie)
 	}
 	return root, err
 }
 
 func (m cachedTrie) Prove(key []byte, fromLevel uint, proofDb ethdb.Putter) error {
-	return m.TomoXTrie.Prove(key, fromLevel, proofDb)
+	return m.RupeXTrie.Prove(key, fromLevel, proofDb)
 }

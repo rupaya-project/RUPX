@@ -41,14 +41,14 @@ import (
 )
 
 const (
-	clientIdentifier = "tomo" // Client identifier to advertise over the network
+	clientIdentifier = "rupaya" // Client identifier to advertise over the network
 )
 
 var (
 	// Git SHA1 commit hash of the release (set via linker flags)
 	gitCommit = ""
 	// The app that holds all commands and flags.
-	app = utils.NewApp(gitCommit, "the tomochain command line interface")
+	app = utils.NewApp(gitCommit, "the rupaya command line interface")
 	// flags that configure the node
 	nodeFlags = []cli.Flag{
 		utils.IdentityFlag,
@@ -66,12 +66,12 @@ var (
 		//utils.EthashDatasetDirFlag,
 		//utils.EthashDatasetsInMemoryFlag,
 		//utils.EthashDatasetsOnDiskFlag,
-		utils.TomoXEnabledFlag,
-		utils.TomoXDataDirFlag,
-		utils.TomoXDBEngineFlag,
-		utils.TomoXDBConnectionUrlFlag,
-		utils.TomoXDBReplicaSetNameFlag,
-		utils.TomoXDBNameFlag,
+		utils.RupeXEnabledFlag,
+		utils.RupeXDataDirFlag,
+		utils.RupeXDBEngineFlag,
+		utils.RupeXDBConnectionUrlFlag,
+		utils.RupeXDBReplicaSetNameFlag,
+		utils.RupeXDBNameFlag,
 		utils.TxPoolNoLocalsFlag,
 		utils.TxPoolJournalFlag,
 		utils.TxPoolRejournalFlag,
@@ -112,7 +112,7 @@ var (
 		//utils.TestnetFlag,
 		//utils.RinkebyFlag,
 		//utils.VMEnableDebugFlag,
-		utils.TomoTestnetFlag,
+		utils.RupayaTestnetFlag,
 		utils.RewoundFlag,
 		utils.NetworkIdFlag,
 		utils.RPCCORSDomainFlag,
@@ -128,7 +128,7 @@ var (
 		utils.AnnounceTxsFlag,
 		utils.StoreRewardFlag,
 		utils.RollbackFlag,
-		utils.TomoSlaveModeFlag,
+		utils.RupayaSlaveModeFlag,
 	}
 
 	rpcFlags = []cli.Flag{
@@ -153,10 +153,10 @@ var (
 )
 
 func init() {
-	// Initialize the CLI app and start tomo
-	app.Action = tomo
+	// Initialize the CLI app and start rupaya
+	app.Action = rupaya
 	app.HideVersion = true // we have a command to print the version
-	app.Copyright = "Copyright (c) 2018 Tomochain"
+	app.Copyright = "Copyright (c) 2018 Rupaya"
 	app.Commands = []cli.Command{
 		// See chaincmd.go:
 		initCommand,
@@ -210,10 +210,10 @@ func main() {
 	}
 }
 
-// tomo is the main entry point into the system if no special subcommand is ran.
+// rupaya is the main entry point into the system if no special subcommand is ran.
 // It creates a default node based on the command line arguments and runs it in
 // blocking mode, waiting for it to be shut down.
-func tomo(ctx *cli.Context) error {
+func rupaya(ctx *cli.Context) error {
 	node, cfg := makeFullNode(ctx)
 	startNode(ctx, node, cfg)
 	node.Wait()
@@ -223,7 +223,7 @@ func tomo(ctx *cli.Context) error {
 // startNode boots up the system node and all registered protocols, after which
 // it unlocks any requested accounts, and starts the RPC/IPC interfaces and the
 // miner.
-func startNode(ctx *cli.Context, stack *node.Node, cfg tomoConfig) {
+func startNode(ctx *cli.Context, stack *node.Node, cfg rupayaConfig) {
 	// Start up the node itself
 	utils.StartNode(stack)
 
@@ -298,7 +298,7 @@ func startNode(ctx *cli.Context, stack *node.Node, cfg tomoConfig) {
 		go func() {
 			started := false
 			ok := false
-			slaveMode := ctx.GlobalIsSet(utils.TomoSlaveModeFlag.Name)
+			slaveMode := ctx.GlobalIsSet(utils.RupayaSlaveModeFlag.Name)
 			var err error
 			if common.IsTestnet {
 				ok, err = ethereum.ValidateMasternodeTestnet()

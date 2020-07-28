@@ -173,123 +173,123 @@ func (_SafeMath *SafeMathTransactorRaw) Transact(opts *bind.TransactOpts, method
 	return _SafeMath.Contract.contract.Transact(opts, method, params...)
 }
 
-// TomoRandomizeABI is the input ABI used to generate the binding from.
-const TomoRandomizeABI = "[{\"constant\":true,\"inputs\":[{\"name\":\"_validator\",\"type\":\"address\"}],\"name\":\"getSecret\",\"outputs\":[{\"name\":\"\",\"type\":\"bytes32[]\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"_secret\",\"type\":\"bytes32[]\"}],\"name\":\"setSecret\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"name\":\"_validator\",\"type\":\"address\"}],\"name\":\"getOpening\",\"outputs\":[{\"name\":\"\",\"type\":\"bytes32\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"_opening\",\"type\":\"bytes32\"}],\"name\":\"setOpening\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"}]"
+// RupayaRandomizeABI is the input ABI used to generate the binding from.
+const RupayaRandomizeABI = "[{\"constant\":true,\"inputs\":[{\"name\":\"_validator\",\"type\":\"address\"}],\"name\":\"getSecret\",\"outputs\":[{\"name\":\"\",\"type\":\"bytes32[]\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"_secret\",\"type\":\"bytes32[]\"}],\"name\":\"setSecret\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"name\":\"_validator\",\"type\":\"address\"}],\"name\":\"getOpening\",\"outputs\":[{\"name\":\"\",\"type\":\"bytes32\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"_opening\",\"type\":\"bytes32\"}],\"name\":\"setOpening\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"}]"
 
-// TomoRandomizeBin is the compiled bytecode used for deploying new contracts.
-const TomoRandomizeBin = `0x6060604052341561000f57600080fd5b6103368061001e6000396000f3006060604052600436106100615763ffffffff7c0100000000000000000000000000000000000000000000000000000000600035041663284180fc811461006657806334d38600146100d8578063d442d6cc14610129578063e11f5ba21461015a575b600080fd5b341561007157600080fd5b610085600160a060020a0360043516610170565b60405160208082528190810183818151815260200191508051906020019060200280838360005b838110156100c45780820151838201526020016100ac565b505050509050019250505060405180910390f35b34156100e357600080fd5b61012760046024813581810190830135806020818102016040519081016040528093929190818152602001838360200280828437509496506101f395505050505050565b005b341561013457600080fd5b610148600160a060020a0360043516610243565b60405190815260200160405180910390f35b341561016557600080fd5b61012760043561025e565b61017861028e565b60008083600160a060020a0316600160a060020a031681526020019081526020016000208054806020026020016040519081016040528092919081815260200182805480156101e757602002820191906000526020600020905b815481526001909101906020018083116101d2575b50505050509050919050565b610384430661032081101561020757600080fd5b610352811061021557600080fd5b600160a060020a033316600090815260208190526040902082805161023e9291602001906102a0565b505050565b600160a060020a031660009081526001602052604090205490565b610384430661035281101561027257600080fd5b50600160a060020a033316600090815260016020526040902055565b60206040519081016040526000815290565b8280548282559060005260206000209081019282156102dd579160200282015b828111156102dd57825182556020909201916001909101906102c0565b506102e99291506102ed565b5090565b61030791905b808211156102e957600081556001016102f3565b905600a165627a7a7230582034991c8dc4001fc254f3ba2811c05d2e7d29bee3908946ca56d1545b2c852de20029`
+// RupayaRandomizeBin is the compiled bytecode used for deploying new contracts.
+const RupayaRandomizeBin = `0x6060604052341561000f57600080fd5b6103368061001e6000396000f3006060604052600436106100615763ffffffff7c0100000000000000000000000000000000000000000000000000000000600035041663284180fc811461006657806334d38600146100d8578063d442d6cc14610129578063e11f5ba21461015a575b600080fd5b341561007157600080fd5b610085600160a060020a0360043516610170565b60405160208082528190810183818151815260200191508051906020019060200280838360005b838110156100c45780820151838201526020016100ac565b505050509050019250505060405180910390f35b34156100e357600080fd5b61012760046024813581810190830135806020818102016040519081016040528093929190818152602001838360200280828437509496506101f395505050505050565b005b341561013457600080fd5b610148600160a060020a0360043516610243565b60405190815260200160405180910390f35b341561016557600080fd5b61012760043561025e565b61017861028e565b60008083600160a060020a0316600160a060020a031681526020019081526020016000208054806020026020016040519081016040528092919081815260200182805480156101e757602002820191906000526020600020905b815481526001909101906020018083116101d2575b50505050509050919050565b610384430661032081101561020757600080fd5b610352811061021557600080fd5b600160a060020a033316600090815260208190526040902082805161023e9291602001906102a0565b505050565b600160a060020a031660009081526001602052604090205490565b610384430661035281101561027257600080fd5b50600160a060020a033316600090815260016020526040902055565b60206040519081016040526000815290565b8280548282559060005260206000209081019282156102dd579160200282015b828111156102dd57825182556020909201916001909101906102c0565b506102e99291506102ed565b5090565b61030791905b808211156102e957600081556001016102f3565b905600a165627a7a7230582034991c8dc4001fc254f3ba2811c05d2e7d29bee3908946ca56d1545b2c852de20029`
 
-// DeployTomoRandomize deploys a new Ethereum contract, binding an instance of TomoRandomize to it.
-func DeployTomoRandomize(auth *bind.TransactOpts, backend bind.ContractBackend) (common.Address, *types.Transaction, *TomoRandomize, error) {
-	parsed, err := abi.JSON(strings.NewReader(TomoRandomizeABI))
+// DeployRupayaRandomize deploys a new Ethereum contract, binding an instance of RupayaRandomize to it.
+func DeployRupayaRandomize(auth *bind.TransactOpts, backend bind.ContractBackend) (common.Address, *types.Transaction, *RupayaRandomize, error) {
+	parsed, err := abi.JSON(strings.NewReader(RupayaRandomizeABI))
 	if err != nil {
 		return common.Address{}, nil, nil, err
 	}
-	address, tx, contract, err := bind.DeployContract(auth, parsed, common.FromHex(TomoRandomizeBin), backend)
+	address, tx, contract, err := bind.DeployContract(auth, parsed, common.FromHex(RupayaRandomizeBin), backend)
 	if err != nil {
 		return common.Address{}, nil, nil, err
 	}
-	return address, tx, &TomoRandomize{TomoRandomizeCaller: TomoRandomizeCaller{contract: contract}, TomoRandomizeTransactor: TomoRandomizeTransactor{contract: contract}, TomoRandomizeFilterer: TomoRandomizeFilterer{contract: contract}}, nil
+	return address, tx, &RupayaRandomize{RupayaRandomizeCaller: RupayaRandomizeCaller{contract: contract}, RupayaRandomizeTransactor: RupayaRandomizeTransactor{contract: contract}, RupayaRandomizeFilterer: RupayaRandomizeFilterer{contract: contract}}, nil
 }
 
-// TomoRandomize is an auto generated Go binding around an Ethereum contract.
-type TomoRandomize struct {
-	TomoRandomizeCaller     // Read-only binding to the contract
-	TomoRandomizeTransactor // Write-only binding to the contract
-	TomoRandomizeFilterer   // Log filterer for contract events
+// RupayaRandomize is an auto generated Go binding around an Ethereum contract.
+type RupayaRandomize struct {
+	RupayaRandomizeCaller     // Read-only binding to the contract
+	RupayaRandomizeTransactor // Write-only binding to the contract
+	RupayaRandomizeFilterer   // Log filterer for contract events
 }
 
-// TomoRandomizeCaller is an auto generated read-only Go binding around an Ethereum contract.
-type TomoRandomizeCaller struct {
+// RupayaRandomizeCaller is an auto generated read-only Go binding around an Ethereum contract.
+type RupayaRandomizeCaller struct {
 	contract *bind.BoundContract // Generic contract wrapper for the low level calls
 }
 
-// TomoRandomizeTransactor is an auto generated write-only Go binding around an Ethereum contract.
-type TomoRandomizeTransactor struct {
+// RupayaRandomizeTransactor is an auto generated write-only Go binding around an Ethereum contract.
+type RupayaRandomizeTransactor struct {
 	contract *bind.BoundContract // Generic contract wrapper for the low level calls
 }
 
-// TomoRandomizeFilterer is an auto generated log filtering Go binding around an Ethereum contract events.
-type TomoRandomizeFilterer struct {
+// RupayaRandomizeFilterer is an auto generated log filtering Go binding around an Ethereum contract events.
+type RupayaRandomizeFilterer struct {
 	contract *bind.BoundContract // Generic contract wrapper for the low level calls
 }
 
-// TomoRandomizeSession is an auto generated Go binding around an Ethereum contract,
+// RupayaRandomizeSession is an auto generated Go binding around an Ethereum contract,
 // with pre-set call and transact options.
-type TomoRandomizeSession struct {
-	Contract     *TomoRandomize    // Generic contract binding to set the session for
+type RupayaRandomizeSession struct {
+	Contract     *RupayaRandomize  // Generic contract binding to set the session for
 	CallOpts     bind.CallOpts     // Call options to use throughout this session
 	TransactOpts bind.TransactOpts // Transaction auth options to use throughout this session
 }
 
-// TomoRandomizeCallerSession is an auto generated read-only Go binding around an Ethereum contract,
+// RupayaRandomizeCallerSession is an auto generated read-only Go binding around an Ethereum contract,
 // with pre-set call options.
-type TomoRandomizeCallerSession struct {
-	Contract *TomoRandomizeCaller // Generic contract caller binding to set the session for
-	CallOpts bind.CallOpts        // Call options to use throughout this session
+type RupayaRandomizeCallerSession struct {
+	Contract *RupayaRandomizeCaller // Generic contract caller binding to set the session for
+	CallOpts bind.CallOpts          // Call options to use throughout this session
 }
 
-// TomoRandomizeTransactorSession is an auto generated write-only Go binding around an Ethereum contract,
+// RupayaRandomizeTransactorSession is an auto generated write-only Go binding around an Ethereum contract,
 // with pre-set transact options.
-type TomoRandomizeTransactorSession struct {
-	Contract     *TomoRandomizeTransactor // Generic contract transactor binding to set the session for
-	TransactOpts bind.TransactOpts        // Transaction auth options to use throughout this session
+type RupayaRandomizeTransactorSession struct {
+	Contract     *RupayaRandomizeTransactor // Generic contract transactor binding to set the session for
+	TransactOpts bind.TransactOpts          // Transaction auth options to use throughout this session
 }
 
-// TomoRandomizeRaw is an auto generated low-level Go binding around an Ethereum contract.
-type TomoRandomizeRaw struct {
-	Contract *TomoRandomize // Generic contract binding to access the raw methods on
+// RupayaRandomizeRaw is an auto generated low-level Go binding around an Ethereum contract.
+type RupayaRandomizeRaw struct {
+	Contract *RupayaRandomize // Generic contract binding to access the raw methods on
 }
 
-// TomoRandomizeCallerRaw is an auto generated low-level read-only Go binding around an Ethereum contract.
-type TomoRandomizeCallerRaw struct {
-	Contract *TomoRandomizeCaller // Generic read-only contract binding to access the raw methods on
+// RupayaRandomizeCallerRaw is an auto generated low-level read-only Go binding around an Ethereum contract.
+type RupayaRandomizeCallerRaw struct {
+	Contract *RupayaRandomizeCaller // Generic read-only contract binding to access the raw methods on
 }
 
-// TomoRandomizeTransactorRaw is an auto generated low-level write-only Go binding around an Ethereum contract.
-type TomoRandomizeTransactorRaw struct {
-	Contract *TomoRandomizeTransactor // Generic write-only contract binding to access the raw methods on
+// RupayaRandomizeTransactorRaw is an auto generated low-level write-only Go binding around an Ethereum contract.
+type RupayaRandomizeTransactorRaw struct {
+	Contract *RupayaRandomizeTransactor // Generic write-only contract binding to access the raw methods on
 }
 
-// NewTomoRandomize creates a new instance of TomoRandomize, bound to a specific deployed contract.
-func NewTomoRandomize(address common.Address, backend bind.ContractBackend) (*TomoRandomize, error) {
-	contract, err := bindTomoRandomize(address, backend, backend, backend)
+// NewRupayaRandomize creates a new instance of RupayaRandomize, bound to a specific deployed contract.
+func NewRupayaRandomize(address common.Address, backend bind.ContractBackend) (*RupayaRandomize, error) {
+	contract, err := bindRupayaRandomize(address, backend, backend, backend)
 	if err != nil {
 		return nil, err
 	}
-	return &TomoRandomize{TomoRandomizeCaller: TomoRandomizeCaller{contract: contract}, TomoRandomizeTransactor: TomoRandomizeTransactor{contract: contract}, TomoRandomizeFilterer: TomoRandomizeFilterer{contract: contract}}, nil
+	return &RupayaRandomize{RupayaRandomizeCaller: RupayaRandomizeCaller{contract: contract}, RupayaRandomizeTransactor: RupayaRandomizeTransactor{contract: contract}, RupayaRandomizeFilterer: RupayaRandomizeFilterer{contract: contract}}, nil
 }
 
-// NewTomoRandomizeCaller creates a new read-only instance of TomoRandomize, bound to a specific deployed contract.
-func NewTomoRandomizeCaller(address common.Address, caller bind.ContractCaller) (*TomoRandomizeCaller, error) {
-	contract, err := bindTomoRandomize(address, caller, nil, nil)
+// NewRupayaRandomizeCaller creates a new read-only instance of RupayaRandomize, bound to a specific deployed contract.
+func NewRupayaRandomizeCaller(address common.Address, caller bind.ContractCaller) (*RupayaRandomizeCaller, error) {
+	contract, err := bindRupayaRandomize(address, caller, nil, nil)
 	if err != nil {
 		return nil, err
 	}
-	return &TomoRandomizeCaller{contract: contract}, nil
+	return &RupayaRandomizeCaller{contract: contract}, nil
 }
 
-// NewTomoRandomizeTransactor creates a new write-only instance of TomoRandomize, bound to a specific deployed contract.
-func NewTomoRandomizeTransactor(address common.Address, transactor bind.ContractTransactor) (*TomoRandomizeTransactor, error) {
-	contract, err := bindTomoRandomize(address, nil, transactor, nil)
+// NewRupayaRandomizeTransactor creates a new write-only instance of RupayaRandomize, bound to a specific deployed contract.
+func NewRupayaRandomizeTransactor(address common.Address, transactor bind.ContractTransactor) (*RupayaRandomizeTransactor, error) {
+	contract, err := bindRupayaRandomize(address, nil, transactor, nil)
 	if err != nil {
 		return nil, err
 	}
-	return &TomoRandomizeTransactor{contract: contract}, nil
+	return &RupayaRandomizeTransactor{contract: contract}, nil
 }
 
-// NewTomoRandomizeFilterer creates a new log filterer instance of TomoRandomize, bound to a specific deployed contract.
-func NewTomoRandomizeFilterer(address common.Address, filterer bind.ContractFilterer) (*TomoRandomizeFilterer, error) {
-	contract, err := bindTomoRandomize(address, nil, nil, filterer)
+// NewRupayaRandomizeFilterer creates a new log filterer instance of RupayaRandomize, bound to a specific deployed contract.
+func NewRupayaRandomizeFilterer(address common.Address, filterer bind.ContractFilterer) (*RupayaRandomizeFilterer, error) {
+	contract, err := bindRupayaRandomize(address, nil, nil, filterer)
 	if err != nil {
 		return nil, err
 	}
-	return &TomoRandomizeFilterer{contract: contract}, nil
+	return &RupayaRandomizeFilterer{contract: contract}, nil
 }
 
-// bindTomoRandomize binds a generic wrapper to an already deployed contract.
-func bindTomoRandomize(address common.Address, caller bind.ContractCaller, transactor bind.ContractTransactor, filterer bind.ContractFilterer) (*bind.BoundContract, error) {
-	parsed, err := abi.JSON(strings.NewReader(TomoRandomizeABI))
+// bindRupayaRandomize binds a generic wrapper to an already deployed contract.
+func bindRupayaRandomize(address common.Address, caller bind.ContractCaller, transactor bind.ContractTransactor, filterer bind.ContractFilterer) (*bind.BoundContract, error) {
+	parsed, err := abi.JSON(strings.NewReader(RupayaRandomizeABI))
 	if err != nil {
 		return nil, err
 	}
@@ -300,130 +300,130 @@ func bindTomoRandomize(address common.Address, caller bind.ContractCaller, trans
 // sets the output to result. The result type might be a single field for simple
 // returns, a slice of interfaces for anonymous returns and a struct for named
 // returns.
-func (_TomoRandomize *TomoRandomizeRaw) Call(opts *bind.CallOpts, result interface{}, method string, params ...interface{}) error {
-	return _TomoRandomize.Contract.TomoRandomizeCaller.contract.Call(opts, result, method, params...)
+func (_RupayaRandomize *RupayaRandomizeRaw) Call(opts *bind.CallOpts, result interface{}, method string, params ...interface{}) error {
+	return _RupayaRandomize.Contract.RupayaRandomizeCaller.contract.Call(opts, result, method, params...)
 }
 
 // Transfer initiates a plain transaction to move funds to the contract, calling
 // its default method if one is available.
-func (_TomoRandomize *TomoRandomizeRaw) Transfer(opts *bind.TransactOpts) (*types.Transaction, error) {
-	return _TomoRandomize.Contract.TomoRandomizeTransactor.contract.Transfer(opts)
+func (_RupayaRandomize *RupayaRandomizeRaw) Transfer(opts *bind.TransactOpts) (*types.Transaction, error) {
+	return _RupayaRandomize.Contract.RupayaRandomizeTransactor.contract.Transfer(opts)
 }
 
 // Transact invokes the (paid) contract method with params as input values.
-func (_TomoRandomize *TomoRandomizeRaw) Transact(opts *bind.TransactOpts, method string, params ...interface{}) (*types.Transaction, error) {
-	return _TomoRandomize.Contract.TomoRandomizeTransactor.contract.Transact(opts, method, params...)
+func (_RupayaRandomize *RupayaRandomizeRaw) Transact(opts *bind.TransactOpts, method string, params ...interface{}) (*types.Transaction, error) {
+	return _RupayaRandomize.Contract.RupayaRandomizeTransactor.contract.Transact(opts, method, params...)
 }
 
 // Call invokes the (constant) contract method with params as input values and
 // sets the output to result. The result type might be a single field for simple
 // returns, a slice of interfaces for anonymous returns and a struct for named
 // returns.
-func (_TomoRandomize *TomoRandomizeCallerRaw) Call(opts *bind.CallOpts, result interface{}, method string, params ...interface{}) error {
-	return _TomoRandomize.Contract.contract.Call(opts, result, method, params...)
+func (_RupayaRandomize *RupayaRandomizeCallerRaw) Call(opts *bind.CallOpts, result interface{}, method string, params ...interface{}) error {
+	return _RupayaRandomize.Contract.contract.Call(opts, result, method, params...)
 }
 
 // Transfer initiates a plain transaction to move funds to the contract, calling
 // its default method if one is available.
-func (_TomoRandomize *TomoRandomizeTransactorRaw) Transfer(opts *bind.TransactOpts) (*types.Transaction, error) {
-	return _TomoRandomize.Contract.contract.Transfer(opts)
+func (_RupayaRandomize *RupayaRandomizeTransactorRaw) Transfer(opts *bind.TransactOpts) (*types.Transaction, error) {
+	return _RupayaRandomize.Contract.contract.Transfer(opts)
 }
 
 // Transact invokes the (paid) contract method with params as input values.
-func (_TomoRandomize *TomoRandomizeTransactorRaw) Transact(opts *bind.TransactOpts, method string, params ...interface{}) (*types.Transaction, error) {
-	return _TomoRandomize.Contract.contract.Transact(opts, method, params...)
+func (_RupayaRandomize *RupayaRandomizeTransactorRaw) Transact(opts *bind.TransactOpts, method string, params ...interface{}) (*types.Transaction, error) {
+	return _RupayaRandomize.Contract.contract.Transact(opts, method, params...)
 }
 
 // GetOpening is a free data retrieval call binding the contract method 0xd442d6cc.
 //
 // Solidity: function getOpening(_validator address) constant returns(bytes32)
-func (_TomoRandomize *TomoRandomizeCaller) GetOpening(opts *bind.CallOpts, _validator common.Address) ([32]byte, error) {
+func (_RupayaRandomize *RupayaRandomizeCaller) GetOpening(opts *bind.CallOpts, _validator common.Address) ([32]byte, error) {
 	var (
 		ret0 = new([32]byte)
 	)
 	out := ret0
-	err := _TomoRandomize.contract.Call(opts, out, "getOpening", _validator)
+	err := _RupayaRandomize.contract.Call(opts, out, "getOpening", _validator)
 	return *ret0, err
 }
 
 // GetOpening is a free data retrieval call binding the contract method 0xd442d6cc.
 //
 // Solidity: function getOpening(_validator address) constant returns(bytes32)
-func (_TomoRandomize *TomoRandomizeSession) GetOpening(_validator common.Address) ([32]byte, error) {
-	return _TomoRandomize.Contract.GetOpening(&_TomoRandomize.CallOpts, _validator)
+func (_RupayaRandomize *RupayaRandomizeSession) GetOpening(_validator common.Address) ([32]byte, error) {
+	return _RupayaRandomize.Contract.GetOpening(&_RupayaRandomize.CallOpts, _validator)
 }
 
 // GetOpening is a free data retrieval call binding the contract method 0xd442d6cc.
 //
 // Solidity: function getOpening(_validator address) constant returns(bytes32)
-func (_TomoRandomize *TomoRandomizeCallerSession) GetOpening(_validator common.Address) ([32]byte, error) {
-	return _TomoRandomize.Contract.GetOpening(&_TomoRandomize.CallOpts, _validator)
+func (_RupayaRandomize *RupayaRandomizeCallerSession) GetOpening(_validator common.Address) ([32]byte, error) {
+	return _RupayaRandomize.Contract.GetOpening(&_RupayaRandomize.CallOpts, _validator)
 }
 
 // GetSecret is a free data retrieval call binding the contract method 0x284180fc.
 //
 // Solidity: function getSecret(_validator address) constant returns(bytes32[])
-func (_TomoRandomize *TomoRandomizeCaller) GetSecret(opts *bind.CallOpts, _validator common.Address) ([][32]byte, error) {
+func (_RupayaRandomize *RupayaRandomizeCaller) GetSecret(opts *bind.CallOpts, _validator common.Address) ([][32]byte, error) {
 	var (
 		ret0 = new([][32]byte)
 	)
 	out := ret0
-	err := _TomoRandomize.contract.Call(opts, out, "getSecret", _validator)
+	err := _RupayaRandomize.contract.Call(opts, out, "getSecret", _validator)
 	return *ret0, err
 }
 
 // GetSecret is a free data retrieval call binding the contract method 0x284180fc.
 //
 // Solidity: function getSecret(_validator address) constant returns(bytes32[])
-func (_TomoRandomize *TomoRandomizeSession) GetSecret(_validator common.Address) ([][32]byte, error) {
-	return _TomoRandomize.Contract.GetSecret(&_TomoRandomize.CallOpts, _validator)
+func (_RupayaRandomize *RupayaRandomizeSession) GetSecret(_validator common.Address) ([][32]byte, error) {
+	return _RupayaRandomize.Contract.GetSecret(&_RupayaRandomize.CallOpts, _validator)
 }
 
 // GetSecret is a free data retrieval call binding the contract method 0x284180fc.
 //
 // Solidity: function getSecret(_validator address) constant returns(bytes32[])
-func (_TomoRandomize *TomoRandomizeCallerSession) GetSecret(_validator common.Address) ([][32]byte, error) {
-	return _TomoRandomize.Contract.GetSecret(&_TomoRandomize.CallOpts, _validator)
+func (_RupayaRandomize *RupayaRandomizeCallerSession) GetSecret(_validator common.Address) ([][32]byte, error) {
+	return _RupayaRandomize.Contract.GetSecret(&_RupayaRandomize.CallOpts, _validator)
 }
 
 // SetOpening is a paid mutator transaction binding the contract method 0xe11f5ba2.
 //
 // Solidity: function setOpening(_opening bytes32) returns()
-func (_TomoRandomize *TomoRandomizeTransactor) SetOpening(opts *bind.TransactOpts, _opening [32]byte) (*types.Transaction, error) {
-	return _TomoRandomize.contract.Transact(opts, "setOpening", _opening)
+func (_RupayaRandomize *RupayaRandomizeTransactor) SetOpening(opts *bind.TransactOpts, _opening [32]byte) (*types.Transaction, error) {
+	return _RupayaRandomize.contract.Transact(opts, "setOpening", _opening)
 }
 
 // SetOpening is a paid mutator transaction binding the contract method 0xe11f5ba2.
 //
 // Solidity: function setOpening(_opening bytes32) returns()
-func (_TomoRandomize *TomoRandomizeSession) SetOpening(_opening [32]byte) (*types.Transaction, error) {
-	return _TomoRandomize.Contract.SetOpening(&_TomoRandomize.TransactOpts, _opening)
+func (_RupayaRandomize *RupayaRandomizeSession) SetOpening(_opening [32]byte) (*types.Transaction, error) {
+	return _RupayaRandomize.Contract.SetOpening(&_RupayaRandomize.TransactOpts, _opening)
 }
 
 // SetOpening is a paid mutator transaction binding the contract method 0xe11f5ba2.
 //
 // Solidity: function setOpening(_opening bytes32) returns()
-func (_TomoRandomize *TomoRandomizeTransactorSession) SetOpening(_opening [32]byte) (*types.Transaction, error) {
-	return _TomoRandomize.Contract.SetOpening(&_TomoRandomize.TransactOpts, _opening)
+func (_RupayaRandomize *RupayaRandomizeTransactorSession) SetOpening(_opening [32]byte) (*types.Transaction, error) {
+	return _RupayaRandomize.Contract.SetOpening(&_RupayaRandomize.TransactOpts, _opening)
 }
 
 // SetSecret is a paid mutator transaction binding the contract method 0x34d38600.
 //
 // Solidity: function setSecret(_secret bytes32[]) returns()
-func (_TomoRandomize *TomoRandomizeTransactor) SetSecret(opts *bind.TransactOpts, _secret [][32]byte) (*types.Transaction, error) {
-	return _TomoRandomize.contract.Transact(opts, "setSecret", _secret)
+func (_RupayaRandomize *RupayaRandomizeTransactor) SetSecret(opts *bind.TransactOpts, _secret [][32]byte) (*types.Transaction, error) {
+	return _RupayaRandomize.contract.Transact(opts, "setSecret", _secret)
 }
 
 // SetSecret is a paid mutator transaction binding the contract method 0x34d38600.
 //
 // Solidity: function setSecret(_secret bytes32[]) returns()
-func (_TomoRandomize *TomoRandomizeSession) SetSecret(_secret [][32]byte) (*types.Transaction, error) {
-	return _TomoRandomize.Contract.SetSecret(&_TomoRandomize.TransactOpts, _secret)
+func (_RupayaRandomize *RupayaRandomizeSession) SetSecret(_secret [][32]byte) (*types.Transaction, error) {
+	return _RupayaRandomize.Contract.SetSecret(&_RupayaRandomize.TransactOpts, _secret)
 }
 
 // SetSecret is a paid mutator transaction binding the contract method 0x34d38600.
 //
 // Solidity: function setSecret(_secret bytes32[]) returns()
-func (_TomoRandomize *TomoRandomizeTransactorSession) SetSecret(_secret [][32]byte) (*types.Transaction, error) {
-	return _TomoRandomize.Contract.SetSecret(&_TomoRandomize.TransactOpts, _secret)
+func (_RupayaRandomize *RupayaRandomizeTransactorSession) SetSecret(_secret [][32]byte) (*types.Transaction, error) {
+	return _RupayaRandomize.Contract.SetSecret(&_RupayaRandomize.TransactOpts, _secret)
 }

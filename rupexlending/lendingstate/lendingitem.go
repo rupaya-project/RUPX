@@ -346,9 +346,9 @@ func (l *LendingItem) VerifyLendingSignature() error {
 	return nil
 }
 
-func VerifyBalance(isTomoXLendingFork bool, statedb *state.StateDB, lendingStateDb *LendingStateDB,
+func VerifyBalance(isRupeXLendingFork bool, statedb *state.StateDB, lendingStateDb *LendingStateDB,
 	orderType, side, status string, userAddress, relayer, lendingToken, collateralToken common.Address,
-	quantity, lendingTokenDecimal, collateralTokenDecimal, lendTokenTOMOPrice, collateralPrice *big.Int,
+	quantity, lendingTokenDecimal, collateralTokenDecimal, lendTokenRUPXPrice, collateralPrice *big.Int,
 	term uint64, lendingId uint64, lendingTradeId uint64) error {
 	borrowingFeeRate := GetFee(statedb, relayer)
 	switch orderType {
@@ -389,17 +389,17 @@ func VerifyBalance(isTomoXLendingFork bool, statedb *state.StateDB, lendingState
 					return fmt.Errorf("VerifyBalance: investor doesn't have enough lendingToken. User: %s. Token: %s. Expected: %v. Have: %v", userAddress.Hex(), lendingToken.Hex(), quantity, balance)
 				}
 				// check quantity: reject if it's too small
-				if lendTokenTOMOPrice != nil && lendTokenTOMOPrice.Sign() > 0 {
+				if lendTokenRUPXPrice != nil && lendTokenRUPXPrice.Sign() > 0 {
 					defaultFee := new(big.Int).Mul(quantity, new(big.Int).SetUint64(DefaultFeeRate))
-					defaultFee = new(big.Int).Div(defaultFee, common.TomoXBaseFee)
-					defaultFeeInTOMO := common.Big0
-					if lendingToken.String() != common.TomoNativeAddress {
-						defaultFeeInTOMO = new(big.Int).Mul(defaultFee, lendTokenTOMOPrice)
-						defaultFeeInTOMO = new(big.Int).Div(defaultFeeInTOMO, lendingTokenDecimal)
+					defaultFee = new(big.Int).Div(defaultFee, common.RupeXBaseFee)
+					defaultFeeInRUPX := common.Big0
+					if lendingToken.String() != common.RupayaNativeAddress {
+						defaultFeeInRUPX = new(big.Int).Mul(defaultFee, lendTokenRUPXPrice)
+						defaultFeeInRUPX = new(big.Int).Div(defaultFeeInRUPX, lendingTokenDecimal)
 					} else {
-						defaultFeeInTOMO = defaultFee
+						defaultFeeInRUPX = defaultFee
 					}
-					if defaultFeeInTOMO.Cmp(common.RelayerLendingFee) <= 0 {
+					if defaultFeeInRUPX.Cmp(common.RelayerLendingFee) <= 0 {
 						return ErrQuantityTradeTooSmall
 					}
 
@@ -412,7 +412,7 @@ func VerifyBalance(isTomoXLendingFork bool, statedb *state.StateDB, lendingState
 				item := lendingStateDb.GetLendingOrder(lendingBook, common.BigToHash(new(big.Int).SetUint64(lendingId)))
 				cancelFee := big.NewInt(0)
 				cancelFee = new(big.Int).Mul(item.Quantity, borrowingFeeRate)
-				cancelFee = new(big.Int).Div(cancelFee, common.TomoXBaseCancelFee)
+				cancelFee = new(big.Int).Div(cancelFee, common.RupeXBaseCancelFee)
 
 				actualBalance := GetTokenBalance(userAddress, lendingToken, statedb)
 				if actualBalance.Cmp(cancelFee) < 0 {
@@ -427,7 +427,7 @@ func VerifyBalance(isTomoXLendingFork bool, statedb *state.StateDB, lendingState
 			switch status {
 			case LendingStatusNew:
 				depositRate, _, _ := GetCollateralDetail(statedb, collateralToken)
-				settleBalanceResult, err := GetSettleBalance(isTomoXLendingFork, Borrowing, lendTokenTOMOPrice, collateralPrice, depositRate, borrowingFeeRate, lendingToken, collateralToken, lendingTokenDecimal, collateralTokenDecimal, quantity)
+				settleBalanceResult, err := GetSettleBalance(isRupeXLendingFork, Borrowing, lendTokenRUPXPrice, collateralPrice, depositRate, borrowingFeeRate, lendingToken, collateralToken, lendingTokenDecimal, collateralTokenDecimal, quantity)
 				if err != nil {
 					return err
 				}
@@ -444,7 +444,7 @@ func VerifyBalance(isTomoXLendingFork bool, statedb *state.StateDB, lendingState
 				// Fee ==  quantityToLend/base lend token decimal *price*borrowFee/LendingCancelFee
 				cancelFee = new(big.Int).Div(item.Quantity, collateralPrice)
 				cancelFee = new(big.Int).Mul(cancelFee, borrowingFeeRate)
-				cancelFee = new(big.Int).Div(cancelFee, common.TomoXBaseCancelFee)
+				cancelFee = new(big.Int).Div(cancelFee, common.RupeXBaseCancelFee)
 				actualBalance := GetTokenBalance(userAddress, collateralToken, statedb)
 				if actualBalance.Cmp(cancelFee) < 0 {
 					return fmt.Errorf("VerifyBalance: borrower doesn't have enough collateralToken to pay cancel fee. User: %s. CollateralToken: %s . ExpectedBalance: %s . ActualBalance: %s",

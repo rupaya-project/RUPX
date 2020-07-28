@@ -211,7 +211,7 @@ func (g *Genesis) configOrDefault(ghash common.Hash) *params.ChainConfig {
 	case g != nil:
 		return g.Config
 	case ghash == params.MainnetGenesisHash:
-		return params.TomoMainnetChainConfig
+		return params.RupayaMainnetChainConfig
 	case ghash == params.TestnetGenesisHash:
 		return params.TestnetChainConfig
 	default:
@@ -311,13 +311,13 @@ func GenesisBlockForTesting(db ethdb.Database, addr common.Address, balance *big
 // DefaultGenesisBlock returns the Ethereum main net genesis block.
 func DefaultGenesisBlock() *Genesis {
 	return &Genesis{
-		Config:     params.TomoMainnetChainConfig,
+		Config:     params.RupayaMainnetChainConfig,
 		Nonce:      0,
-		ExtraData:  hexutil.MustDecode("0x00000000000000000000000000000000000000000000000000000000000000001b82c4bf317fcafe3d77e8b444c82715d216afe845b7bd987fa22c9bac89b71f0ded03f6e150ba31ad670b2b166684657ffff95f4810380ae7381e9bce41231d5dd8cdd7499e418b648c00af75d184a2f9aba09a6fa4a46fb1a6a3919b027d9cac5aa6890000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"),
+		ExtraData:  hexutil.MustDecode("0x00000000000000000000000000000000000000000000000000000000000000000aab66ed764880331e2c2abe2524ad5ee9e847311e56eaa93778996a9e3fae74c297121ac1683bfb86772842b795c455a7ad87676795ae298d8d73ed0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"),
 		GasLimit:   4700000,
 		Difficulty: big.NewInt(1),
 		Alloc:      DecodeMainnet(),
-		Timestamp:  1544771829,
+		Timestamp:  1582241211,
 	}
 }
 
@@ -386,6 +386,6 @@ func decodePrealloc(data string) GenesisAlloc {
 
 func DecodeMainnet() GenesisAlloc {
 	mainnetAlloc := GenesisAlloc{}
-	json.Unmarshal([]byte(tomoAllocData), &mainnetAlloc)
+	json.Unmarshal([]byte(rupayaAllocData), &mainnetAlloc)
 	return mainnetAlloc
 }

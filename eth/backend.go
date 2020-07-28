@@ -108,8 +108,8 @@ type Ethereum struct {
 	netRPCService *ethapi.PublicNetAPI
 
 	lock    sync.RWMutex // Protects the variadic fields (e.g. gas price and etherbase)
-	TomoX   *tomox.TomoX
-	Lending *tomoxlending.Lending
+	RupeX   *rupex.RupeX
+	Lending *rupexlending.Lending
 }
 
 func (s *Ethereum) AddLesServer(ls LesServer) {
@@ -119,7 +119,7 @@ func (s *Ethereum) AddLesServer(ls LesServer) {
 
 // New creates a new Ethereum object (including the
 // initialisation of the common Ethereum object)
-func New(ctx *node.ServiceContext, config *Config, tomoXServ *tomox.TomoX, lendingServ *tomoxlending.Lending) (*Ethereum, error) {
+func New(ctx *node.ServiceContext, config *Config, rupeXServ *rupex.RupeX, lendingServ *rupexlending.Lending) (*Ethereum, error) {
 	if config.SyncMode == downloader.LightSync {
 		return nil, errors.New("can't run eth.Ethereum in light sync mode, use les.LightEthereum")
 	}
@@ -153,9 +153,9 @@ func New(ctx *node.ServiceContext, config *Config, tomoXServ *tomox.TomoX, lendi
 		bloomRequests:  make(chan chan *bloombits.Retrieval),
 		bloomIndexer:   NewBloomIndexer(chainDb, params.BloomBitsBlocks),
 	}
-	// Inject TomoX Service into main Eth Service.
-	if tomoXServ != nil {
-		eth.TomoX = tomoXServ
+	// Inject RupeX Service into main Eth Service.
+	if rupeXServ != nil {
+		eth.RupeX = rupeXServ
 	}
 	if lendingServ != nil {
 		eth.Lending = lendingServ
@@ -175,14 +175,14 @@ func New(ctx *node.ServiceContext, config *Config, tomoXServ *tomox.TomoX, lendi
 	)
 	if eth.chainConfig.Posv != nil {
 		c := eth.engine.(*posv.Posv)
-		c.GetTomoXService = func() posv.TradingService {
-			return eth.TomoX
+		c.GetRupeXService = func() posv.TradingService {
+			return eth.RupeX
 		}
 		c.GetLendingService = func() posv.LendingService {
 			return eth.Lending
 		}
 	}
-	eth.blockchain, err = core.NewBlockChainEx(chainDb, tomoXServ.GetLevelDB(), cacheConfig, eth.chainConfig, eth.engine, vmConfig)
+	eth.blockchain, err = core.NewBlockChainEx(chainDb, rupeXServ.GetLevelDB(), cacheConfig, eth.chainConfig, eth.engine, vmConfig)
 	if err != nil {
 		return nil, err
 	}
@@ -467,7 +467,7 @@ func New(ctx *node.ServiceContext, config *Config, tomoXServ *tomox.TomoX, lendi
 				return nil, err
 			}
 			addr := common.HexToAddress(common.MasternodeVotingSMC)
-			validator, err := contractValidator.NewTomoValidator(addr, client)
+			validator, err := contractValidator.NewRupayaValidator(addr, client)
 			if err != nil {
 				return nil, err
 			}
@@ -604,7 +604,7 @@ func makeExtraData(extra []byte) []byte {
 		// create default extradata
 		extra, _ = rlp.EncodeToBytes([]interface{}{
 			uint(params.VersionMajor<<16 | params.VersionMinor<<8 | params.VersionPatch),
-			"tomo",
+			"rupaya",
 			runtime.Version(),
 			runtime.GOOS,
 		})
@@ -947,15 +947,15 @@ func (s *Ethereum) GetPeer() int {
 	return len(s.protocolManager.peers.peers)
 }
 
-func (s *Ethereum) GetTomoX() *tomox.TomoX {
-	return s.TomoX
+func (s *Ethereum) GetRupeX() *rupex.RupeX {
+	return s.RupeX
 }
 
 func (s *Ethereum) OrderPool() *core.OrderPool {
 	return s.orderPool
 }
 
-func (s *Ethereum) GetTomoXLending() *tomoxlending.Lending {
+func (s *Ethereum) GetRupeXLending() *rupexlending.Lending {
 	return s.Lending
 }
 

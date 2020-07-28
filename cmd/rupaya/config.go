@@ -37,7 +37,7 @@ import (
 	"github.com/rupaya-project/rupx/log"
 	"github.com/rupaya-project/rupx/node"
 	"github.com/rupaya-project/rupx/params"
-	tomox "github.com/rupaya-project/rupx/rupex"
+	rupex "github.com/rupaya-project/rupx/rupex"
 	whisper "github.com/rupaya-project/rupx/whisper/whisperv6"
 )
 
@@ -89,12 +89,12 @@ type Bootnodes struct {
 	Testnet []string
 }
 
-type tomoConfig struct {
+type rupayaConfig struct {
 	Eth         eth.Config
 	Shh         whisper.Config
 	Node        node.Config
 	Ethstats    ethstatsConfig
-	TomoX       tomox.Config
+	RupeX       rupex.Config
 	Account     account
 	StakeEnable bool
 	Bootnodes   Bootnodes
@@ -102,7 +102,7 @@ type tomoConfig struct {
 	NAT         string
 }
 
-func loadConfig(file string, cfg *tomoConfig) error {
+func loadConfig(file string, cfg *rupayaConfig) error {
 	f, err := os.Open(file)
 	if err != nil {
 		return err
@@ -122,16 +122,16 @@ func defaultNodeConfig() node.Config {
 	cfg.Version = params.VersionWithCommit(gitCommit)
 	cfg.HTTPModules = append(cfg.HTTPModules, "eth", "shh")
 	cfg.WSModules = append(cfg.WSModules, "eth", "shh")
-	cfg.IPCPath = "tomo.ipc"
+	cfg.IPCPath = "rupaya.ipc"
 	return cfg
 }
 
-func makeConfigNode(ctx *cli.Context) (*node.Node, tomoConfig) {
+func makeConfigNode(ctx *cli.Context) (*node.Node, rupayaConfig) {
 	// Load defaults.
-	cfg := tomoConfig{
+	cfg := rupayaConfig{
 		Eth:         eth.DefaultConfig,
 		Shh:         whisper.DefaultConfig,
-		TomoX:       tomox.DefaultConfig,
+		RupeX:       rupex.DefaultConfig,
 		Node:        defaultNodeConfig(),
 		StakeEnable: true,
 		Verbosity:   3,
@@ -155,12 +155,12 @@ func makeConfigNode(ctx *cli.Context) (*node.Node, tomoConfig) {
 	}
 
 	// Check testnet is enable.
-	if ctx.GlobalBool(utils.TomoTestnetFlag.Name) {
+	if ctx.GlobalBool(utils.RupayaTestnetFlag.Name) {
 		common.IsTestnet = true
-		common.TRC21IssuerSMC = common.TRC21IssuerSMCTestNet
+		common.RRC21IssuerSMC = common.RRC21IssuerSMCTestNet
 		cfg.Eth.NetworkId = 89
 		common.RelayerRegistrationSMC = common.RelayerRegistrationSMCTestnet
-		common.TIPTRC21Fee = common.TIPTomoXTestnet
+		common.TIPRRC21Fee = common.TIPRupeXTestnet
 	}
 
 	// Rewound
@@ -207,7 +207,7 @@ func makeConfigNode(ctx *cli.Context) (*node.Node, tomoConfig) {
 	}
 
 	utils.SetShhConfig(ctx, stack, &cfg.Shh)
-	utils.SetTomoXConfig(ctx, &cfg.TomoX, cfg.Node.DataDir)
+	utils.SetRupeXConfig(ctx, &cfg.RupeX, cfg.Node.DataDir)
 	return stack, cfg
 }
 
@@ -234,12 +234,12 @@ func enableWhisper(ctx *cli.Context) bool {
 	return false
 }
 
-func makeFullNode(ctx *cli.Context) (*node.Node, tomoConfig) {
+func makeFullNode(ctx *cli.Context) (*node.Node, rupayaConfig) {
 	stack, cfg := makeConfigNode(ctx)
 
-	// Register TomoX's OrderBook service if requested.
+	// Register RupeX's OrderBook service if requested.
 	// enable in default
-	utils.RegisterTomoXService(stack, &cfg.TomoX)
+	utils.RegisterRupeXService(stack, &cfg.RupeX)
 	utils.RegisterEthService(stack, &cfg.Eth)
 
 	// Whisper must be explicitly enabled by specifying at least 1 whisper flag or in dev mode

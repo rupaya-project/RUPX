@@ -3,11 +3,12 @@ package main
 import (
 	"context"
 	"fmt"
-	"github.com/rupaya-project/rupx/core/state"
-	"github.com/rupaya-project/rupx/rupexlending/lendingstate"
 	"math/big"
 	"os"
 	"time"
+
+	"github.com/rupaya-project/rupx/core/state"
+	"github.com/rupaya-project/rupx/rupexlending/lendingstate"
 
 	"github.com/rupaya-project/rupx/accounts/abi/bind"
 	"github.com/rupaya-project/rupx/common"
@@ -30,13 +31,13 @@ func main() {
 	auth.GasLimit = uint64(4000000) // in units
 	auth.GasPrice = big.NewInt(250000000000000)
 
-	// init trc21 issuer
+	// init rrc21 issuer
 	auth.Nonce = big.NewInt(int64(nonce))
 
 	price := new(big.Int)
 	price.SetString(os.Getenv("PRICE"), 10)
 
-	lendContract, _ := tomox.NewLendingRelayerRegistration(auth, common.HexToAddress(os.Getenv("LENDING_ADDRESS")), client)
+	lendContract, _ := rupex.NewLendingRelayerRegistration(auth, common.HexToAddress(os.Getenv("LENDING_ADDRESS")), client)
 
 	token := common.HexToAddress(os.Getenv("TOKEN_ADDRESS"))
 	lendingToken := common.HexToAddress(os.Getenv("LENDING_TOKEN_ADDRESS"))

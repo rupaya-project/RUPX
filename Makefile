@@ -1,6 +1,6 @@
-.PHONY: tomo tomo-cross evm all test clean
-.PHONY: tomo-linux tomo-linux-386 tomo-linux-amd64 tomo-linux-mips64 tomo-linux-mips64le
-.PHONY: tomo-darwin tomo-darwin-386 tomo-darwin-amd64
+.PHONY: rupaya rupaya-cross evm all test clean
+.PHONY: rupaya-linux rupaya-linux-386 rupaya-linux-amd64 rupaya-linux-mips64 rupaya-linux-mips64le
+.PHONY: rupaya-darwin rupaya-darwin-386 rupaya-darwin-amd64
 
 GOBIN = $(shell pwd)/build/bin
 GOFMT = gofmt
@@ -10,10 +10,10 @@ GO_FILES := $(shell find $(shell go list -f '{{.Dir}}' $(GO_PACKAGES)) -name \*.
 
 GIT = git
 
-tomo:
-	go run build/ci.go install ./cmd/tomo
+rupaya:
+	go run build/ci.go install ./cmd/rupaya
 	@echo "Done building."
-	@echo "Run \"$(GOBIN)/tomo\" to launch tomo."
+	@echo "Run \"$(GOBIN)/rupaya\" to launch rupaya."
 
 gc:
 	go run build/ci.go install ./cmd/gc
@@ -41,62 +41,62 @@ clean:
 
 # Cross Compilation Targets (xgo)
 
-tomo-cross: tomo-windows-amd64 tomo-darwin-amd64 tomo-linux
+rupaya-cross: rupaya-windows-amd64 rupaya-darwin-amd64 rupaya-linux
 	@echo "Full cross compilation done:"
-	@ls -ld $(GOBIN)/tomo-*
+	@ls -ld $(GOBIN)/rupaya-*
 
-tomo-linux: tomo-linux-386 tomo-linux-amd64 tomo-linux-mips64 tomo-linux-mips64le
+rupaya-linux: rupaya-linux-386 rupaya-linux-amd64 rupaya-linux-mips64 rupaya-linux-mips64le
 	@echo "Linux cross compilation done:"
-	@ls -ld $(GOBIN)/tomo-linux-*
+	@ls -ld $(GOBIN)/rupaya-linux-*
 
-tomo-linux-386:
-	go run build/ci.go xgo -- --go=$(GO) --targets=linux/386 -v ./cmd/tomo
+rupaya-linux-386:
+	go run build/ci.go xgo -- --go=$(GO) --targets=linux/386 -v ./cmd/rupaya
 	@echo "Linux 386 cross compilation done:"
-	@ls -ld $(GOBIN)/tomo-linux-* | grep 386
+	@ls -ld $(GOBIN)/rupaya-linux-* | grep 386
 
-tomo-linux-amd64:
-	go run build/ci.go xgo -- --go=$(GO) --targets=linux/amd64 -v ./cmd/tomo
+rupaya-linux-amd64:
+	go run build/ci.go xgo -- --go=$(GO) --targets=linux/amd64 -v ./cmd/rupaya
 	@echo "Linux amd64 cross compilation done:"
-	@ls -ld $(GOBIN)/tomo-linux-* | grep amd64
+	@ls -ld $(GOBIN)/rupaya-linux-* | grep amd64
 
-tomo-linux-mips:
-	go run build/ci.go xgo -- --go=$(GO) --targets=linux/mips --ldflags '-extldflags "-static"' -v ./cmd/tomo
+rupaya-linux-mips:
+	go run build/ci.go xgo -- --go=$(GO) --targets=linux/mips --ldflags '-extldflags "-static"' -v ./cmd/rupaya
 	@echo "Linux MIPS cross compilation done:"
-	@ls -ld $(GOBIN)/tomo-linux-* | grep mips
+	@ls -ld $(GOBIN)/rupaya-linux-* | grep mips
 
-tomo-linux-mipsle:
-	go run build/ci.go xgo -- --go=$(GO) --targets=linux/mipsle --ldflags '-extldflags "-static"' -v ./cmd/tomo
+rupaya-linux-mipsle:
+	go run build/ci.go xgo -- --go=$(GO) --targets=linux/mipsle --ldflags '-extldflags "-static"' -v ./cmd/rupaya
 	@echo "Linux MIPSle cross compilation done:"
-	@ls -ld $(GOBIN)/tomo-linux-* | grep mipsle
+	@ls -ld $(GOBIN)/rupaya-linux-* | grep mipsle
 
-tomo-linux-mips64:
-	go run build/ci.go xgo -- --go=$(GO) --targets=linux/mips64 --ldflags '-extldflags "-static"' -v ./cmd/tomo
+rupaya-linux-mips64:
+	go run build/ci.go xgo -- --go=$(GO) --targets=linux/mips64 --ldflags '-extldflags "-static"' -v ./cmd/rupaya
 	@echo "Linux MIPS64 cross compilation done:"
-	@ls -ld $(GOBIN)/tomo-linux-* | grep mips64
+	@ls -ld $(GOBIN)/rupaya-linux-* | grep mips64
 
-tomo-linux-mips64le:
-	go run build/ci.go xgo -- --go=$(GO) --targets=linux/mips64le --ldflags '-extldflags "-static"' -v ./cmd/tomo
+rupaya-linux-mips64le:
+	go run build/ci.go xgo -- --go=$(GO) --targets=linux/mips64le --ldflags '-extldflags "-static"' -v ./cmd/rupaya
 	@echo "Linux MIPS64le cross compilation done:"
-	@ls -ld $(GOBIN)/tomo-linux-* | grep mips64le
+	@ls -ld $(GOBIN)/rupaya-linux-* | grep mips64le
 
-tomo-darwin: tomo-darwin-386 tomo-darwin-amd64
+rupaya-darwin: rupaya-darwin-386 rupaya-darwin-amd64
 	@echo "Darwin cross compilation done:"
-	@ls -ld $(GOBIN)/tomo-darwin-*
+	@ls -ld $(GOBIN)/rupaya-darwin-*
 
-tomo-darwin-386:
-	go run build/ci.go xgo -- --go=$(GO) --targets=darwin/386 -v ./cmd/tomo
+rupaya-darwin-386:
+	go run build/ci.go xgo -- --go=$(GO) --targets=darwin/386 -v ./cmd/rupaya
 	@echo "Darwin 386 cross compilation done:"
-	@ls -ld $(GOBIN)/tomo-darwin-* | grep 386
+	@ls -ld $(GOBIN)/rupaya-darwin-* | grep 386
 
-tomo-darwin-amd64:
-	go run build/ci.go xgo -- --go=$(GO) --targets=darwin/amd64 -v ./cmd/tomo
+rupaya-darwin-amd64:
+	go run build/ci.go xgo -- --go=$(GO) --targets=darwin/amd64 -v ./cmd/rupaya
 	@echo "Darwin amd64 cross compilation done:"
-	@ls -ld $(GOBIN)/tomo-darwin-* | grep amd64
+	@ls -ld $(GOBIN)/rupaya-darwin-* | grep amd64
 
-tomo-windows-amd64:
-	go run build/ci.go xgo -- --go=$(GO) --targets=windows/amd64 -v ./cmd/tomo
+rupaya-windows-amd64:
+	go run build/ci.go xgo -- --go=$(GO) --targets=windows/amd64 -v ./cmd/rupaya
 	@echo "Windows amd64 cross compilation done:"
-	@ls -ld $(GOBIN)/tomo-windows-* | grep amd64
+	@ls -ld $(GOBIN)/rupaya-windows-* | grep amd64
 gofmt:
 	$(GOFMT) -s -w $(GO_FILES)
 	$(GIT) checkout vendor

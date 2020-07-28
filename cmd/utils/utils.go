@@ -20,11 +20,11 @@ func RegisterEthService(stack *node.Node, cfg *eth.Config) {
 		})
 	} else {
 		err = stack.Register(func(ctx *node.ServiceContext) (node.Service, error) {
-			var tomoXServ *tomox.TomoX
-			ctx.Service(&tomoXServ)
-			var lendingServ *tomoxlending.Lending
+			var rupeXServ *rupex.RupeX
+			ctx.Service(&rupeXServ)
+			var lendingServ *rupexlending.Lending
 			ctx.Service(&lendingServ)
-			fullNode, err := eth.New(ctx, cfg, tomoXServ,lendingServ)
+			fullNode, err := eth.New(ctx, cfg, rupeXServ,lendingServ)
 			if fullNode != nil && cfg.LightServ > 0 {
 				ls, _ := les.NewLesServer(fullNode, cfg)
 				fullNode.AddLesServer(ls)
@@ -63,18 +63,18 @@ func RegisterEthStatsService(stack *node.Node, url string) {
 	}
 }
 
-func RegisterTomoXService(stack *node.Node, cfg *tomox.Config) {
-	tomoX := tomox.New(cfg)
+func RegisterRupeXService(stack *node.Node, cfg *rupex.Config) {
+	rupayaX := rupex.New(cfg)
 	if err := stack.Register(func(n *node.ServiceContext) (node.Service, error) {
-		return tomoX, nil
+		return rupayaX, nil
 	}); err != nil {
-		Fatalf("Failed to register the TomoX service: %v", err)
+		Fatalf("Failed to register the RupeX service: %v", err)
 	}
 
-	// register tomoxlending service
+	// register rupexlending service
 	if err := stack.Register(func(n *node.ServiceContext) (node.Service, error) {
-		return tomoxlending.New(tomoX), nil
+		return rupexlending.New(rupayaX), nil
 	}); err != nil {
-		Fatalf("Failed to register the TomoXLending service: %v", err)
+		Fatalf("Failed to register the RupeXLending service: %v", err)
 	}
 }

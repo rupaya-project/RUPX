@@ -2,20 +2,20 @@ FROM golang:1.12-alpine as builder
 
 RUN apk add --no-cache make gcc musl-dev linux-headers git
 
-ADD . /tomochain
-RUN cd /tomochain && make tomo
+ADD . /rupaya
+RUN cd /rupaya && make rupaya
 
 FROM alpine:latest
 
-WORKDIR /tomochain
+WORKDIR /rupaya
 
-COPY --from=builder /tomochain/build/bin/tomo /usr/local/bin/tomo
+COPY --from=builder /rupaya/build/bin/rupaya /usr/local/bin/rupaya
 
-RUN chmod +x /usr/local/bin/tomo
+RUN chmod +x /usr/local/bin/rupaya
 
-EXPOSE 8545
-EXPOSE 30303
+EXPOSE 7050
+EXPOSE 9050
 
-ENTRYPOINT ["/usr/local/bin/tomo"]
+ENTRYPOINT ["/usr/local/bin/rupaya"]
 
 CMD ["--help"]

@@ -1,4 +1,4 @@
-package tomoxlending
+package rupexlending
 
 import (
 	"github.com/rupaya-project/rupx/common"

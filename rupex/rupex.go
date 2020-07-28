@@ -1,4 +1,4 @@
-package tomox
+package rupex
 
 import (
 	"errors"
@@ -11,7 +11,7 @@ import (
 	"github.com/rupaya-project/rupx/core/types"
 	"github.com/rupaya-project/rupx/p2p"
 	"github.com/rupaya-project/rupx/rupex/tradingstate"
-	tomoxDAO "github.com/rupaya-project/rupx/rupexDAO"
+	rupexDAO "github.com/rupaya-project/rupx/rupexDAO"
 	"gopkg.in/karalabe/cookiejar.v2/collections/prque"
 
 	lru "github.com/hashicorp/golang-lru"
@@ -23,7 +23,7 @@ import (
 )
 
 const (
-	ProtocolName       = "tomox"
+	ProtocolName       = "rupex"
 	ProtocolVersion    = uint64(1)
 	ProtocolVersionStr = "1.0"
 	overflowIdx        // Indicator of message queue overflow
@@ -49,12 +49,12 @@ var DefaultConfig = Config{
 	DataDir: "",
 }
 
-type TomoX struct {
+type RupeX struct {
 	// Order related
-	db         tomoxDAO.TomoXDAO
-	mongodb    tomoxDAO.TomoXDAO
+	db         rupexDAO.RupeXDAO
+	mongodb    rupexDAO.RupeXDAO
 	Triegc     *prque.Prque          // Priority queue mapping block numbers to tries to gc
-	StateCache tradingstate.Database // State database to reuse between imports (contains state cache)    *tomox_state.TradingStateDB
+	StateCache tradingstate.Database // State database to reuse between imports (contains state cache)    *rupex_state.TradingStateDB
 
 	orderNonce map[common.Address]*big.Int
 
@@ -64,28 +64,28 @@ type TomoX struct {
 	orderCache        *lru.Cache
 }
 
-func (tomox *TomoX) Protocols() []p2p.Protocol {
+func (rupex *RupeX) Protocols() []p2p.Protocol {
 	return []p2p.Protocol{}
 }
 
-func (tomox *TomoX) Start(server *p2p.Server) error {
+func (rupex *RupeX) Start(server *p2p.Server) error {
 	return nil
 }
 
-func (tomox *TomoX) SaveData() {
+func (rupex *RupeX) SaveData() {
 }
-func (tomox *TomoX) Stop() error {
+func (rupex *RupeX) Stop() error {
 	return nil
 }
 
-func NewLDBEngine(cfg *Config) *tomoxDAO.BatchDatabase {
+func NewLDBEngine(cfg *Config) *rupexDAO.BatchDatabase {
 	datadir := cfg.DataDir
-	batchDB := tomoxDAO.NewBatchDatabaseWithEncode(datadir, 0)
+	batchDB := rupexDAO.NewBatchDatabaseWithEncode(datadir, 0)
 	return batchDB
 }
 
-func NewMongoDBEngine(cfg *Config) *tomoxDAO.MongoDatabase {
-	mongoDB, err := tomoxDAO.NewMongoDatabase(nil, cfg.DBName, cfg.ConnectionUrl, cfg.ReplicaSetName, 0)
+func NewMongoDBEngine(cfg *Config) *rupexDAO.MongoDatabase {
+	mongoDB, err := rupexDAO.NewMongoDatabase(nil, cfg.DBName, cfg.ConnectionUrl, cfg.ReplicaSetName, 0)
 
 	if err != nil {
 		log.Crit("Failed to init mongodb engine", "err", err)
@@ -94,10 +94,10 @@ func NewMongoDBEngine(cfg *Config) *tomoxDAO.MongoDatabase {
 	return mongoDB
 }
 
-func New(cfg *Config) *TomoX {
+func New(cfg *Config) *RupeX {
 	tokenDecimalCache, _ := lru.New(defaultCacheLimit)
 	orderCache, _ := lru.New(tradingstate.OrderCacheLimit)
-	tomoX := &TomoX{
+	rupayaX := &RupeX{
 		orderNonce:        make(map[common.Address]*big.Int),
 		Triegc:            prque.New(),
 		tokenDecimalCache: tokenDecimalCache,
@@ -105,56 +105,56 @@ func New(cfg *Config) *TomoX {
 	}
 
 	// default DBEngine: levelDB
-	tomoX.db = NewLDBEngine(cfg)
-	tomoX.sdkNode = false
+	rupayaX.db = NewLDBEngine(cfg)
+	rupayaX.sdkNode = false
 
 	if cfg.DBEngine == "mongodb" { // this is an add-on DBEngine for SDK nodes
-		tomoX.mongodb = NewMongoDBEngine(cfg)
-		tomoX.sdkNode = true
+		rupayaX.mongodb = NewMongoDBEngine(cfg)
+		rupayaX.sdkNode = true
 	}
 
-	tomoX.StateCache = tradingstate.NewDatabase(tomoX.db)
-	tomoX.settings.Store(overflowIdx, false)
+	rupayaX.StateCache = tradingstate.NewDatabase(rupayaX.db)
+	rupayaX.settings.Store(overflowIdx, false)
 
-	return tomoX
+	return rupayaX
 }
 
 // Overflow returns an indication if the message queue is full.
-func (tomox *TomoX) Overflow() bool {
-	val, _ := tomox.settings.Load(overflowIdx)
+func (rupex *RupeX) Overflow() bool {
+	val, _ := rupex.settings.Load(overflowIdx)
 	return val.(bool)
 }
 
-func (tomox *TomoX) IsSDKNode() bool {
-	return tomox.sdkNode
+func (rupex *RupeX) IsSDKNode() bool {
+	return rupex.sdkNode
 }
 
-func (tomox *TomoX) GetLevelDB() tomoxDAO.TomoXDAO {
-	return tomox.db
+func (rupex *RupeX) GetLevelDB() rupexDAO.RupeXDAO {
+	return rupex.db
 }
 
-func (tomox *TomoX) GetMongoDB() tomoxDAO.TomoXDAO {
-	return tomox.mongodb
+func (rupex *RupeX) GetMongoDB() rupexDAO.RupeXDAO {
+	return rupex.mongodb
 }
 
-// APIs returns the RPC descriptors the TomoX implementation offers
-func (tomox *TomoX) APIs() []rpc.API {
+// APIs returns the RPC descriptors the RupeX implementation offers
+func (rupex *RupeX) APIs() []rpc.API {
 	return []rpc.API{
 		{
 			Namespace: ProtocolName,
 			Version:   ProtocolVersionStr,
-			Service:   NewPublicTomoXAPI(tomox),
+			Service:   NewPublicRupeXAPI(rupex),
 			Public:    true,
 		},
 	}
 }
 
-// Version returns the TomoX sub-protocols version number.
-func (tomox *TomoX) Version() uint64 {
+// Version returns the RupeX sub-protocols version number.
+func (rupex *RupeX) Version() uint64 {
 	return ProtocolVersion
 }
 
-func (tomox *TomoX) ProcessOrderPending(coinbase common.Address, chain consensus.ChainContext, pending map[common.Address]types.OrderTransactions, statedb *state.StateDB, tomoXstatedb *tradingstate.TradingStateDB) ([]tradingstate.TxDataMatch, map[common.Hash]tradingstate.MatchingResult) {
+func (rupex *RupeX) ProcessOrderPending(coinbase common.Address, chain consensus.ChainContext, pending map[common.Address]types.OrderTransactions, statedb *state.StateDB, rupayaXstatedb *tradingstate.TradingStateDB) ([]tradingstate.TxDataMatch, map[common.Hash]tradingstate.MatchingResult) {
 	txMatches := []tradingstate.TxDataMatch{}
 	matchingResults := map[common.Hash]tradingstate.MatchingResult{}
 
@@ -212,7 +212,7 @@ func (tomox *TomoX) ProcessOrderPending(coinbase common.Address, chain consensus
 			order.Status = tradingstate.OrderStatusCancelled
 		}
 
-		newTrades, newRejectedOrders, err := tomox.CommitOrder(coinbase, chain, statedb, tomoXstatedb, tradingstate.GetTradingOrderBookHash(order.BaseToken, order.QuoteToken), order)
+		newTrades, newRejectedOrders, err := rupex.CommitOrder(coinbase, chain, statedb, rupayaXstatedb, tradingstate.GetTradingOrderBookHash(order.BaseToken, order.QuoteToken), order)
 
 		for _, reject := range newRejectedOrders {
 			log.Debug("Reject order", "reject", *reject)
@@ -268,7 +268,7 @@ func (tomox *TomoX) ProcessOrderPending(coinbase common.Address, chain consensus
 // 2. txMatchData.Trades: includes information of matched orders.
 // 		a. PutObject them to `trades` collection
 // 		b. Update status of regrading orders to sdktypes.OrderStatusFilled
-func (tomox *TomoX) SyncDataToSDKNode(takerOrderInTx *tradingstate.OrderItem, txHash common.Hash, txMatchTime time.Time, statedb *state.StateDB, trades []map[string]string, rejectedOrders []*tradingstate.OrderItem, dirtyOrderCount *uint64) error {
+func (rupex *RupeX) SyncDataToSDKNode(takerOrderInTx *tradingstate.OrderItem, txHash common.Hash, txMatchTime time.Time, statedb *state.StateDB, trades []map[string]string, rejectedOrders []*tradingstate.OrderItem, dirtyOrderCount *uint64) error {
 	var (
 		// originTakerOrder: order get from db, nil if it doesn't exist
 		// takerOrderInTx: order decoded from txdata
@@ -278,7 +278,7 @@ func (tomox *TomoX) SyncDataToSDKNode(takerOrderInTx *tradingstate.OrderItem, tx
 		makerDirtyFilledAmount              map[string]*big.Int
 		err                                 error
 	)
-	db := tomox.GetMongoDB()
+	db := rupex.GetMongoDB()
 	db.InitBulk()
 	if takerOrderInTx.Status == tradingstate.OrderStatusCancelled && len(rejectedOrders) > 0 {
 		// cancel order is rejected -> nothing change
@@ -320,7 +320,7 @@ func (tomox *TomoX) SyncDataToSDKNode(takerOrderInTx *tradingstate.OrderItem, tx
 	}
 	*dirtyOrderCount++
 
-	tomox.UpdateOrderCache(updatedTakerOrder.BaseToken, updatedTakerOrder.QuoteToken, updatedTakerOrder.Hash, txHash, lastState)
+	rupex.UpdateOrderCache(updatedTakerOrder.BaseToken, updatedTakerOrder.QuoteToken, updatedTakerOrder.Hash, txHash, lastState)
 	updatedTakerOrder.UpdatedAt = txMatchTime
 
 	// 2. put trades to db and update status to FILLED
@@ -382,7 +382,7 @@ func (tomox *TomoX) SyncDataToSDKNode(takerOrderInTx *tradingstate.OrderItem, tx
 		makerDirtyFilledAmount[trade[tradingstate.TradeMakerOrderHash]] = makerFilledAmount
 		makerDirtyHashes = append(makerDirtyHashes, trade[tradingstate.TradeMakerOrderHash])
 
-		//updatedTakerOrder = tomox.updateMatchedOrder(updatedTakerOrder, filledAmount, txMatchTime, txHash)
+		//updatedTakerOrder = rupex.updateMatchedOrder(updatedTakerOrder, filledAmount, txMatchTime, txHash)
 		//  update filledAmount, status of takerOrder
 		updatedTakerOrder.FilledAmount = new(big.Int).Add(updatedTakerOrder.FilledAmount, filledAmount)
 		if updatedTakerOrder.FilledAmount.Cmp(updatedTakerOrder.Quantity) < 0 && updatedTakerOrder.Type == tradingstate.Limit {
@@ -424,7 +424,7 @@ func (tomox *TomoX) SyncDataToSDKNode(takerOrderInTx *tradingstate.OrderItem, tx
 				Status:       o.Status,
 				UpdatedAt:    o.UpdatedAt,
 			}
-			tomox.UpdateOrderCache(o.BaseToken, o.QuoteToken, o.Hash, txHash, lastState)
+			rupex.UpdateOrderCache(o.BaseToken, o.QuoteToken, o.Hash, txHash, lastState)
 			o.TxHash = txHash
 			o.UpdatedAt = txMatchTime
 			o.FilledAmount = new(big.Int).Add(o.FilledAmount, makerDirtyFilledAmount[o.Hash.Hex()])
@@ -459,7 +459,7 @@ func (tomox *TomoX) SyncDataToSDKNode(takerOrderInTx *tradingstate.OrderItem, tx
 					Status:       updatedTakerOrder.Status,
 					UpdatedAt:    updatedTakerOrder.UpdatedAt,
 				}
-				tomox.UpdateOrderCache(updatedTakerOrder.BaseToken, updatedTakerOrder.QuoteToken, updatedTakerOrder.Hash, txHash, orderHistoryRecord)
+				rupex.UpdateOrderCache(updatedTakerOrder.BaseToken, updatedTakerOrder.QuoteToken, updatedTakerOrder.Hash, txHash, orderHistoryRecord)
 				// if whole order is rejected, status = REJECTED
 				// otherwise, status = FILLED
 				if updatedTakerOrder.FilledAmount.Sign() > 0 {
@@ -489,7 +489,7 @@ func (tomox *TomoX) SyncDataToSDKNode(takerOrderInTx *tradingstate.OrderItem, tx
 					Status:       order.Status,
 					UpdatedAt:    order.UpdatedAt,
 				}
-				tomox.UpdateOrderCache(order.BaseToken, order.QuoteToken, order.Hash, txHash, orderHistoryRecord)
+				rupex.UpdateOrderCache(order.BaseToken, order.QuoteToken, order.Hash, txHash, orderHistoryRecord)
 				dirtyFilledAmount, ok := makerDirtyFilledAmount[order.Hash.Hex()]
 				if ok && dirtyFilledAmount != nil {
 					order.FilledAmount = new(big.Int).Add(order.FilledAmount, dirtyFilledAmount)
@@ -516,36 +516,36 @@ func (tomox *TomoX) SyncDataToSDKNode(takerOrderInTx *tradingstate.OrderItem, tx
 	return nil
 }
 
-func (tomox *TomoX) GetTradingState(block *types.Block, author common.Address) (*tradingstate.TradingStateDB, error) {
-	root, err := tomox.GetTradingStateRoot(block, author)
+func (rupex *RupeX) GetTradingState(block *types.Block, author common.Address) (*tradingstate.TradingStateDB, error) {
+	root, err := rupex.GetTradingStateRoot(block, author)
 	if err != nil {
 		return nil, err
 	}
-	if tomox.StateCache == nil {
-		return nil, errors.New("Not initialized tomox")
+	if rupex.StateCache == nil {
+		return nil, errors.New("Not initialized rupex")
 	}
-	return tradingstate.New(root, tomox.StateCache)
+	return tradingstate.New(root, rupex.StateCache)
 }
 
-func (tomox *TomoX) GetStateCache() tradingstate.Database {
-	return tomox.StateCache
+func (rupex *RupeX) GetStateCache() tradingstate.Database {
+	return rupex.StateCache
 }
-func (tomox *TomoX) HasTradingState(block *types.Block, author common.Address) bool {
-	root, err := tomox.GetTradingStateRoot(block, author)
+func (rupex *RupeX) HasTradingState(block *types.Block, author common.Address) bool {
+	root, err := rupex.GetTradingStateRoot(block, author)
 	if err != nil {
 		return false
 	}
-	_, err = tomox.StateCache.OpenTrie(root)
+	_, err = rupex.StateCache.OpenTrie(root)
 	if err != nil {
 		return false
 	}
 	return true
 }
-func (tomox *TomoX) GetTriegc() *prque.Prque {
-	return tomox.Triegc
+func (rupex *RupeX) GetTriegc() *prque.Prque {
+	return rupex.Triegc
 }
 
-func (tomox *TomoX) GetTradingStateRoot(block *types.Block, author common.Address) (common.Hash, error) {
+func (rupex *RupeX) GetTradingStateRoot(block *types.Block, author common.Address) (common.Hash, error) {
 	for _, tx := range block.Transactions() {
 		from := *(tx.From())
 		if tx.To() != nil && tx.To().Hex() == common.TradingStateAddr && from.String() == author.String() {
@@ -557,9 +557,9 @@ func (tomox *TomoX) GetTradingStateRoot(block *types.Block, author common.Addres
 	return tradingstate.EmptyRoot, nil
 }
 
-func (tomox *TomoX) UpdateOrderCache(baseToken, quoteToken common.Address, orderHash common.Hash, txhash common.Hash, lastState tradingstate.OrderHistoryItem) {
+func (rupex *RupeX) UpdateOrderCache(baseToken, quoteToken common.Address, orderHash common.Hash, txhash common.Hash, lastState tradingstate.OrderHistoryItem) {
 	var orderCacheAtTxHash map[common.Hash]tradingstate.OrderHistoryItem
-	c, ok := tomox.orderCache.Get(txhash)
+	c, ok := rupex.orderCache.Get(txhash)
 	if !ok || c == nil {
 		orderCacheAtTxHash = make(map[common.Hash]tradingstate.OrderHistoryItem)
 	} else {
@@ -570,20 +570,20 @@ func (tomox *TomoX) UpdateOrderCache(baseToken, quoteToken common.Address, order
 	if !ok {
 		orderCacheAtTxHash[orderKey] = lastState
 	}
-	tomox.orderCache.Add(txhash, orderCacheAtTxHash)
+	rupex.orderCache.Add(txhash, orderCacheAtTxHash)
 }
 
-func (tomox *TomoX) RollbackReorgTxMatch(txhash common.Hash) error {
-	db := tomox.GetMongoDB()
+func (rupex *RupeX) RollbackReorgTxMatch(txhash common.Hash) error {
+	db := rupex.GetMongoDB()
 	db.InitBulk()
 
 	items := db.GetListItemByTxHash(txhash, &tradingstate.OrderItem{})
 	if items != nil {
 		for _, order := range items.([]*tradingstate.OrderItem) {
-			c, ok := tomox.orderCache.Get(txhash)
-			log.Debug("Tomox reorg: rollback order", "txhash", txhash.Hex(), "order", tradingstate.ToJSON(order), "orderHistoryItem", c)
+			c, ok := rupex.orderCache.Get(txhash)
+			log.Debug("Rupex reorg: rollback order", "txhash", txhash.Hex(), "order", tradingstate.ToJSON(order), "orderHistoryItem", c)
 			if !ok {
-				log.Debug("Tomox reorg: remove order due to no orderCache", "order", tradingstate.ToJSON(order))
+				log.Debug("Rupex reorg: remove order due to no orderCache", "order", tradingstate.ToJSON(order))
 				if err := db.DeleteObject(order.Hash, &tradingstate.OrderItem{}); err != nil {
 					log.Crit("SDKNode: failed to remove reorg order", "err", err.Error(), "order", tradingstate.ToJSON(order))
 				}
@@ -592,7 +592,7 @@ func (tomox *TomoX) RollbackReorgTxMatch(txhash common.Hash) error {
 			orderCacheAtTxHash := c.(map[common.Hash]tradingstate.OrderHistoryItem)
 			orderHistoryItem, _ := orderCacheAtTxHash[tradingstate.GetOrderHistoryKey(order.BaseToken, order.QuoteToken, order.Hash)]
 			if (orderHistoryItem == tradingstate.OrderHistoryItem{}) {
-				log.Debug("Tomox reorg: remove order due to empty orderHistory", "order", tradingstate.ToJSON(order))
+				log.Debug("Rupex reorg: remove order due to empty orderHistory", "order", tradingstate.ToJSON(order))
 				if err := db.DeleteObject(order.Hash, &tradingstate.OrderItem{}); err != nil {
 					log.Crit("SDKNode: failed to remove reorg order", "err", err.Error(), "order", tradingstate.ToJSON(order))
 				}
@@ -602,13 +602,13 @@ func (tomox *TomoX) RollbackReorgTxMatch(txhash common.Hash) error {
 			order.Status = orderHistoryItem.Status
 			order.FilledAmount = tradingstate.CloneBigInt(orderHistoryItem.FilledAmount)
 			order.UpdatedAt = orderHistoryItem.UpdatedAt
-			log.Debug("Tomox reorg: update order to the last orderHistoryItem", "order", tradingstate.ToJSON(order), "orderHistoryItem", orderHistoryItem)
+			log.Debug("Rupex reorg: update order to the last orderHistoryItem", "order", tradingstate.ToJSON(order), "orderHistoryItem", orderHistoryItem)
 			if err := db.PutObject(order.Hash, order); err != nil {
 				log.Crit("SDKNode: failed to update reorg order", "err", err.Error(), "order", tradingstate.ToJSON(order))
 			}
 		}
 	}
-	log.Debug("Tomox reorg: DeleteTradeByTxHash", "txhash", txhash.Hex())
+	log.Debug("Rupex reorg: DeleteTradeByTxHash", "txhash", txhash.Hex())
 	db.DeleteItemByTxHash(txhash, &tradingstate.Trade{})
 	if err := db.CommitBulk(); err != nil {
 		return fmt.Errorf("failed to RollbackTradingData. %v", err)

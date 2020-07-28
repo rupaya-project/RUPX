@@ -1,8 +1,10 @@
-package tomoxlending
+package rupexlending
 
 import (
 	"encoding/json"
 	"fmt"
+	"math/big"
+
 	"github.com/rupaya-project/rupx/common"
 	"github.com/rupaya-project/rupx/consensus"
 	"github.com/rupaya-project/rupx/core/state"
@@ -10,7 +12,6 @@ import (
 	"github.com/rupaya-project/rupx/log"
 	"github.com/rupaya-project/rupx/rupex/tradingstate"
 	"github.com/rupaya-project/rupx/rupexlending/lendingstate"
-	"math/big"
 )
 
 func (l *Lending) CommitOrder(header *types.Header, coinbase common.Address, chain consensus.ChainContext, statedb *state.StateDB, lendingStateDB *lendingstate.LendingStateDB, tradingStateDb *tradingstate.TradingStateDB, lendingOrderBook common.Hash, order *lendingstate.LendingItem) ([]*lendingstate.LendingTrade, []*lendingstate.LendingItem, error) {
@@ -277,17 +278,17 @@ func (l *Lending) processOrderList(header *types.Header, coinbase common.Address
 			return nil, nil, nil, fmt.Errorf("invalid recallRate %v", recallRate)
 		}
 
-		lendTokenTOMOPrice, collateralPrice, err := l.GetCollateralPrices(header, chain, statedb, tradingStateDb, collateralToken, order.LendingToken)
+		lendTokenRUPXPrice, collateralPrice, err := l.GetCollateralPrices(header, chain, statedb, tradingStateDb, collateralToken, order.LendingToken)
 		if err != nil {
 			return nil, nil, nil, err
 		}
-		if lendTokenTOMOPrice == nil || lendTokenTOMOPrice.Sign() <= 0 {
+		if lendTokenRUPXPrice == nil || lendTokenRUPXPrice.Sign() <= 0 {
 			return nil, nil, nil, fmt.Errorf("invalid lendToken price")
 		}
 		if collateralPrice == nil || collateralPrice.Sign() <= 0 {
 			return nil, nil, nil, fmt.Errorf("invalid collateral price")
 		}
-		tradedQuantity, collateralLockedAmount, rejectMaker, settleBalanceResult, err := l.getLendQuantity(lendTokenTOMOPrice, collateralPrice, depositRate, borrowFee, coinbase, chain, header, statedb, order, &oldestOrder, maxTradedQuantity)
+		tradedQuantity, collateralLockedAmount, rejectMaker, settleBalanceResult, err := l.getLendQuantity(lendTokenRUPXPrice, collateralPrice, depositRate, borrowFee, coinbase, chain, header, statedb, order, &oldestOrder, maxTradedQuantity)
 		if err != nil && err == lendingstate.ErrQuantityTradeTooSmall && tradedQuantity != nil && tradedQuantity.Sign() >= 0 {
 			if tradedQuantity.Cmp(maxTradedQuantity) == 0 {
 				if quantityToTrade.Cmp(amount) == 0 { // reject Taker & maker
@@ -418,7 +419,7 @@ func (l *Lending) processOrderList(header *types.Header, coinbase common.Address
 }
 
 func (l *Lending) getLendQuantity(
-	lendTokenTOMOPrice,
+	lendTokenRUPXPrice,
 	collateralPrice,
 	depositRate,
 	borrowFee *big.Int,
@@ -432,7 +433,7 @@ func (l *Lending) getLendQuantity(
 			return lendingstate.Zero, lendingstate.Zero, true, nil, nil
 		}
 	}
-	LendingTokenDecimal, err := l.tomox.GetTokenDecimal(chain, statedb, makerOrder.LendingToken)
+	LendingTokenDecimal, err := l.rupex.GetTokenDecimal(chain, statedb, makerOrder.LendingToken)
 	if err != nil || LendingTokenDecimal.Sign() == 0 {
 		return lendingstate.Zero, lendingstate.Zero, false, nil, fmt.Errorf("Fail to get tokenDecimal. Token: %v . Err: %v", makerOrder.LendingToken.String(), err)
 	}
@@ -440,7 +441,7 @@ func (l *Lending) getLendQuantity(
 	if takerOrder.Side == lendingstate.Borrowing {
 		collateralToken = takerOrder.CollateralToken
 	}
-	collateralTokenDecimal, err := l.tomox.GetTokenDecimal(chain, statedb, collateralToken)
+	collateralTokenDecimal, err := l.rupex.GetTokenDecimal(chain, statedb, collateralToken)
 	if err != nil || collateralTokenDecimal.Sign() == 0 {
 		return lendingstate.Zero, lendingstate.Zero, false, nil, fmt.Errorf("fail to get tokenDecimal. Token: %v . Err: %v", collateralToken.String(), err)
 	}
@@ -478,8 +479,8 @@ func (l *Lending) getLendQuantity(
 	log.Debug("GetLendQuantity", "side", takerOrder.Side, "takerBalance", takerBalance, "makerBalance", makerBalance, "LendingToken", makerOrder.LendingToken, "CollateralToken", collateralToken, "quantity", quantity, "rejectMaker", rejectMaker)
 	if quantity.Sign() > 0 {
 		// Apply Match Order
-		isTomoXLendingFork := chain.Config().IsTIPTomoXLending(header.Number)
-		settleBalanceResult, err := lendingstate.GetSettleBalance(isTomoXLendingFork, takerOrder.Side, lendTokenTOMOPrice, collateralPrice, depositRate, borrowFee, lendToken, collateralToken, LendingTokenDecimal, collateralTokenDecimal, quantity)
+		isRupeXLendingFork := chain.Config().IsTIPRupeXLending(header.Number)
+		settleBalanceResult, err := lendingstate.GetSettleBalance(isRupeXLendingFork, takerOrder.Side, lendTokenRUPXPrice, collateralPrice, depositRate, borrowFee, lendToken, collateralToken, LendingTokenDecimal, collateralTokenDecimal, quantity)
 		log.Debug("GetSettleBalance", "settleBalanceResult", settleBalanceResult, "err", err)
 		if err == nil {
 			err = DoSettleBalance(coinbase, takerOrder, makerOrder, settleBalanceResult, statedb)
@@ -690,7 +691,7 @@ func (l *Lending) ProcessCancelOrder(header *types.Header, lendingStateDB *lendi
 		log.Debug("Relayer not enough fee when cancel order", "err", err)
 		return nil, true
 	}
-	lendTokenDecimal, err := l.tomox.GetTokenDecimal(chain, statedb, originOrder.LendingToken)
+	lendTokenDecimal, err := l.rupex.GetTokenDecimal(chain, statedb, originOrder.LendingToken)
 	if err != nil || lendTokenDecimal == nil || lendTokenDecimal.Sign() <= 0 {
 		log.Debug("Fail to get tokenDecimal ", "Token", originOrder.LendingToken.String(), "err", err)
 		return err, false
@@ -714,7 +715,7 @@ func (l *Lending) ProcessCancelOrder(header *types.Header, lendingStateDB *lendi
 		if err != nil || collateralPrice == nil || collateralPrice.Sign() <= 0 {
 			return err, false
 		}
-		collateralTokenDecimal, err = l.tomox.GetTokenDecimal(chain, statedb, originOrder.CollateralToken)
+		collateralTokenDecimal, err = l.rupex.GetTokenDecimal(chain, statedb, originOrder.CollateralToken)
 		if err != nil || collateralTokenDecimal == nil || collateralTokenDecimal.Sign() <= 0 {
 			log.Debug("Fail to get tokenDecimal ", "Token", originOrder.LendingToken.String(), "err", err)
 			return err, false
@@ -730,7 +731,7 @@ func (l *Lending) ProcessCancelOrder(header *types.Header, lendingStateDB *lendi
 		log.Debug("Error when cancel order", "order", &originOrder)
 		return err, false
 	}
-	// relayers pay TOMO for masternode
+	// relayers pay RUPX for masternode
 	lendingstate.SubRelayerFee(originOrder.Relayer, common.RelayerLendingCancelFee, statedb)
 	masternodeOwner := statedb.GetOwner(coinbase)
 	statedb.AddBalance(masternodeOwner, common.RelayerLendingCancelFee)
@@ -887,13 +888,13 @@ func getCancelFee(collateralTokenDecimal *big.Int, collateralPrice, borrowFee *b
 	if order.Side == lendingstate.Investing {
 		// cancel fee = quantityToLend*borrowFee/LendingCancelFee
 		cancelFee = new(big.Int).Mul(order.Quantity, borrowFee)
-		cancelFee = new(big.Int).Div(cancelFee, common.TomoXBaseCancelFee)
+		cancelFee = new(big.Int).Div(cancelFee, common.RupeXBaseCancelFee)
 	} else {
 		//Fee = quantityToLend * collateralTokenDecimal/collateralPrice *borrowFee/LendingCancelFee
 		cancelFee = new(big.Int).Mul(order.Quantity, collateralTokenDecimal)
 		cancelFee = new(big.Int).Mul(cancelFee, borrowFee)
 		cancelFee = new(big.Int).Div(cancelFee, collateralPrice)
-		cancelFee = new(big.Int).Div(cancelFee, common.TomoXBaseCancelFee)
+		cancelFee = new(big.Int).Div(cancelFee, common.RupeXBaseCancelFee)
 	}
 	return cancelFee
 }
@@ -907,11 +908,11 @@ func (l *Lending) GetMediumTradePriceBeforeEpoch(chain consensus.ChainContext, s
 		inversePrice := tradingStateDb.GetMediumPriceBeforeEpoch(tradingstate.GetTradingOrderBookHash(quoteToken, baseToken))
 		log.Debug("getMediumTradePriceBeforeEpoch", "baseToken", baseToken.Hex(), "quoteToken", quoteToken.Hex(), "inversePrice", inversePrice)
 		if inversePrice != nil && inversePrice.Sign() > 0 {
-			quoteTokenDecimal, err := l.tomox.GetTokenDecimal(chain, statedb, quoteToken)
+			quoteTokenDecimal, err := l.rupex.GetTokenDecimal(chain, statedb, quoteToken)
 			if err != nil || quoteTokenDecimal.Sign() == 0 {
 				return nil, fmt.Errorf("Fail to get tokenDecimal. Token: %v . Err: %v", quoteToken.String(), err)
 			}
-			baseTokenDecimal, err := l.tomox.GetTokenDecimal(chain, statedb, baseToken)
+			baseTokenDecimal, err := l.rupex.GetTokenDecimal(chain, statedb, baseToken)
 			if err != nil || baseTokenDecimal.Sign() == 0 {
 				return nil, fmt.Errorf("Fail to get tokenDecimal. Token: %v . Err: %v", baseToken, err)
 			}
@@ -925,32 +926,32 @@ func (l *Lending) GetMediumTradePriceBeforeEpoch(chain consensus.ChainContext, s
 }
 
 //LendToken and CollateralToken must meet at least one of following conditions
-//- Have direct pair in TomoX: lendToken/CollateralToken or CollateralToken/LendToken
-//- Have pairs with TOMO:
-//-  lendToken/TOMO and CollateralToken/TOMO
-//-  TOMO/lendToken and TOMO/CollateralToken
+//- Have direct pair in RupeX: lendToken/CollateralToken or CollateralToken/LendToken
+//- Have pairs with RUPX:
+//-  lendToken/RUPX and CollateralToken/RUPX
+//-  RUPX/lendToken and RUPX/CollateralToken
 func (l *Lending) GetCollateralPrices(header *types.Header, chain consensus.ChainContext, statedb *state.StateDB, tradingStateDb *tradingstate.TradingStateDB, collateralToken common.Address, lendingToken common.Address) (*big.Int, *big.Int, error) {
-	// lendTokenTOMOPrice: price of ticker lendToken/TOMO
-	// collateralTOMOPrice: price of ticker collateralToken/TOMO
+	// lendTokenRUPXPrice: price of ticker lendToken/RUPX
+	// collateralRUPXPrice: price of ticker collateralToken/RUPX
 	// collateralPrice: price of ticker collateralToken/lendToken
 
 	collateralPriceFromContract, updatedBlock := lendingstate.GetCollateralPrice(statedb, collateralToken, lendingToken)
 	collateralPriceUpdatedFromContract := updatedBlock.Uint64()/chain.Config().Posv.Epoch == header.Number.Uint64()/chain.Config().Posv.Epoch
 
-	lendTokenTOMOPrice, err := l.GetTOMOBasePrices(header, chain, statedb, tradingStateDb, lendingToken)
+	lendTokenRUPXPrice, err := l.GetRUPXBasePrices(header, chain, statedb, tradingStateDb, lendingToken)
 	if err != nil {
 		return nil, nil, err
 	}
 	if collateralPriceUpdatedFromContract {
 		log.Debug("Getting collateral/lending token price from contract", "price", collateralPriceFromContract)
-		return lendTokenTOMOPrice, collateralPriceFromContract, nil
+		return lendTokenRUPXPrice, collateralPriceFromContract, nil
 	}
-	lendingTokenDecimal, err := l.tomox.GetTokenDecimal(chain, statedb, lendingToken)
+	lendingTokenDecimal, err := l.rupex.GetTokenDecimal(chain, statedb, lendingToken)
 	log.Debug("GetTokenDecimal", "lendingToken", lendingToken, "err", err)
 	if err != nil || lendingTokenDecimal == nil || lendingTokenDecimal.Sign() == 0 {
 		return nil, nil, err
 	}
-	collateralTokenDecimal, err := l.tomox.GetTokenDecimal(chain, statedb, collateralToken)
+	collateralTokenDecimal, err := l.rupex.GetTokenDecimal(chain, statedb, collateralToken)
 	log.Debug("GetTokenDecimal", "collateralToken", collateralToken, "err", err)
 	if err != nil || collateralTokenDecimal == nil || collateralTokenDecimal.Sign() == 0 {
 		return nil, nil, err
@@ -962,71 +963,71 @@ func (l *Lending) GetCollateralPrices(header *types.Header, chain consensus.Chai
 		log.Debug("Getting lending/collateral token price from contract", "price", inverseCollateralPriceFromContract)
 		collateralPrice = new(big.Int).Mul(lendingTokenDecimal, collateralTokenDecimal)
 		collateralPrice = new(big.Int).Div(collateralPrice, inverseCollateralPriceFromContract)
-		return lendTokenTOMOPrice, collateralPrice, nil
+		return lendTokenRUPXPrice, collateralPrice, nil
 	}
 	// if contract doesn't provide any price information
-	// getting price from pair in tomox
+	// getting price from pair in rupex
 	lastAveragePrice, err := l.GetMediumTradePriceBeforeEpoch(chain, statedb, tradingStateDb, collateralToken, lendingToken)
 	if err != nil {
 		return nil, nil, err
 	}
 	if lastAveragePrice != nil && lastAveragePrice.Sign() > 0 {
-		log.Debug("Getting collateral/lending from direct pair in tomox", "lendToken", lendingToken.Hex(), "collateralToken", collateralToken.Hex(), "price", lastAveragePrice)
-		return lendTokenTOMOPrice, lastAveragePrice, nil
+		log.Debug("Getting collateral/lending from direct pair in rupex", "lendToken", lendingToken.Hex(), "collateralToken", collateralToken.Hex(), "price", lastAveragePrice)
+		return lendTokenRUPXPrice, lastAveragePrice, nil
 	}
-	collateralTOMOPrice, err := l.GetTOMOBasePrices(header, chain, statedb, tradingStateDb, collateralToken)
+	collateralRUPXPrice, err := l.GetRUPXBasePrices(header, chain, statedb, tradingStateDb, collateralToken)
 	if err != nil {
 		return nil, nil, err
 	}
-	if collateralTOMOPrice == nil || lendTokenTOMOPrice == nil {
+	if collateralRUPXPrice == nil || lendTokenRUPXPrice == nil {
 		return common.Big0, common.Big0, nil
 	}
-	// Calculate collateral/LendToken price from collateral/TOMO, lendToken/TOMO
-	collateralPrice = new(big.Int).Mul(collateralTOMOPrice, lendingTokenDecimal)
-	collateralPrice = new(big.Int).Div(collateralPrice, lendTokenTOMOPrice)
-	log.Debug("GetCollateralPrices: Calculate collateral/LendToken price from collateral/TOMO, lendToken/TOMO", "collateralPrice", collateralPrice,
-		"collateralTOMOPrice", collateralTOMOPrice, "lendingTokenDecimal", lendingTokenDecimal, "lendTokenTOMOPrice", lendTokenTOMOPrice)
-	return lendTokenTOMOPrice, collateralPrice, nil
+	// Calculate collateral/LendToken price from collateral/RUPX, lendToken/RUPX
+	collateralPrice = new(big.Int).Mul(collateralRUPXPrice, lendingTokenDecimal)
+	collateralPrice = new(big.Int).Div(collateralPrice, lendTokenRUPXPrice)
+	log.Debug("GetCollateralPrices: Calculate collateral/LendToken price from collateral/RUPX, lendToken/RUPX", "collateralPrice", collateralPrice,
+		"collateralRUPXPrice", collateralRUPXPrice, "lendingTokenDecimal", lendingTokenDecimal, "lendTokenRUPXPrice", lendTokenRUPXPrice)
+	return lendTokenRUPXPrice, collateralPrice, nil
 }
 
-func (l *Lending) GetTOMOBasePrices(header *types.Header, chain consensus.ChainContext, statedb *state.StateDB, tradingStateDb *tradingstate.TradingStateDB, token common.Address) (*big.Int, error) {
+func (l *Lending) GetRUPXBasePrices(header *types.Header, chain consensus.ChainContext, statedb *state.StateDB, tradingStateDb *tradingstate.TradingStateDB, token common.Address) (*big.Int, error) {
 
-	tokenTOMOPriceFromContract, updatedBlock := lendingstate.GetCollateralPrice(statedb, token, common.HexToAddress(common.TomoNativeAddress))
-	tokenTOMOPriceUpdatedFromContract := updatedBlock.Uint64()/chain.Config().Posv.Epoch == header.Number.Uint64()/chain.Config().Posv.Epoch
+	tokenRUPXPriceFromContract, updatedBlock := lendingstate.GetCollateralPrice(statedb, token, common.HexToAddress(common.RupayaNativeAddress))
+	tokenRUPXPriceUpdatedFromContract := updatedBlock.Uint64()/chain.Config().Posv.Epoch == header.Number.Uint64()/chain.Config().Posv.Epoch
 
-	if token == common.HexToAddress(common.TomoNativeAddress) {
+	if token == common.HexToAddress(common.RupayaNativeAddress) {
 		return common.BasePrice, nil
-	} else if tokenTOMOPriceUpdatedFromContract {
+	} else if tokenRUPXPriceUpdatedFromContract {
 		// getting lendToken price from contract first
-		// otherwise, getting from tomox lendToken/TOMO
-		log.Debug("Getting token/TOMO price from contract", "price", tokenTOMOPriceFromContract)
-		return tokenTOMOPriceFromContract, nil
+		// otherwise, getting from rupex lendToken/RUPX
+		log.Debug("Getting token/RUPX price from contract", "price", tokenRUPXPriceFromContract)
+		return tokenRUPXPriceFromContract, nil
 	} else {
-		tomoTokenPriceFromContract, updatedBlock := lendingstate.GetCollateralPrice(statedb, common.HexToAddress(common.TomoNativeAddress), token)
-		tomoTokenPriceUpdatedFromContract := updatedBlock.Uint64()/chain.Config().Posv.Epoch == header.Number.Uint64()/chain.Config().Posv.Epoch
-		if tomoTokenPriceUpdatedFromContract && tomoTokenPriceFromContract != nil && tomoTokenPriceFromContract.Sign() > 0 {
+		rupayaTokenPriceFromContract, updatedBlock := lendingstate.GetCollateralPrice(statedb, common.HexToAddress(common.RupayaNativeAddress), token)
+		rupayaTokenPriceUpdatedFromContract := updatedBlock.Uint64()/chain.Config().Posv.Epoch == header.Number.Uint64()/chain.Config().Posv.Epoch
+		if rupayaTokenPriceUpdatedFromContract && rupayaTokenPriceFromContract != nil && rupayaTokenPriceFromContract.Sign() > 0 {
 			// getting lendToken price from contract first
-			// otherwise, getting from tomox lendToken/TOMO
-			log.Debug("Getting TOMO/token from contract", "price", tomoTokenPriceFromContract)
-			tokenDecimal, err := l.tomox.GetTokenDecimal(chain, statedb, token)
+			// otherwise, getting from rupex lendToken/RUPX
+			log.Debug("Getting RUPX/token from contract", "price", rupayaTokenPriceFromContract)
+			tokenDecimal, err := l.rupex.GetTokenDecimal(chain, statedb, token)
 			log.Debug("GetTokenDecimal", "token", token.Hex(), "err", err)
 			if err != nil || tokenDecimal == nil || tokenDecimal.Sign() == 0 {
 				return nil, err
 			}
-			tokenTomoPrice := new(big.Int).Mul(common.BasePrice, tokenDecimal)
-			tokenTomoPrice = new(big.Int).Div(tokenTomoPrice, tomoTokenPriceFromContract)
-			return tokenTomoPrice, nil
+			tokenRupayaPrice := new(big.Int).Mul(common.BasePrice, tokenDecimal)
+			tokenRupayaPrice = new(big.Int).Div(tokenRupayaPrice, rupayaTokenPriceFromContract)
+			return tokenRupayaPrice, nil
 		}
-		tokenTOMOPrice, err := l.GetMediumTradePriceBeforeEpoch(chain, statedb, tradingStateDb, token, common.HexToAddress(common.TomoNativeAddress))
+		tokenRUPXPrice, err := l.GetMediumTradePriceBeforeEpoch(chain, statedb, tradingStateDb, token, common.HexToAddress(common.RupayaNativeAddress))
 		if err != nil {
 			return nil, err
 		}
-		if tokenTOMOPrice != nil && tokenTOMOPrice.Sign() > 0 {
-			log.Debug("Getting token/TOMO from tomox", "price", tokenTOMOPrice, "err", err)
-			return tokenTOMOPrice, nil
+		if tokenRUPXPrice != nil && tokenRUPXPrice.Sign() > 0 {
+			log.Debug("Getting token/RUPX from rupex", "price", tokenRUPXPrice, "err", err)
+			return tokenRUPXPrice, nil
 		}
 	}
-	log.Debug("Can't getting tokenTOMOPrice ", "token", token.Hex())
+	log.Debug("Can't getting tokenRUPXPrice ", "token", token.Hex())
 	return nil, nil
 }
 
@@ -1101,7 +1102,7 @@ func (l *Lending) ProcessRepayLendingTrade(header *types.Header, chain consensus
 		}
 		newLendingTrade := &lendingstate.LendingTrade{}
 		var err error
-		if chain.Config().IsTIPTomoXLending(header.Number) {
+		if chain.Config().IsTIPRupeXLending(header.Number) {
 			newLendingTrade, err = l.LiquidationExpiredTrade(header, chain, lendingStateDB, statedb, tradingstateDB, lendingBook, lendingTradeId)
 		} else {
 			newLendingTrade, err = l.LiquidationTrade(lendingStateDB, statedb, tradingstateDB, lendingBook, lendingTradeId)

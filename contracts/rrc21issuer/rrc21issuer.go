@@ -1,4 +1,4 @@
-package trc21issuer
+package rrc21issuer
 
 import (
 	"github.com/rupaya-project/rupx/accounts/abi/bind"
@@ -7,19 +7,19 @@ import (
 	"math/big"
 )
 
-type TRC21Issuer struct {
-	*contract.TRC21IssuerSession
+type RRC21Issuer struct {
+	*contract.RRC21IssuerSession
 	contractBackend bind.ContractBackend
 }
 
-func NewTRC21Issuer(transactOpts *bind.TransactOpts, contractAddr common.Address, contractBackend bind.ContractBackend) (*TRC21Issuer, error) {
-	contractObject, err := contract.NewTRC21Issuer(contractAddr, contractBackend)
+func NewRRC21Issuer(transactOpts *bind.TransactOpts, contractAddr common.Address, contractBackend bind.ContractBackend) (*RRC21Issuer, error) {
+	contractObject, err := contract.NewRRC21Issuer(contractAddr, contractBackend)
 	if err != nil {
 		return nil, err
 	}
 
-	return &TRC21Issuer{
-		&contract.TRC21IssuerSession{
+	return &RRC21Issuer{
+		&contract.RRC21IssuerSession{
 			Contract:     contractObject,
 			TransactOpts: *transactOpts,
 		},
@@ -27,12 +27,12 @@ func NewTRC21Issuer(transactOpts *bind.TransactOpts, contractAddr common.Address
 	}, nil
 }
 
-func DeployTRC21Issuer(transactOpts *bind.TransactOpts, contractBackend bind.ContractBackend, minApply *big.Int) (common.Address, *TRC21Issuer, error) {
-	contractAddr, _, _, err := contract.DeployTRC21Issuer(transactOpts, contractBackend, minApply)
+func DeployRRC21Issuer(transactOpts *bind.TransactOpts, contractBackend bind.ContractBackend, minApply *big.Int) (common.Address, *RRC21Issuer, error) {
+	contractAddr, _, _, err := contract.DeployRRC21Issuer(transactOpts, contractBackend, minApply)
 	if err != nil {
 		return contractAddr, nil, err
 	}
-	contractObject, err := NewTRC21Issuer(transactOpts, contractAddr, contractBackend)
+	contractObject, err := NewRRC21Issuer(transactOpts, contractAddr, contractBackend)
 	if err != nil {
 		return contractAddr, nil, err
 	}

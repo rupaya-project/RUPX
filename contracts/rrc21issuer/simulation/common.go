@@ -7,7 +7,7 @@ import (
 
 var (
 	RpcEndpoint = "http://127.0.0.1:8501/"
-	MinApply    = big.NewInt(0).Mul(big.NewInt(1000), big.NewInt(100000000000000000)) // 100 TOMO
+	MinApply    = big.NewInt(0).Mul(big.NewInt(1000), big.NewInt(100000000000000000)) // 100 RUPX
 	Cap         = big.NewInt(0).Mul(big.NewInt(10000000000000), big.NewInt(10000000000000))
 	Fee         = big.NewInt(100)
 

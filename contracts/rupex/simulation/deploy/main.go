@@ -9,6 +9,7 @@ import (
 
 	"github.com/rupaya-project/rupx/accounts/abi/bind"
 	"github.com/rupaya-project/rupx/common"
+	"github.com/rupaya-project/rupx/contracts/rupex"
 	"github.com/rupaya-project/rupx/contracts/rupex/simulation"
 	"github.com/rupaya-project/rupx/ethclient"
 )
@@ -29,33 +30,33 @@ func main() {
 	auth.GasLimit = uint64(10000000) // in units
 	auth.GasPrice = big.NewInt(250000000000000)
 
-	// init trc21 issuer
+	// init rrc21 issuer
 	auth.Nonce = big.NewInt(int64(nonce))
-	trc21IssuerAddr, trc21Issuer, err := tomox.DeployTRC21Issuer(auth, client, simulation.MinTRC21Apply)
+	rrc21IssuerAddr, rrc21Issuer, err := rupex.DeployRRC21Issuer(auth, client, simulation.MinRRC21Apply)
 	if err != nil {
-		log.Fatal("DeployTRC21Issuer", err)
+		log.Fatal("DeployRRC21Issuer", err)
 	}
-	trc21Issuer.TransactOpts.GasPrice = big.NewInt(250000000000000)
+	rrc21Issuer.TransactOpts.GasPrice = big.NewInt(250000000000000)
 
-	fmt.Println("===> trc21 issuer address", trc21IssuerAddr.Hex())
-	fmt.Println("wait 10s to execute init smart contract : TRC Issuer")
+	fmt.Println("===> rrc21 issuer address", rrc21IssuerAddr.Hex())
+	fmt.Println("wait 10s to execute init smart contract : RRC Issuer")
 	time.Sleep(2 * time.Second)
 
-	//init TOMOX Listing in
+	//init RUPEX Listing in
 	auth.Nonce = big.NewInt(int64(nonce + 1))
-	tomoxListtingAddr, tomoxListing, err := tomox.DeployTOMOXListing(auth, client)
+	rupexListtingAddr, rupexListing, err := rupex.DeployRUPEXListing(auth, client)
 	if err != nil {
-		log.Fatal("DeployTOMOXListing", err)
+		log.Fatal("DeployRUPEXListing", err)
 	}
-	tomoxListing.TransactOpts.GasPrice = big.NewInt(250000000000000)
+	rupexListing.TransactOpts.GasPrice = big.NewInt(250000000000000)
 
-	fmt.Println("===> tomox listing address", tomoxListtingAddr.Hex())
-	fmt.Println("wait 10s to execute init smart contract : tomox listing ")
+	fmt.Println("===> rupex listing address", rupexListtingAddr.Hex())
+	fmt.Println("wait 10s to execute init smart contract : rupex listing ")
 	time.Sleep(2 * time.Second)
 
 	// init Relayer Registration
 	auth.Nonce = big.NewInt(int64(nonce + 2))
-	relayerRegistrationAddr, relayerRegistration, err := tomox.DeployRelayerRegistration(auth, client, tomoxListtingAddr, simulation.MaxRelayers, simulation.MaxTokenList, simulation.MinDeposit)
+	relayerRegistrationAddr, relayerRegistration, err := rupex.DeployRelayerRegistration(auth, client, rupexListtingAddr, simulation.MaxRelayers, simulation.MaxTokenList, simulation.MinDeposit)
 	if err != nil {
 		log.Fatal("DeployRelayerRegistration", err)
 	}
@@ -66,7 +67,7 @@ func main() {
 	time.Sleep(2 * time.Second)
 
 	auth.Nonce = big.NewInt(int64(nonce + 3))
-	lendingRelayerRegistrationAddr, lendingRelayerRegistration, err := tomox.DeployLendingRelayerRegistration(auth, client, relayerRegistrationAddr, tomoxListtingAddr)
+	lendingRelayerRegistrationAddr, lendingRelayerRegistration, err := rupex.DeployLendingRelayerRegistration(auth, client, relayerRegistrationAddr, rupexListtingAddr)
 	if err != nil {
 		log.Fatal("DeployLendingRelayerRegistration", err)
 	}
@@ -77,14 +78,14 @@ func main() {
 	time.Sleep(2 * time.Second)
 
 	currentNonce := nonce + 4
-	tokenList := initTRC21(auth, client, currentNonce, simulation.TokenNameList)
+	tokenList := initRRC21(auth, client, currentNonce, simulation.TokenNameList)
 
 	currentNonce = currentNonce + uint64(len(simulation.TokenNameList)) // init smartcontract
 
-	applyIssuer(trc21Issuer, tokenList, currentNonce)
+	applyIssuer(rrc21Issuer, tokenList, currentNonce)
 
 	currentNonce = currentNonce + uint64(len(simulation.TokenNameList))
-	applyTomoXListing(tomoxListing, tokenList, currentNonce)
+	applyRupeXListing(rupexListing, tokenList, currentNonce)
 
 	// BTC Collateral
 	nonce = currentNonce + uint64(len(simulation.TokenNameList))
@@ -102,10 +103,10 @@ func main() {
 		log.Fatal("Lending add collateral", err)
 	}
 
-	// TOMO Collateral
+	// RUPX Collateral
 	nonce = nonce + 1
 	lendingRelayerRegistration.TransactOpts.Nonce = big.NewInt(int64(nonce))
-	_, err = lendingRelayerRegistration.AddCollateral(simulation.TOMONative, simulation.CollateralDepositRate, simulation.CollateralLiquidationRate, simulation.CollateralRecallRate)
+	_, err = lendingRelayerRegistration.AddCollateral(simulation.RUPXNative, simulation.CollateralDepositRate, simulation.CollateralLiquidationRate, simulation.CollateralRecallRate)
 
 	if err != nil {
 		log.Fatal("Lending add collateral", err)
@@ -127,12 +128,12 @@ func main() {
 		log.Fatal("Lending add base token USD", err)
 	}
 
-	// TOMO lending base
+	// RUPX lending base
 	nonce = nonce + 1
 	lendingRelayerRegistration.TransactOpts.Nonce = big.NewInt(int64(nonce))
-	_, err = lendingRelayerRegistration.AddBaseToken(simulation.TOMONative)
+	_, err = lendingRelayerRegistration.AddBaseToken(simulation.RUPXNative)
 	if err != nil {
-		log.Fatal("Lending add base token TOMO", err)
+		log.Fatal("Lending add base token RUPX", err)
 	}
 
 	// BTC lending base
@@ -163,7 +164,7 @@ func main() {
 	// relayer registration
 	ownerRelayer := bind.NewKeyedTransactor(simulation.OwnerRelayerKey)
 	nonce, _ = client.NonceAt(context.Background(), simulation.OwnerRelayerAddr, nil)
-	relayerRegistration, err = tomox.NewRelayerRegistration(ownerRelayer, relayerRegistrationAddr, client)
+	relayerRegistration, err = rupex.NewRelayerRegistration(ownerRelayer, relayerRegistrationAddr, client)
 	if err != nil {
 		log.Fatal("NewRelayerRegistration", err)
 	}
@@ -177,42 +178,42 @@ func main() {
 	/*
 		for _, token := range tokenList {
 			fromTokens = append(fromTokens, token["address"].(common.Address))
-			toTokens = append(toTokens, simulation.TOMONative)
+			toTokens = append(toTokens, simulation.RUPXNative)
 		}
 	*/
 
-	// TOMO/BTC
-	fromTokens = append(fromTokens, simulation.TOMONative)
+	// RUPX/BTC
+	fromTokens = append(fromTokens, simulation.RUPXNative)
 	toTokens = append(toTokens, tokenList[0]["address"].(common.Address))
 
-	// TOMO/USDT
-	fromTokens = append(fromTokens, simulation.TOMONative)
+	// RUPX/USDT
+	fromTokens = append(fromTokens, simulation.RUPXNative)
 	toTokens = append(toTokens, tokenList[9]["address"].(common.Address))
 
-	// ETH/TOMO
+	// ETH/RUPX
 	fromTokens = append(fromTokens, tokenList[1]["address"].(common.Address))
-	toTokens = append(toTokens, simulation.TOMONative)
+	toTokens = append(toTokens, simulation.RUPXNative)
 
 	fromTokens = append(fromTokens, tokenList[2]["address"].(common.Address))
-	toTokens = append(toTokens, simulation.TOMONative)
+	toTokens = append(toTokens, simulation.RUPXNative)
 
 	fromTokens = append(fromTokens, tokenList[3]["address"].(common.Address))
-	toTokens = append(toTokens, simulation.TOMONative)
+	toTokens = append(toTokens, simulation.RUPXNative)
 
 	fromTokens = append(fromTokens, tokenList[4]["address"].(common.Address))
-	toTokens = append(toTokens, simulation.TOMONative)
+	toTokens = append(toTokens, simulation.RUPXNative)
 
 	fromTokens = append(fromTokens, tokenList[5]["address"].(common.Address))
-	toTokens = append(toTokens, simulation.TOMONative)
+	toTokens = append(toTokens, simulation.RUPXNative)
 
 	fromTokens = append(fromTokens, tokenList[6]["address"].(common.Address))
-	toTokens = append(toTokens, simulation.TOMONative)
+	toTokens = append(toTokens, simulation.RUPXNative)
 
 	fromTokens = append(fromTokens, tokenList[7]["address"].(common.Address))
-	toTokens = append(toTokens, simulation.TOMONative)
+	toTokens = append(toTokens, simulation.RUPXNative)
 
 	fromTokens = append(fromTokens, tokenList[8]["address"].(common.Address))
-	toTokens = append(toTokens, simulation.TOMONative)
+	toTokens = append(toTokens, simulation.RUPXNative)
 
 	// ETH/BTC
 	fromTokens = append(fromTokens, tokenList[1]["address"].(common.Address))
@@ -234,12 +235,12 @@ func main() {
 	if err != nil {
 		log.Fatal("relayerRegistration Register ", err)
 	}
-	fmt.Println("wait 2s to apply token to list tomox")
+	fmt.Println("wait 2s to apply token to list rupex")
 	time.Sleep(2 * time.Second)
 
 	// Lending apply
 	nonce = nonce + 1
-	lendingRelayerRegistration, err = tomox.NewLendingRelayerRegistration(ownerRelayer, lendingRelayerRegistrationAddr, client)
+	lendingRelayerRegistration, err = rupex.NewLendingRelayerRegistration(ownerRelayer, lendingRelayerRegistrationAddr, client)
 	if err != nil {
 		log.Fatal("NewRelayerRegistration", err)
 	}
@@ -280,23 +281,23 @@ func main() {
 	terms = append(terms, big.NewInt(30*86400))
 	collaterals = append(collaterals, common.HexToAddress("0x0"))
 
-	// TOMO 1 min
-	baseTokens = append(baseTokens, simulation.TOMONative)
+	// RUPX 1 min
+	baseTokens = append(baseTokens, simulation.RUPXNative)
 	terms = append(terms, big.NewInt(60))
 	collaterals = append(collaterals, common.HexToAddress("0x0"))
 
-	// TOMO 1 day
-	baseTokens = append(baseTokens, simulation.TOMONative)
+	// RUPX 1 day
+	baseTokens = append(baseTokens, simulation.RUPXNative)
 	terms = append(terms, big.NewInt(86400))
 	collaterals = append(collaterals, common.HexToAddress("0x0"))
 
-	// TOMO 7 days
-	baseTokens = append(baseTokens, simulation.TOMONative)
+	// RUPX 7 days
+	baseTokens = append(baseTokens, simulation.RUPXNative)
 	terms = append(terms, big.NewInt(7*86400))
 	collaterals = append(collaterals, common.HexToAddress("0x0"))
 
-	// TOMO 30 days
-	baseTokens = append(baseTokens, simulation.TOMONative)
+	// RUPX 30 days
+	baseTokens = append(baseTokens, simulation.RUPXNative)
 	terms = append(terms, big.NewInt(30*86400))
 	collaterals = append(collaterals, common.HexToAddress("0x0"))
 
@@ -329,34 +330,34 @@ func main() {
 	time.Sleep(2 * time.Second)
 }
 
-func initTRC21(auth *bind.TransactOpts, client *ethclient.Client, nonce uint64, tokenNameList []string) []map[string]interface{} {
+func initRRC21(auth *bind.TransactOpts, client *ethclient.Client, nonce uint64, tokenNameList []string) []map[string]interface{} {
 	tokenListResult := []map[string]interface{}{}
 	for _, tokenName := range tokenNameList {
 		auth.Nonce = big.NewInt(int64(nonce))
 		d := uint8(18)
 		depositFee := big.NewInt(0)
 		withdrawFee := big.NewInt(0)
-		tokenCap := simulation.TRC21TokenCap
+		tokenCap := simulation.RRC21TokenCap
 		if tokenName == "ADA" {
 			d = 0
-			tokenCap = new(big.Int).Div(simulation.TRC21TokenCap, simulation.BaseTOMO)
+			tokenCap = new(big.Int).Div(simulation.RRC21TokenCap, simulation.BaseRUPX)
 		}
 		if tokenName == "USDT" {
 			d = 6
-			tokenCap = new(big.Int).Div(simulation.TRC21TokenCap, big.NewInt(1000000000000))
+			tokenCap = new(big.Int).Div(simulation.RRC21TokenCap, big.NewInt(1000000000000))
 			withdrawFee = big.NewInt(970000)
 		}
 		if tokenName == "BTC" {
 			d = 8
-			tokenCap = new(big.Int).Div(simulation.TRC21TokenCap, big.NewInt(10000000000))
+			tokenCap = new(big.Int).Div(simulation.RRC21TokenCap, big.NewInt(10000000000))
 			withdrawFee = big.NewInt(40000)
 		}
 		if tokenName == "ETH" {
 			withdrawFee = big.NewInt(3000000000000000)
 		}
-		tokenAddr, _, err := tomox.DeployTRC21(auth, client, simulation.Owners, simulation.Required, tokenName, tokenName, d, tokenCap, simulation.TRC21TokenFee, depositFee, withdrawFee)
+		tokenAddr, _, err := rupex.DeployRRC21(auth, client, simulation.Owners, simulation.Required, tokenName, tokenName, d, tokenCap, simulation.RRC21TokenFee, depositFee, withdrawFee)
 		if err != nil {
-			log.Fatal("DeployTRC21 ", tokenName, err)
+			log.Fatal("DeployRRC21 ", tokenName, err)
 		}
 
 		fmt.Println(tokenName+" token address", tokenAddr.Hex(), "cap", tokenCap)
@@ -372,13 +373,13 @@ func initTRC21(auth *bind.TransactOpts, client *ethclient.Client, nonce uint64, 
 	return tokenListResult
 }
 
-func applyIssuer(trc21Issuer *tomox.TRC21Issuer, tokenList []map[string]interface{}, nonce uint64) {
+func applyIssuer(rrc21Issuer *rupex.RRC21Issuer, tokenList []map[string]interface{}, nonce uint64) {
 	for _, token := range tokenList {
-		trc21Issuer.TransactOpts.Nonce = big.NewInt(int64(nonce))
-		trc21Issuer.TransactOpts.Value = simulation.MinTRC21Apply
-		_, err := trc21Issuer.Apply(token["address"].(common.Address))
+		rrc21Issuer.TransactOpts.Nonce = big.NewInt(int64(nonce))
+		rrc21Issuer.TransactOpts.Value = simulation.MinRRC21Apply
+		_, err := rrc21Issuer.Apply(token["address"].(common.Address))
 		if err != nil {
-			log.Fatal("trc21Issuer Apply  ", token["name"].(string), err)
+			log.Fatal("rrc21Issuer Apply  ", token["name"].(string), err)
 		}
 		fmt.Println("applyIssuer ", token["name"].(string))
 		nonce = nonce + 1
@@ -386,15 +387,15 @@ func applyIssuer(trc21Issuer *tomox.TRC21Issuer, tokenList []map[string]interfac
 	time.Sleep(5 * time.Second)
 }
 
-func applyTomoXListing(tomoxListing *tomox.TOMOXListing, tokenList []map[string]interface{}, nonce uint64) {
+func applyRupeXListing(rupexListing *rupex.RUPEXListing, tokenList []map[string]interface{}, nonce uint64) {
 	for _, token := range tokenList {
-		tomoxListing.TransactOpts.Nonce = big.NewInt(int64(nonce))
-		tomoxListing.TransactOpts.Value = simulation.TomoXListingFee
-		_, err := tomoxListing.Apply(token["address"].(common.Address))
+		rupexListing.TransactOpts.Nonce = big.NewInt(int64(nonce))
+		rupexListing.TransactOpts.Value = simulation.RupeXListingFee
+		_, err := rupexListing.Apply(token["address"].(common.Address))
 		if err != nil {
-			log.Fatal("tomoxListing Apply ", token["name"].(string), err)
+			log.Fatal("rupexListing Apply ", token["name"].(string), err)
 		}
-		fmt.Println("applyTomoXListing ", token["name"].(string))
+		fmt.Println("applyRupeXListing ", token["name"].(string))
 		nonce = nonce + 1
 	}
 	time.Sleep(5 * time.Second)
@@ -403,11 +404,11 @@ func applyTomoXListing(tomoxListing *tomox.TOMOXListing, tokenList []map[string]
 func airdrop(auth *bind.TransactOpts, client *ethclient.Client, tokenList []map[string]interface{}, addresses []common.Address, nonce uint64) {
 	for _, token := range tokenList {
 		for _, address := range addresses {
-			trc21Contract, _ := tomox.NewTRC21(auth, token["address"].(common.Address), client)
-			trc21Contract.TransactOpts.Nonce = big.NewInt(int64(nonce))
+			rrc21Contract, _ := rupex.NewRRC21(auth, token["address"].(common.Address), client)
+			rrc21Contract.TransactOpts.Nonce = big.NewInt(int64(nonce))
 			baseAmount := new(big.Int).Exp(big.NewInt(10), big.NewInt(int64(token["decimals"].(uint8))), nil)
 			amount := big.NewInt(0).Mul(baseAmount, big.NewInt(1000000))
-			_, err := trc21Contract.Transfer(address, amount)
+			_, err := rrc21Contract.Transfer(address, amount)
 			if err == nil {
 				fmt.Printf("Transfer %v %v to %v successfully", amount.String(), token["name"].(string), address.String())
 				fmt.Println()

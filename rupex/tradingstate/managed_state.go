@@ -28,29 +28,29 @@ type exchanges struct {
 	nonces      []bool
 }
 
-type TomoXManagedState struct {
+type RupeXManagedState struct {
 	*TradingStateDB
 	mu        sync.RWMutex
 	exchanges map[common.Hash]*exchanges
 }
 
-// TomoXManagedState returns a new managed state with the statedb as it's backing layer
-func ManageState(statedb *TradingStateDB) *TomoXManagedState {
-	return &TomoXManagedState{
+// RupeXManagedState returns a new managed state with the statedb as it's backing layer
+func ManageState(statedb *TradingStateDB) *RupeXManagedState {
+	return &RupeXManagedState{
 		TradingStateDB: statedb.Copy(),
 		exchanges:      make(map[common.Hash]*exchanges),
 	}
 }
 
 // SetState sets the backing layer of the managed state
-func (ms *TomoXManagedState) SetState(statedb *TradingStateDB) {
+func (ms *RupeXManagedState) SetState(statedb *TradingStateDB) {
 	ms.mu.Lock()
 	defer ms.mu.Unlock()
 	ms.TradingStateDB = statedb
 }
 
 // RemoveNonce removed the nonce from the managed state and all future pending nonces
-func (ms *TomoXManagedState) RemoveNonce(addr common.Hash, n uint64) {
+func (ms *RupeXManagedState) RemoveNonce(addr common.Hash, n uint64) {
 	if ms.hasAccount(addr) {
 		ms.mu.Lock()
 		defer ms.mu.Unlock()
@@ -65,7 +65,7 @@ func (ms *TomoXManagedState) RemoveNonce(addr common.Hash, n uint64) {
 }
 
 // NewNonce returns the new canonical nonce for the managed orderId
-func (ms *TomoXManagedState) NewNonce(addr common.Hash) uint64 {
+func (ms *RupeXManagedState) NewNonce(addr common.Hash) uint64 {
 	ms.mu.Lock()
 	defer ms.mu.Unlock()
 
@@ -83,7 +83,7 @@ func (ms *TomoXManagedState) NewNonce(addr common.Hash) uint64 {
 // GetNonce returns the canonical nonce for the managed or unmanaged orderId.
 //
 // Because GetNonce mutates the DB, we must take a write lock.
-func (ms *TomoXManagedState) GetNonce(addr common.Hash) uint64 {
+func (ms *RupeXManagedState) GetNonce(addr common.Hash) uint64 {
 	ms.mu.Lock()
 	defer ms.mu.Unlock()
 	if ms.hasAccount(addr) {
@@ -95,7 +95,7 @@ func (ms *TomoXManagedState) GetNonce(addr common.Hash) uint64 {
 }
 
 // SetNonce sets the new canonical nonce for the managed state
-func (ms *TomoXManagedState) SetNonce(addr common.Hash, nonce uint64) {
+func (ms *RupeXManagedState) SetNonce(addr common.Hash, nonce uint64) {
 	ms.mu.Lock()
 	defer ms.mu.Unlock()
 
@@ -106,19 +106,19 @@ func (ms *TomoXManagedState) SetNonce(addr common.Hash, nonce uint64) {
 }
 
 // HasAccount returns whether the given address is managed or not
-func (ms *TomoXManagedState) HasAccount(addr common.Hash) bool {
+func (ms *RupeXManagedState) HasAccount(addr common.Hash) bool {
 	ms.mu.RLock()
 	defer ms.mu.RUnlock()
 	return ms.hasAccount(addr)
 }
 
-func (ms *TomoXManagedState) hasAccount(addr common.Hash) bool {
+func (ms *RupeXManagedState) hasAccount(addr common.Hash) bool {
 	_, ok := ms.exchanges[addr]
 	return ok
 }
 
 // populate the managed state
-func (ms *TomoXManagedState) getAccount(addr common.Hash) *exchanges {
+func (ms *RupeXManagedState) getAccount(addr common.Hash) *exchanges {
 	if account, ok := ms.exchanges[addr]; !ok {
 		so := ms.GetOrNewStateExchangeObject(addr)
 		ms.exchanges[addr] = newAccount(so)

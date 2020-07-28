@@ -16,19 +16,19 @@
 
 package ethclient
 
-import "github.com/rupaya-project/rupx"
+import rupaya "github.com/rupaya-project/rupx"
 
 // Verify that Client implements the ethereum interfaces.
 var (
-	_ = tomochain.ChainReader(&Client{})
-	_ = tomochain.TransactionReader(&Client{})
-	_ = tomochain.ChainStateReader(&Client{})
-	_ = tomochain.ChainSyncReader(&Client{})
-	_ = tomochain.ContractCaller(&Client{})
-	_ = tomochain.GasEstimator(&Client{})
-	_ = tomochain.GasPricer(&Client{})
-	_ = tomochain.LogFilterer(&Client{})
-	_ = tomochain.PendingStateReader(&Client{})
+	_ = rupaya.ChainReader(&Client{})
+	_ = rupaya.TransactionReader(&Client{})
+	_ = rupaya.ChainStateReader(&Client{})
+	_ = rupaya.ChainSyncReader(&Client{})
+	_ = rupaya.ContractCaller(&Client{})
+	_ = rupaya.GasEstimator(&Client{})
+	_ = rupaya.GasPricer(&Client{})
+	_ = rupaya.LogFilterer(&Client{})
+	_ = rupaya.PendingStateReader(&Client{})
 	// _ = ethereum.PendingStateEventer(&Client{})
-	_ = tomochain.PendingContractCaller(&Client{})
+	_ = rupaya.PendingContractCaller(&Client{})
 )

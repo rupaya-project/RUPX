@@ -1,4 +1,4 @@
-package tomox
+package rupex
 
 import (
 	"github.com/rupaya-project/rupx/accounts/abi/bind"
@@ -26,8 +26,8 @@ func NewLendingRelayerRegistration(transactOpts *bind.TransactOpts, contractAddr
 	}, nil
 }
 
-func DeployLendingRelayerRegistration(transactOpts *bind.TransactOpts, contractBackend bind.ContractBackend, relayerAddr common.Address, tomoxListtingAddr common.Address) (common.Address, *LendingRelayerRegistration, error) {
-	contractAddr, _, _, err := contract.DeployLending(transactOpts, contractBackend, relayerAddr, tomoxListtingAddr)
+func DeployLendingRelayerRegistration(transactOpts *bind.TransactOpts, contractBackend bind.ContractBackend, relayerAddr common.Address, rupexListtingAddr common.Address) (common.Address, *LendingRelayerRegistration, error) {
+	contractAddr, _, _, err := contract.DeployLending(transactOpts, contractBackend, relayerAddr, rupexListtingAddr)
 	if err != nil {
 		return contractAddr, nil, err
 	}

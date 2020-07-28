@@ -3,11 +3,12 @@ package main
 import (
 	"context"
 	"fmt"
-	"github.com/rupaya-project/rupx/contracts/rupex/simulation"
 	"math/big"
 	"os"
 	"strconv"
 	"time"
+
+	"github.com/rupaya-project/rupx/contracts/rupex/simulation"
 
 	"github.com/rupaya-project/rupx/accounts/abi/bind"
 	"github.com/rupaya-project/rupx/common"
@@ -35,7 +36,7 @@ func main() {
 
 	auth.Nonce = big.NewInt(int64(nonce))
 
-	lendContract, _ := tomox.NewLendingRelayerRegistration(auth, common.HexToAddress("0x4d7eA2cE949216D6b120f3AA10164173615A2b6C"), client)
+	lendContract, _ := rupex.NewLendingRelayerRegistration(auth, common.HexToAddress("0x4d7eA2cE949216D6b120f3AA10164173615A2b6C"), client)
 
 	tx, err := lendContract.UpdateFee(coinbase, uint16(fee))
 	if err != nil {

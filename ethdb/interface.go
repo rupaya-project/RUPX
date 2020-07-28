@@ -37,8 +37,8 @@ type Database interface {
 	NewBatch() Batch
 }
 
-// TomoxDatabase interface
-type TomoxDatabase interface {
+// RupexDatabase interface
+type RupexDatabase interface {
 	GetObject(hash common.Hash, val interface{}) (interface{}, error)
 }
 

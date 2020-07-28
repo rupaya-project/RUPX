@@ -24,7 +24,7 @@ import (
 )
 
 var (
-	dir          = flag.String("dir", "", "directory to TomoChain chaindata")
+	dir          = flag.String("dir", "", "directory to Rupaya chaindata")
 	cacheSize    = flag.Int("size", 1000000, "LRU cache size")
 	sercureKey   = []byte("secure-key-")
 	nWorker      = runtime.NumCPU() / 2

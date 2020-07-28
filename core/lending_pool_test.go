@@ -50,7 +50,7 @@ func getLendingNonce(userAddress common.Address) (uint64, error) {
 		return 0, err
 	}
 	var result interface{}
-	err = rpcClient.Call(&result, "tomox_getLendingOrderCount", userAddress)
+	err = rpcClient.Call(&result, "rupex_getLendingOrderCount", userAddress)
 	if err != nil {
 		return 0, err
 	}
@@ -192,21 +192,21 @@ func TestSendLending(t *testing.T) {
 		nonce++
 		time.Sleep(time.Second)
 
-		// lendToken: USD, collateral: TOMO
+		// lendToken: USD, collateral: RUPX
 		// amount 1000 USD
 		testSendLending(key, nonce, USDAddress, common.Address{}, new(big.Int).Mul(_1E8, big.NewInt(1000)), interestRate, lendingstate.Investing, lendingstate.LendingStatusNew, true, 0, 0, common.Hash{}, "")
 		nonce++
 		time.Sleep(time.Second)
-		testSendLending(key, nonce, USDAddress, common.HexToAddress(common.TomoNativeAddress), new(big.Int).Mul(_1E8, big.NewInt(1000)), interestRate, lendingstate.Borrowing, lendingstate.LendingStatusNew, true, 0, 0, common.Hash{}, "")
+		testSendLending(key, nonce, USDAddress, common.HexToAddress(common.RupayaNativeAddress), new(big.Int).Mul(_1E8, big.NewInt(1000)), interestRate, lendingstate.Borrowing, lendingstate.LendingStatusNew, true, 0, 0, common.Hash{}, "")
 		nonce++
 		time.Sleep(time.Second)
 
-		// lendToken: BTC, collateral: TOMO
+		// lendToken: BTC, collateral: RUPX
 		// amount 1 BTC
 		testSendLending(key, nonce, BTCAddress, common.Address{}, new(big.Int).Mul(_1E18, big.NewInt(1)), interestRate, lendingstate.Investing, lendingstate.LendingStatusNew, true, 0, 0, common.Hash{}, "")
 		nonce++
 		time.Sleep(time.Second)
-		testSendLending(key, nonce, BTCAddress, common.HexToAddress(common.TomoNativeAddress), new(big.Int).Mul(_1E18, big.NewInt(1)), interestRate, lendingstate.Borrowing, lendingstate.LendingStatusNew, true, 0, 0, common.Hash{}, "")
+		testSendLending(key, nonce, BTCAddress, common.HexToAddress(common.RupayaNativeAddress), new(big.Int).Mul(_1E18, big.NewInt(1)), interestRate, lendingstate.Borrowing, lendingstate.LendingStatusNew, true, 0, 0, common.Hash{}, "")
 		nonce++
 		time.Sleep(time.Second)
 
@@ -219,21 +219,21 @@ func TestSendLending(t *testing.T) {
 		nonce++
 		time.Sleep(time.Second)
 
-		// lendToken: TOMO, collateral: BTC
-		// amount 1000 TOMO
-		testSendLending(key, nonce, common.HexToAddress(common.TomoNativeAddress), common.Address{}, new(big.Int).Mul(_1E18, big.NewInt(1000)), interestRate, lendingstate.Investing, lendingstate.LendingStatusNew, true, 0, 0, common.Hash{}, "")
+		// lendToken: RUPX, collateral: BTC
+		// amount 1000 RUPX
+		testSendLending(key, nonce, common.HexToAddress(common.RupayaNativeAddress), common.Address{}, new(big.Int).Mul(_1E18, big.NewInt(1000)), interestRate, lendingstate.Investing, lendingstate.LendingStatusNew, true, 0, 0, common.Hash{}, "")
 		nonce++
 		time.Sleep(time.Second)
-		testSendLending(key, nonce, common.HexToAddress(common.TomoNativeAddress), BTCAddress, new(big.Int).Mul(_1E18, big.NewInt(1000)), interestRate, lendingstate.Borrowing, lendingstate.LendingStatusNew, true, 0, 0, common.Hash{}, "")
+		testSendLending(key, nonce, common.HexToAddress(common.RupayaNativeAddress), BTCAddress, new(big.Int).Mul(_1E18, big.NewInt(1000)), interestRate, lendingstate.Borrowing, lendingstate.LendingStatusNew, true, 0, 0, common.Hash{}, "")
 		nonce++
 		time.Sleep(time.Second)
 
-		// lendToken: TOMO, collateral: ETH
-		// amount 1000 TOMO
-		testSendLending(key, nonce, common.HexToAddress(common.TomoNativeAddress), common.Address{}, new(big.Int).Mul(_1E18, big.NewInt(1000)), interestRate, lendingstate.Investing, lendingstate.LendingStatusNew, true, 0, 0, common.Hash{}, "")
+		// lendToken: RUPX, collateral: ETH
+		// amount 1000 RUPX
+		testSendLending(key, nonce, common.HexToAddress(common.RupayaNativeAddress), common.Address{}, new(big.Int).Mul(_1E18, big.NewInt(1000)), interestRate, lendingstate.Investing, lendingstate.LendingStatusNew, true, 0, 0, common.Hash{}, "")
 		nonce++
 		time.Sleep(time.Second)
-		testSendLending(key, nonce, common.HexToAddress(common.TomoNativeAddress), ETHAddress, new(big.Int).Mul(_1E18, big.NewInt(1000)), interestRate, lendingstate.Borrowing, lendingstate.LendingStatusNew, true, 0, 0, common.Hash{}, "")
+		testSendLending(key, nonce, common.HexToAddress(common.RupayaNativeAddress), ETHAddress, new(big.Int).Mul(_1E18, big.NewInt(1000)), interestRate, lendingstate.Borrowing, lendingstate.LendingStatusNew, true, 0, 0, common.Hash{}, "")
 		nonce++
 		time.Sleep(time.Second)
 	}
@@ -282,6 +282,6 @@ func TestRecallLending(t *testing.T) {
 		t.Error("fail to get nonce")
 		t.FailNow()
 	}
-	testSendLending(key, nonce, USDAddress, common.HexToAddress(common.TomoNativeAddress), new(big.Int).Mul(_1E8, big.NewInt(1000)), interestRate, lendingstate.Borrowing, lendingstate.LendingStatusNew, true, 0, 0, common.Hash{}, "")
+	testSendLending(key, nonce, USDAddress, common.HexToAddress(common.RupayaNativeAddress), new(big.Int).Mul(_1E8, big.NewInt(1000)), interestRate, lendingstate.Borrowing, lendingstate.LendingStatusNew, true, 0, 0, common.Hash{}, "")
 	time.Sleep(2 * time.Second)
 }

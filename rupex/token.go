@@ -1,4 +1,4 @@
-package tomox
+package rupex
 
 import (
 	"github.com/rupaya-project/rupx/contracts/rupex/contract"
@@ -17,7 +17,7 @@ import (
 
 // GetTokenAbi return token abi
 func GetTokenAbi() (*abi.ABI, error) {
-	contractABI, err := abi.JSON(strings.NewReader(contract.TRC21ABI))
+	contractABI, err := abi.JSON(strings.NewReader(contract.RRC21ABI))
 	if err != nil {
 		return nil, err
 	}
@@ -32,7 +32,7 @@ func RunContract(chain consensus.ChainContext, statedb *state.StateDB, contractA
 	}
 	backend := (*backends.SimulatedBackend)(nil)
 	fakeCaller := common.HexToAddress("0x0000000000000000000000000000000000000001")
-	msg := tomochain.CallMsg{To: &contractAddr, Data: input, From: fakeCaller}
+	msg := rupaya.CallMsg{To: &contractAddr, Data: input, From: fakeCaller}
 	result, err := backend.CallContractWithState(msg, chain, statedb)
 	if err != nil {
 		return nil, err
@@ -45,12 +45,12 @@ func RunContract(chain consensus.ChainContext, statedb *state.StateDB, contractA
 	return unpackResult, nil
 }
 
-func (tomox *TomoX) GetTokenDecimal(chain consensus.ChainContext, statedb *state.StateDB, tokenAddr common.Address) (*big.Int, error) {
-	if tokenDecimal, ok := tomox.tokenDecimalCache.Get(tokenAddr); ok {
+func (rupex *RupeX) GetTokenDecimal(chain consensus.ChainContext, statedb *state.StateDB, tokenAddr common.Address) (*big.Int, error) {
+	if tokenDecimal, ok := rupex.tokenDecimalCache.Get(tokenAddr); ok {
 		return tokenDecimal.(*big.Int), nil
 	}
-	if tokenAddr.String() == common.TomoNativeAddress {
-		tomox.tokenDecimalCache.Add(tokenAddr, common.BasePrice)
+	if tokenAddr.String() == common.RupayaNativeAddress {
+		rupex.tokenDecimalCache.Add(tokenAddr, common.BasePrice)
 		return common.BasePrice, nil
 	}
 	var decimals uint8
@@ -69,6 +69,6 @@ func (tomox *TomoX) GetTokenDecimal(chain consensus.ChainContext, statedb *state
 	decimals = result.(uint8)
 
 	tokenDecimal := new(big.Int).SetUint64(0).Exp(big.NewInt(10), big.NewInt(int64(decimals)), nil)
-	tomox.tokenDecimalCache.Add(tokenAddr, tokenDecimal)
+	rupex.tokenDecimalCache.Add(tokenAddr, tokenDecimal)
 	return tokenDecimal, nil
 }

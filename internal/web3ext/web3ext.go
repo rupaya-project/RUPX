@@ -29,8 +29,8 @@ var Modules = map[string]string{
 	"personal":     Personal_JS,
 	"rpc":          RPC_JS,
 	"shh":          Shh_JS,
-	"tomox":        TomoX_JS,
-	"tomoxlending": TomoXLending_JS,
+	"rupex":        RupeX_JS,
+	"rupexlending": RupeXLending_JS,
 	"swarmfs":      SWARMFS_JS,
 	"txpool":       TxPool_JS,
 }
@@ -625,304 +625,304 @@ web3._extend({
 });
 `
 
-const TomoX_JS = `
+const RupeX_JS = `
 web3._extend({
-	property: 'tomox',
+	property: 'rupex',
 	methods: [
 		new web3._extend.Method({
 			name: 'version',
-			call: 'tomox_version',
+			call: 'rupex_version',
 			params: 0,
 			outputFormatter: web3._extend.utils.toDecimal
 		}),
 		new web3._extend.Method({
 			name: 'info',
-			call: 'tomox_info',
+			call: 'rupex_info',
 			params: 0
 		}),
 		new web3._extend.Method({
             name: 'getFeeByEpoch',
-            call: 'tomox_getFeeByEpoch',
+            call: 'rupex_getFeeByEpoch',
             params: 1,
             inputFormatter: [null, web3._extend.formatters.inputAddressFormatter]
         }),
 		new web3._extend.Method({
             name: 'sendOrderRawTransaction',
-            call: 'tomox_sendOrderRawTransaction',
+            call: 'rupex_sendOrderRawTransaction',
             params: 1
 		}),
 		new web3._extend.Method({
             name: 'sendLendingRawTransaction',
-            call: 'tomox_sendLendingRawTransaction',
+            call: 'rupex_sendLendingRawTransaction',
             params: 1
 		}),
 		
 		new web3._extend.Method({
             name: 'sendOrderTransaction',
-            call: 'tomox_sendOrder',
+            call: 'rupex_sendOrder',
             params: 1
 		}),
 		new web3._extend.Method({
             name: 'sendLendingTransaction',
-            call: 'tomox_sendLending',
+            call: 'rupex_sendLending',
             params: 1
 		}),
 		new web3._extend.Method({
             name: 'getOrderTxMatchByHash',
-            call: 'tomox_getOrderTxMatchByHash',
+            call: 'rupex_getOrderTxMatchByHash',
             params: 1
 		}),
 		new web3._extend.Method({
             name: 'getOrderPoolContent',
-            call: 'tomox_getOrderPoolContent',
+            call: 'rupex_getOrderPoolContent',
             params: 0
 		}),
 		new web3._extend.Method({
             name: 'getOrderStats',
-            call: 'tomox_getOrderStats',
+            call: 'rupex_getOrderStats',
             params: 0
 		}),
 		new web3._extend.Method({
             name: 'getOrderCount',
-            call: 'tomox_getOrderCount',
+            call: 'rupex_getOrderCount',
             params: 1
         }),
 		new web3._extend.Method({
             name: 'getBestBid',
-            call: 'tomox_getBestBid',
+            call: 'rupex_getBestBid',
             params: 2
 		}),
 		new web3._extend.Method({
             name: 'getBestAsk',
-            call: 'tomox_getBestAsk',
+            call: 'rupex_getBestAsk',
             params: 2
 		}),
 		new web3._extend.Method({
             name: 'getBidTree',
-            call: 'tomox_getBidTree',
+            call: 'rupex_getBidTree',
             params: 2
 		}),
 		new web3._extend.Method({
             name: 'getAskTree',
-            call: 'tomox_getAskTree',
+            call: 'rupex_getAskTree',
             params: 2
 		}),
 		new web3._extend.Method({
             name: 'getOrderById',
-            call: 'tomox_getOrderById',
+            call: 'rupex_getOrderById',
             params: 3
 		}),
 		new web3._extend.Method({
             name: 'getPrice',
-            call: 'tomox_getPrice',
+            call: 'rupex_getPrice',
             params: 2
 		}),
 		new web3._extend.Method({
             name: 'getLastEpochPrice',
-            call: 'tomox_getLastEpochPrice',
+            call: 'rupex_getLastEpochPrice',
             params: 2
 		}),
 		new web3._extend.Method({
             name: 'getCurrentEpochPrice',
-            call: 'tomox_getCurrentEpochPrice',
+            call: 'rupex_getCurrentEpochPrice',
             params: 2
 		}),
 		new web3._extend.Method({
             name: 'getTradingOrderBookInfo',
-            call: 'tomox_getTradingOrderBookInfo',
+            call: 'rupex_getTradingOrderBookInfo',
             params: 2
 		}),
 		new web3._extend.Method({
             name: 'getLiquidationPriceTree',
-            call: 'tomox_getLiquidationPriceTree',
+            call: 'rupex_getLiquidationPriceTree',
             params: 2
 		}),
 		new web3._extend.Method({
             name: 'getInvestingTree',
-            call: 'tomox_getInvestingTree',
+            call: 'rupex_getInvestingTree',
             params: 2
 		}),
 		new web3._extend.Method({
             name: 'getBorrowingTree',
-            call: 'tomox_getBorrowingTree',
+            call: 'rupex_getBorrowingTree',
             params: 2
 		}),
 		new web3._extend.Method({
             name: 'getLendingOrderBookInfo',
-            call: 'tomox_getLendingOrderBookInfo',
+            call: 'rupex_getLendingOrderBookInfo',
             params: 2
 		}),
 		new web3._extend.Method({
             name: 'getLendingOrderTree',
-            call: 'tomox_getLendingOrderTree',
+            call: 'rupex_getLendingOrderTree',
             params: 2
 		}),
 		new web3._extend.Method({
             name: 'getLendingTradeTree',
-            call: 'tomox_getLendingTradeTree',
+            call: 'rupex_getLendingTradeTree',
             params: 2
 		}),
 		new web3._extend.Method({
             name: 'getLiquidationTimeTree',
-            call: 'tomox_getLiquidationTimeTree',
+            call: 'rupex_getLiquidationTimeTree',
             params: 2
 		}),
 		new web3._extend.Method({
             name: 'getLendingOrderCount',
-            call: 'tomox_getLendingOrderCount',
+            call: 'rupex_getLendingOrderCount',
             params: 1
         }),
 		new web3._extend.Method({
             name: 'getBestInvesting',
-            call: 'tomox_getBestInvesting',
+            call: 'rupex_getBestInvesting',
             params: 2
 		}),
 		new web3._extend.Method({
             name: 'getBestBorrowing',
-            call: 'tomox_getBestBorrowing',
+            call: 'rupex_getBestBorrowing',
             params: 2
 		}),
 		new web3._extend.Method({
             name: 'getBids',
-            call: 'tomox_getBids',
+            call: 'rupex_getBids',
             params: 2
 		}),
 		new web3._extend.Method({
             name: 'getAsks',
-            call: 'tomox_getAsks',
+            call: 'rupex_getAsks',
             params: 2
 		}),
 		new web3._extend.Method({
             name: 'getInvests',
-            call: 'tomox_getInvests',
+            call: 'rupex_getInvests',
             params: 2
 		}),
 		new web3._extend.Method({
             name: 'getBorrows',
-            call: 'tomox_getBorrows',
+            call: 'rupex_getBorrows',
             params: 2
 		}),
 		new web3._extend.Method({
             name: 'getLendingTxMatchByHash',
-            call: 'tomox_getLendingTxMatchByHash',
+            call: 'rupex_getLendingTxMatchByHash',
             params: 1
 		}),
 		new web3._extend.Method({
             name: 'getLiquidatedTradesByTxHash',
-            call: 'tomox_getLiquidatedTradesByTxHash',
+            call: 'rupex_getLiquidatedTradesByTxHash',
             params: 1
 		}),
 		new web3._extend.Method({
             name: 'getLendingOrderById',
-            call: 'tomox_getLendingOrderById',
+            call: 'rupex_getLendingOrderById',
             params: 3
 		}),
 		new web3._extend.Method({
             name: 'getLendingTradeById',
-            call: 'tomox_getLendingTradeById',
+            call: 'rupex_getLendingTradeById',
             params: 3
 		}),
 	]
 });
 `
 
-const TomoXLending_JS = `
+const RupeXLending_JS = `
 web3._extend({
-	property: 'tomoxlending',
+	property: 'rupexlending',
 	methods: [
 		new web3._extend.Method({
 			name: 'version',
-			call: 'tomoxlending_version',
+			call: 'rupexlending_version',
 			params: 0,
 			outputFormatter: web3._extend.utils.toDecimal
 		}),
 		new web3._extend.Method({
 			name: 'info',
-			call: 'tomoxlending_info',
+			call: 'rupexlending_info',
 			params: 0
 		}),
 		new web3._extend.Method({
             name: 'createOrder',
-            call: 'tomoxlending_createOrder',
+            call: 'rupexlending_createOrder',
             params: 1,
             inputFormatter: [null]
         }),
         new web3._extend.Method({
             name: 'cancelOrder',
-            call: 'tomoxlending_cancelOrder',
+            call: 'rupexlending_cancelOrder',
             params: 1,
             inputFormatter: [null]
         }),
         new web3._extend.Method({
             name: 'getOrders',
-            call: 'tomoxlending_getOrders',
+            call: 'rupexlending_getOrders',
             params: 1
         }),
 		new web3._extend.Method({
             name: 'getOrderNonce',
-            call: 'tomoxlending_getOrderNonce',
+            call: 'rupexlending_getOrderNonce',
             params: 1,
             inputFormatter: [web3._extend.formatters.inputAddressFormatter]
 		}),
 		new web3._extend.Method({
             name: 'getFeeByEpoch',
-            call: 'tomoxlending_GetFeeByEpoch',
+            call: 'rupexlending_GetFeeByEpoch',
             params: 1,
             inputFormatter: [null, web3._extend.formatters.inputAddressFormatter]
         }),
 		new web3._extend.Method({
             name: 'getPendingOrders',
-            call: 'tomoxlending_getPendingOrders',
+            call: 'rupexlending_getPendingOrders',
             params: 1
         }),
 		new web3._extend.Method({
             name: 'getAllPendingHashes',
-            call: 'tomoxlending_getAllPendingHashes',
+            call: 'rupexlending_getAllPendingHashes',
             params: 0
         }),
 		new web3._extend.Method({
             name: 'sendOrderRawTransaction',
-            call: 'tomoxlending_sendOrderRawTransaction',
+            call: 'rupexlending_sendOrderRawTransaction',
             params: 1
         }),
 		new web3._extend.Method({
             name: 'sendOrderTransaction',
-            call: 'tomoxlending_sendOrder',
+            call: 'rupexlending_sendOrder',
             params: 1
 		}),
 		new web3._extend.Method({
             name: 'getOrderCount',
-            call: 'tomoxlending_getOrderCount',
+            call: 'rupexlending_getOrderCount',
             params: 1
         }),
 		new web3._extend.Method({
             name: 'getBestBid',
-            call: 'tomoxlending_getBestBid',
+            call: 'rupexlending_getBestBid',
             params: 2
 		}),
 		new web3._extend.Method({
             name: 'getBestAsk',
-            call: 'tomoxlending_getBestAsk',
+            call: 'rupexlending_getBestAsk',
             params: 2
 		}),
 		new web3._extend.Method({
             name: 'getBidTree',
-            call: 'tomoxlending_getBidTree',
+            call: 'rupexlending_getBidTree',
             params: 2
 		}),
 		new web3._extend.Method({
             name: 'getAskTree',
-            call: 'tomoxlending_getAskTree',
+            call: 'rupexlending_getAskTree',
             params: 2
 		}),
 		new web3._extend.Method({
             name: 'getOrderById',
-            call: 'tomoxlending_getOrderById',
+            call: 'rupexlending_getOrderById',
             params: 3
 		}),
 		new web3._extend.Method({
             name: 'getPrice',
-            call: 'tomoxlending_getPrice',
+            call: 'rupexlending_getPrice',
             params: 2
 		}),
 	]
@@ -939,7 +939,7 @@ web3._extend({
 
    var sendOrderTransaction = new Method({
        name: 'sendOrder',
-       call: 'tomox_sendOrder',
+       call: 'rupex_sendOrder',
        params: 1,
        inputFormatter: [null]
    });

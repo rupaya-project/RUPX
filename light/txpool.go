@@ -353,17 +353,17 @@ func (pool *TxPool) validateTx(ctx context.Context, tx *types.Transaction) error
 		return fmt.Errorf("Reject transaction with receiver in black-list: %v", tx.To().Hex())
 	}
 
-	// validate minFee slot for TomoZ
-	if tx.IsTomoZApplyTransaction() {
+	// validate minFee slot for RupayaZ
+	if tx.IsRupayaZApplyTransaction() {
 		copyState := pool.currentState(ctx).Copy()
-		if err := core.ValidateTomoZApplyTransaction(pool.chain, nil, copyState, common.BytesToAddress(tx.Data()[4:])); err != nil {
+		if err := core.ValidateRupayaZApplyTransaction(pool.chain, nil, copyState, common.BytesToAddress(tx.Data()[4:])); err != nil {
 			return err
 		}
 	}
-	// validate balance slot, token decimal for TomoX
-	if tx.IsTomoXApplyTransaction() {
+	// validate balance slot, token decimal for RupeX
+	if tx.IsRupeXApplyTransaction() {
 		copyState := pool.currentState(ctx).Copy()
-		if err := core.ValidateTomoXApplyTransaction(pool.chain, nil, copyState, common.BytesToAddress(tx.Data()[4:])); err != nil {
+		if err := core.ValidateRupeXApplyTransaction(pool.chain, nil, copyState, common.BytesToAddress(tx.Data()[4:])); err != nil {
 			return err
 		}
 	}

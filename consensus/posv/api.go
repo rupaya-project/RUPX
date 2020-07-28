@@ -1,4 +1,4 @@
-// Copyright (c) 2018 Tomochain
+// Copyright (c) 2018 Rupaya
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as published by
@@ -16,11 +16,12 @@
 package posv
 
 import (
+	"math/big"
+
 	"github.com/rupaya-project/rupx/common"
 	"github.com/rupaya-project/rupx/consensus"
 	"github.com/rupaya-project/rupx/core/types"
 	"github.com/rupaya-project/rupx/rpc"
-	"math/big"
 )
 
 // API is a user facing RPC API to allow controlling the signer and voting
@@ -31,10 +32,10 @@ type API struct {
 }
 type NetworkInformation struct {
 	NetworkId                  *big.Int
-	TomoValidatorAddress       common.Address
+	RupayaValidatorAddress     common.Address
 	RelayerRegistrationAddress common.Address
-	TomoXListingAddress        common.Address
-	TomoZAddress               common.Address
+	RupeXListingAddress        common.Address
+	RupayaZAddress             common.Address
 	LendingAddress             common.Address
 }
 
@@ -101,17 +102,17 @@ func (api *API) NetworkInformation() NetworkInformation {
 	defer api.posv.lock.RUnlock()
 	info := NetworkInformation{}
 	info.NetworkId = api.chain.Config().ChainId
-	info.TomoValidatorAddress = common.HexToAddress(common.MasternodeVotingSMC)
+	info.RupayaValidatorAddress = common.HexToAddress(common.MasternodeVotingSMC)
 	if common.IsTestnet {
 		info.LendingAddress = common.HexToAddress(common.LendingRegistrationSMCTestnet)
 		info.RelayerRegistrationAddress = common.HexToAddress(common.RelayerRegistrationSMCTestnet)
-		info.TomoXListingAddress = common.TomoXListingSMCTestNet
-		info.TomoZAddress = common.TRC21IssuerSMCTestNet
+		info.RupeXListingAddress = common.RupeXListingSMCTestNet
+		info.RupayaZAddress = common.RRC21IssuerSMCTestNet
 	} else {
 		info.LendingAddress = common.HexToAddress(common.LendingRegistrationSMC)
 		info.RelayerRegistrationAddress = common.HexToAddress(common.RelayerRegistrationSMC)
-		info.TomoXListingAddress = common.TomoXListingSMC
-		info.TomoZAddress = common.TRC21IssuerSMC
+		info.RupeXListingAddress = common.RupeXListingSMC
+		info.RupayaZAddress = common.RRC21IssuerSMC
 	}
 	return info
 }

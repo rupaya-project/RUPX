@@ -1,4 +1,4 @@
-// Copyright (c) 2018 Tomochain
+// Copyright (c) 2018 Rupaya
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as published by
@@ -70,7 +70,7 @@ type TradingService interface {
 	HasTradingState(block *types.Block, author common.Address) bool
 	GetStateCache() tradingstate.Database
 	GetTriegc() *prque.Prque
-	ApplyOrder(coinbase common.Address, chain consensus.ChainContext, statedb *state.StateDB, tomoXstatedb *tradingstate.TradingStateDB, orderBook common.Hash, order *tradingstate.OrderItem) ([]map[string]string, []*tradingstate.OrderItem, error)
+	ApplyOrder(coinbase common.Address, chain consensus.ChainContext, statedb *state.StateDB, rupayaXstatedb *tradingstate.TradingStateDB, orderBook common.Hash, order *tradingstate.OrderItem) ([]map[string]string, []*tradingstate.OrderItem, error)
 	UpdateMediumPriceBeforeEpoch(epochNumber uint64, tradingStateDB *tradingstate.TradingStateDB, statedb *state.StateDB) error
 	IsSDKNode() bool
 	SyncDataToSDKNode(takerOrder *tradingstate.OrderItem, txHash common.Hash, txMatchTime time.Time, statedb *state.StateDB, trades []map[string]string, rejectedOrders []*tradingstate.OrderItem, dirtyOrderCount *uint64) error
@@ -266,7 +266,7 @@ type Posv struct {
 	HookPenaltyTIPSigning      func(chain consensus.ChainReader, header *types.Header, candidate []common.Address) ([]common.Address, error)
 	HookValidator              func(header *types.Header, signers []common.Address) ([]byte, error)
 	HookVerifyMNs              func(header *types.Header, signers []common.Address) error
-	GetTomoXService            func() TradingService
+	GetRupeXService            func() TradingService
 	GetLendingService          func() LendingService
 	HookGetSignersFromContract func(blockHash common.Hash) ([]common.Address, error)
 }
@@ -468,9 +468,9 @@ func (c *Posv) verifyCascadingFields(chain consensus.ChainReader, header *types.
 func (c *Posv) checkSignersOnCheckpoint(chain consensus.ChainReader, header *types.Header, signers []common.Address) error {
 	number := header.Number.Uint64()
 	// ignore signerCheck at checkpoint block 14458500 due to wrong snapshot at gap 14458495
-	if number == common.IgnoreSignerCheckBlock {
-		return nil
-	}
+	//if number == common.IgnoreSignerCheckBlock {
+	//	return nil
+	//}
 	penPenalties := []common.Address{}
 	if c.HookPenalty != nil || c.HookPenaltyTIPSigning != nil {
 		var err error
@@ -583,7 +583,7 @@ func (c *Posv) YourTurn(chain consensus.ChainReader, parent *types.Header, signe
 	masternodes := c.GetMasternodes(chain, parent)
 
 	if common.IsTestnet {
-		// Only three mns hard code for tomo testnet.
+		// Only three mns hard code for rupaya testnet.
 		masternodes = []common.Address{
 			common.HexToAddress("0xfFC679Dcdf444D2eEb0491A998E7902B411CcF20"),
 			common.HexToAddress("0xd76fd76F7101811726DCE9E43C2617706a4c45c8"),
@@ -1281,7 +1281,7 @@ func (c *Posv) CheckMNTurn(chain consensus.ChainReader, parent *types.Header, si
 	masternodes := c.GetMasternodes(chain, parent)
 
 	if common.IsTestnet {
-		// Only three mns hard code for tomo testnet.
+		// Only three mns hard code for rupaya testnet.
 		masternodes = []common.Address{
 			common.HexToAddress("0xfFC679Dcdf444D2eEb0491A998E7902B411CcF20"),
 			common.HexToAddress("0xd76fd76F7101811726DCE9E43C2617706a4c45c8"),

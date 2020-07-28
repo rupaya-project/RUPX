@@ -19,8 +19,9 @@ package miner
 
 import (
 	"fmt"
-	"github.com/rupaya-project/rupx/rupexlending"
 	"sync/atomic"
+
+	"github.com/rupaya-project/rupx/rupexlending"
 
 	"github.com/rupaya-project/rupx/accounts"
 	"github.com/rupaya-project/rupx/common"
@@ -42,10 +43,10 @@ type Backend interface {
 	BlockChain() *core.BlockChain
 	TxPool() *core.TxPool
 	ChainDb() ethdb.Database
-	GetTomoX() *tomox.TomoX
+	GetRupeX() *rupex.RupeX
 	OrderPool() *core.OrderPool
 	LendingPool() *core.LendingPool
-	GetTomoXLending() *tomoxlending.Lending
+	GetRupeXLending() *rupexlending.Lending
 }
 
 // Miner creates blocks and searches for proof-of-work values.

@@ -495,7 +495,7 @@ func (ec *Client) SendOrderTransaction(ctx context.Context, tx *types.OrderTrans
 	if err != nil {
 		return err
 	}
-	return ec.c.CallContext(ctx, nil, "tomox_sendOrderRawTransaction", common.ToHex(data))
+	return ec.c.CallContext(ctx, nil, "rupex_sendOrderRawTransaction", common.ToHex(data))
 }
 
 // SendLendingTransaction send lending to pool
@@ -504,7 +504,7 @@ func (ec *Client) SendLendingTransaction(ctx context.Context, tx *types.LendingT
 	if err != nil {
 		return err
 	}
-	return ec.c.CallContext(ctx, nil, "tomox_sendLendingRawTransaction", common.ToHex(data))
+	return ec.c.CallContext(ctx, nil, "rupex_sendLendingRawTransaction", common.ToHex(data))
 }
 
 func toCallArg(msg ethereum.CallMsg) interface{} {

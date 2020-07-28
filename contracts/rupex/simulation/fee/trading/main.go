@@ -3,11 +3,12 @@ package main
 import (
 	"context"
 	"fmt"
-	"github.com/rupaya-project/rupx/contracts/rupex/simulation"
 	"math/big"
 	"os"
 	"strconv"
 	"time"
+
+	"github.com/rupaya-project/rupx/contracts/rupex/simulation"
 
 	"github.com/rupaya-project/rupx/accounts/abi/bind"
 	"github.com/rupaya-project/rupx/common"
@@ -35,7 +36,7 @@ func main() {
 
 	auth.Nonce = big.NewInt(int64(nonce))
 
-	registrationContract, _ := tomox.NewRelayerRegistration(auth, common.HexToAddress("0x0342d186212b04E69eA682b3bed8e232b6b3361a"), client)
+	registrationContract, _ := rupex.NewRelayerRegistration(auth, common.HexToAddress("0x0342d186212b04E69eA682b3bed8e232b6b3361a"), client)
 
 	tx, err := registrationContract.UpdateFee(coinbase, uint16(fee))
 	if err != nil {

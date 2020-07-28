@@ -143,7 +143,7 @@ func IsValidPair(statedb *state.StateDB, coinbase common.Address, baseToken comm
 // @param terms: term
 // @return:
 //		- collaterals []common.Address  : list of addresses of collateral
-//		- isSpecialCollateral			: TRUE if collateral is a token which is NOT available for trading in TomoX, otherwise FALSE
+//		- isSpecialCollateral			: TRUE if collateral is a token which is NOT available for trading in RupeX, otherwise FALSE
 func GetCollaterals(statedb *state.StateDB, coinbase common.Address, baseToken common.Address, term uint64) (collaterals []common.Address, isSpecialCollateral bool) {
 	validPair, _ := IsValidPair(statedb, coinbase, baseToken, term)
 	if !validPair {
@@ -204,7 +204,7 @@ func GetCollateralPrice(statedb *state.StateDB, collateralToken common.Address, 
 
 // @function GetSupportedTerms
 // @param statedb : current state
-// @return: list of terms which tomoxlending supports
+// @return: list of terms which rupexlending supports
 func GetSupportedTerms(statedb *state.StateDB) []uint64 {
 	terms := []uint64{}
 	locSupportedTerm := state.GetLocSimpleVariable(SupportedTermSlot)

@@ -1,4 +1,4 @@
-package tomox
+package rupex
 
 import (
 	"github.com/rupaya-project/rupx/accounts/abi/bind"
@@ -6,19 +6,19 @@ import (
 	"github.com/rupaya-project/rupx/contracts/rupex/contract"
 )
 
-type TOMOXListing struct {
-	*contract.TOMOXListingSession
+type RUPEXListing struct {
+	*contract.RUPEXListingSession
 	contractBackend bind.ContractBackend
 }
 
-func NewMyTOMOXListing(transactOpts *bind.TransactOpts, contractAddr common.Address, contractBackend bind.ContractBackend) (*TOMOXListing, error) {
-	smartContract, err := contract.NewTOMOXListing(contractAddr, contractBackend)
+func NewMyRUPEXListing(transactOpts *bind.TransactOpts, contractAddr common.Address, contractBackend bind.ContractBackend) (*RUPEXListing, error) {
+	smartContract, err := contract.NewRUPEXListing(contractAddr, contractBackend)
 	if err != nil {
 		return nil, err
 	}
 
-	return &TOMOXListing{
-		&contract.TOMOXListingSession{
+	return &RUPEXListing{
+		&contract.RUPEXListingSession{
 			Contract:     smartContract,
 			TransactOpts: *transactOpts,
 		},
@@ -26,12 +26,12 @@ func NewMyTOMOXListing(transactOpts *bind.TransactOpts, contractAddr common.Addr
 	}, nil
 }
 
-func DeployTOMOXListing(transactOpts *bind.TransactOpts, contractBackend bind.ContractBackend) (common.Address, *TOMOXListing, error) {
-	contractAddr, _, _, err := contract.DeployTOMOXListing(transactOpts, contractBackend)
+func DeployRUPEXListing(transactOpts *bind.TransactOpts, contractBackend bind.ContractBackend) (common.Address, *RUPEXListing, error) {
+	contractAddr, _, _, err := contract.DeployRUPEXListing(transactOpts, contractBackend)
 	if err != nil {
 		return contractAddr, nil, err
 	}
-	smartContract, err := NewMyTOMOXListing(transactOpts, contractAddr, contractBackend)
+	smartContract, err := NewMyRUPEXListing(transactOpts, contractAddr, contractBackend)
 	if err != nil {
 		return contractAddr, nil, err
 	}

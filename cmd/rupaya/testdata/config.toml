@@ -18,7 +18,7 @@ HTTPHost    =   "localhost"	# flags --rpcaddr & --rpc
                                     #       HTTPHost is "localhost" or "127.0.0.1"  == only set --rpc
                                     #       HTTPHost is other IP (ex : 192.168.1.1) =  set 2 flags --rpc &  --rpcaddr
 WSHost      =   "localhost" # flags --wsaddr & --ws  . same option HTTPHost
-WSPort      =   8546        # flag  --wsport
+WSPort      =   8050        # flag  --wsport
 WSModules   =   ["eth","ssh"] #flag --wsapi
 
 

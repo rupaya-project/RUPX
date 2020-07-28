@@ -14,7 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with go-ethereum. If not, see <http://www.gnu.org/licenses/>.
 
-// Contains the tomo command usage template and generator.
+// Contains the rupaya command usage template and generator.
 
 package main
 
@@ -31,7 +31,7 @@ import (
 var AppHelpTemplate = `NAME:
    {{.App.Name}} - {{.App.Usage}}
 
-   Copyright (c) 2018 Tomochain
+   Copyright (c) 2018 Rupaya
 
 USAGE:
    {{.App.HelpName}} [options]{{if .App.Commands}} command [command options]{{end}} {{if .App.ArgsUsage}}{{.App.ArgsUsage}}{{else}}[arguments...]{{end}}
@@ -63,7 +63,7 @@ type flagGroup struct {
 // AppHelpFlagGroups is the application flags, grouped by functionality.
 var AppHelpFlagGroups = []flagGroup{
 	{
-		Name: "TOMOCHAIN",
+		Name: "RUPAYA",
 		Flags: []cli.Flag{
 			configFileFlag,
 			utils.DataDirFlag,

@@ -273,13 +273,13 @@ func (b *LesApiBackend) AreTwoBlockSamePath(bh1 common.Hash, bh2 common.Hash) bo
 
 // GetOrderNonce get order nonce
 func (b *LesApiBackend) GetOrderNonce(address common.Hash) (uint64, error) {
-	return 0, errors.New("cannot find tomox service")
+	return 0, errors.New("cannot find rupex service")
 }
 
-func (b *LesApiBackend) TomoxService() *tomox.TomoX {
+func (b *LesApiBackend) RupexService() *rupex.RupeX {
 	return nil
 }
 
-func (b *LesApiBackend) LendingService() *tomoxlending.Lending {
+func (b *LesApiBackend) LendingService() *rupexlending.Lending {
 	return nil
 }

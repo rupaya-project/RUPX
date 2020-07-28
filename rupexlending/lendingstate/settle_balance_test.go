@@ -100,16 +100,16 @@ func TestGetSettleBalance(t *testing.T) {
 	lendQuantity, _ := new(big.Int).SetString("1000000000000000000000", 10)        // 1000
 	fee, _ := new(big.Int).SetString("10000000000000000000", 10)                   // 10
 	lendQuantityExcluded, _ := new(big.Int).SetString("990000000000000000000", 10) // 990
-	lendTokenNotTomo := common.HexToAddress("0x0000000000000000000000000000000000000033")
+	lendTokenNotRupaya := common.HexToAddress("0x0000000000000000000000000000000000000033")
 	collateral := common.HexToAddress("0x0000000000000000000000000000000000000022")
 	collateralLocked, _ := new(big.Int).SetString("1000000000000000000000", 10) // 1000
 	collateralLocked = new(big.Int).Mul(big.NewInt(150), collateralLocked)
 	collateralLocked = new(big.Int).Div(collateralLocked, big.NewInt(100))
 
 	type GetSettleBalanceArg struct {
-		isTomoXLendingFork     bool
+		isRupeXLendingFork     bool
 		takerSide              string
-		lendTokenTOMOPrice     *big.Int
+		lendTokenRUPXPrice     *big.Int
 		collateralPrice        *big.Int
 		depositRate            *big.Int
 		borrowFeeRate          *big.Int
@@ -163,7 +163,7 @@ func TestGetSettleBalance(t *testing.T) {
 		},
 
 		{
-			"LendToken is TOMO, quantity too small, taker BORROW",
+			"LendToken is RUPX, quantity too small, taker BORROW",
 			GetSettleBalanceArg{
 				true,
 				Borrowing,
@@ -171,7 +171,7 @@ func TestGetSettleBalance(t *testing.T) {
 				common.BasePrice,
 				big.NewInt(150),
 				big.NewInt(100), // 1%
-				common.HexToAddress(common.TomoNativeAddress),
+				common.HexToAddress(common.RupayaNativeAddress),
 				common.Address{},
 				common.BasePrice,
 				common.BasePrice,
@@ -181,7 +181,7 @@ func TestGetSettleBalance(t *testing.T) {
 			true,
 		},
 		{
-			"LendToken is not TOMO, quantity too small, taker BORROW",
+			"LendToken is not RUPX, quantity too small, taker BORROW",
 			GetSettleBalanceArg{
 				true,
 				Borrowing,
@@ -200,7 +200,7 @@ func TestGetSettleBalance(t *testing.T) {
 		},
 
 		{
-			"LendToken is not TOMO, no error, taker BORROW",
+			"LendToken is not RUPX, no error, taker BORROW",
 			GetSettleBalanceArg{
 				true,
 				Borrowing,
@@ -208,7 +208,7 @@ func TestGetSettleBalance(t *testing.T) {
 				common.BasePrice,
 				big.NewInt(150),
 				big.NewInt(100), // 1%
-				lendTokenNotTomo,
+				lendTokenNotRupaya,
 				collateral,
 				common.BasePrice,
 				common.BasePrice,
@@ -217,7 +217,7 @@ func TestGetSettleBalance(t *testing.T) {
 			&LendingSettleBalance{
 				Taker: TradeResult{
 					Fee:      fee,
-					InToken:  lendTokenNotTomo,
+					InToken:  lendTokenNotRupaya,
 					InTotal:  lendQuantityExcluded,
 					OutToken: collateral,
 					OutTotal: collateralLocked,
@@ -226,7 +226,7 @@ func TestGetSettleBalance(t *testing.T) {
 					Fee:      common.Big0,
 					InToken:  common.Address{},
 					InTotal:  common.Big0,
-					OutToken: lendTokenNotTomo,
+					OutToken: lendTokenNotRupaya,
 					OutTotal: lendQuantity,
 				},
 				CollateralLockedAmount: collateralLocked,
@@ -235,7 +235,7 @@ func TestGetSettleBalance(t *testing.T) {
 		},
 
 		{
-			"LendToken is not TOMO, no error, taker INVEST",
+			"LendToken is not RUPX, no error, taker INVEST",
 			GetSettleBalanceArg{
 				true,
 				Investing,
@@ -243,7 +243,7 @@ func TestGetSettleBalance(t *testing.T) {
 				common.BasePrice,
 				big.NewInt(150),
 				big.NewInt(100), // 1%
-				lendTokenNotTomo,
+				lendTokenNotRupaya,
 				collateral,
 				common.BasePrice,
 				common.BasePrice,
@@ -252,7 +252,7 @@ func TestGetSettleBalance(t *testing.T) {
 			&LendingSettleBalance{
 				Maker: TradeResult{
 					Fee:      fee,
-					InToken:  lendTokenNotTomo,
+					InToken:  lendTokenNotRupaya,
 					InTotal:  lendQuantityExcluded,
 					OutToken: collateral,
 					OutTotal: collateralLocked,
@@ -261,7 +261,7 @@ func TestGetSettleBalance(t *testing.T) {
 					Fee:      common.Big0,
 					InToken:  common.Address{},
 					InTotal:  common.Big0,
-					OutToken: lendTokenNotTomo,
+					OutToken: lendTokenNotRupaya,
 					OutTotal: lendQuantity,
 				},
 				CollateralLockedAmount: collateralLocked,
@@ -269,7 +269,7 @@ func TestGetSettleBalance(t *testing.T) {
 			false,
 		},
 		{
-			"LendToken is TOMO, no error, taker invest",
+			"LendToken is RUPX, no error, taker invest",
 			GetSettleBalanceArg{
 				true,
 				Investing,
@@ -277,7 +277,7 @@ func TestGetSettleBalance(t *testing.T) {
 				common.BasePrice,
 				big.NewInt(150),
 				big.NewInt(100), // 1%
-				common.HexToAddress(common.TomoNativeAddress),
+				common.HexToAddress(common.RupayaNativeAddress),
 				collateral,
 				common.BasePrice,
 				common.BasePrice,
@@ -288,12 +288,12 @@ func TestGetSettleBalance(t *testing.T) {
 					Fee:      common.Big0,
 					InToken:  common.Address{},
 					InTotal:  common.Big0,
-					OutToken: common.HexToAddress(common.TomoNativeAddress),
+					OutToken: common.HexToAddress(common.RupayaNativeAddress),
 					OutTotal: lendQuantity,
 				},
 				Maker: TradeResult{
 					Fee:      fee,
-					InToken:  common.HexToAddress(common.TomoNativeAddress),
+					InToken:  common.HexToAddress(common.RupayaNativeAddress),
 					InTotal:  lendQuantityExcluded,
 					OutToken: collateral,
 					OutTotal: collateralLocked,
@@ -304,7 +304,7 @@ func TestGetSettleBalance(t *testing.T) {
 		},
 
 		{
-			"LendToken is TOMO, no error, taker Borrow",
+			"LendToken is RUPX, no error, taker Borrow",
 			GetSettleBalanceArg{
 				true,
 				Borrowing,
@@ -312,7 +312,7 @@ func TestGetSettleBalance(t *testing.T) {
 				common.BasePrice,
 				big.NewInt(150),
 				big.NewInt(100), // 1%
-				common.HexToAddress(common.TomoNativeAddress),
+				common.HexToAddress(common.RupayaNativeAddress),
 				collateral,
 				common.BasePrice,
 				common.BasePrice,
@@ -323,12 +323,12 @@ func TestGetSettleBalance(t *testing.T) {
 					Fee:      common.Big0,
 					InToken:  common.Address{},
 					InTotal:  common.Big0,
-					OutToken: common.HexToAddress(common.TomoNativeAddress),
+					OutToken: common.HexToAddress(common.RupayaNativeAddress),
 					OutTotal: lendQuantity,
 				},
 				Taker: TradeResult{
 					Fee:      fee,
-					InToken:  common.HexToAddress(common.TomoNativeAddress),
+					InToken:  common.HexToAddress(common.RupayaNativeAddress),
 					InTotal:  lendQuantityExcluded,
 					OutToken: collateral,
 					OutTotal: collateralLocked,
@@ -340,7 +340,7 @@ func TestGetSettleBalance(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			got, err := GetSettleBalance(tt.args.isTomoXLendingFork, tt.args.takerSide, tt.args.lendTokenTOMOPrice, tt.args.collateralPrice, tt.args.depositRate, tt.args.borrowFeeRate, tt.args.lendingToken, tt.args.collateralToken, tt.args.lendTokenDecimal, tt.args.collateralTokenDecimal, tt.args.quantityToLend)
+			got, err := GetSettleBalance(tt.args.isRupeXLendingFork, tt.args.takerSide, tt.args.lendTokenRUPXPrice, tt.args.collateralPrice, tt.args.depositRate, tt.args.borrowFeeRate, tt.args.lendingToken, tt.args.collateralToken, tt.args.lendTokenDecimal, tt.args.collateralTokenDecimal, tt.args.quantityToLend)
 			if (err != nil) != tt.wantErr {
 				t.Errorf("GetSettleBalance() error = %v, wantErr %v", err, tt.wantErr)
 				return

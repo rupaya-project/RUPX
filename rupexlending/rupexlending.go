@@ -1,4 +1,4 @@
-package tomoxlending
+package rupexlending
 
 import (
 	"encoding/json"
@@ -24,7 +24,7 @@ import (
 )
 
 const (
-	ProtocolName       = "tomoxlending"
+	ProtocolName       = "rupexlending"
 	ProtocolVersion    = uint64(1)
 	ProtocolVersionStr = "1.0"
 	defaultCacheLimit  = 1024
@@ -41,7 +41,7 @@ type Lending struct {
 
 	orderNonce map[common.Address]*big.Int
 
-	tomox               *tomox.TomoX
+	rupex               *rupex.RupeX
 	lendingItemHistory  *lru.Cache
 	lendingTradeHistory *lru.Cache
 }
@@ -61,7 +61,7 @@ func (l *Lending) Stop() error {
 	return nil
 }
 
-func New(tomox *tomox.TomoX) *Lending {
+func New(rupex *rupex.RupeX) *Lending {
 	itemCache, _ := lru.New(defaultCacheLimit)
 	lendingTradeCache, _ := lru.New(defaultCacheLimit)
 	lending := &Lending{
@@ -70,17 +70,17 @@ func New(tomox *tomox.TomoX) *Lending {
 		lendingItemHistory:  itemCache,
 		lendingTradeHistory: lendingTradeCache,
 	}
-	lending.StateCache = lendingstate.NewDatabase(tomox.GetLevelDB())
-	lending.tomox = tomox
+	lending.StateCache = lendingstate.NewDatabase(rupex.GetLevelDB())
+	lending.rupex = rupex
 	return lending
 }
 
-func (l *Lending) GetLevelDB() tomoxDAO.TomoXDAO {
-	return l.tomox.GetLevelDB()
+func (l *Lending) GetLevelDB() rupexDAO.RupeXDAO {
+	return l.rupex.GetLevelDB()
 }
 
-func (l *Lending) GetMongoDB() tomoxDAO.TomoXDAO {
-	return l.tomox.GetMongoDB()
+func (l *Lending) GetMongoDB() rupexDAO.RupeXDAO {
+	return l.rupex.GetMongoDB()
 }
 
 // APIs returns the RPC descriptors the Lending implementation offers
@@ -89,7 +89,7 @@ func (l *Lending) APIs() []rpc.API {
 		{
 			Namespace: ProtocolName,
 			Version:   ProtocolVersionStr,
-			Service:   NewPublicTomoXLendingAPI(l),
+			Service:   NewPublicRupeXLendingAPI(l),
 			Public:    true,
 		},
 	}
@@ -673,7 +673,7 @@ func (l *Lending) GetLendingState(block *types.Block, author common.Address) (*l
 		return nil, err
 	}
 	if l.StateCache == nil {
-		return nil, errors.New("Not initialized tomox")
+		return nil, errors.New("Not initialized rupex")
 	}
 	state, err := lendingstate.New(root, l.StateCache)
 	if err != nil {
@@ -754,9 +754,9 @@ func (l *Lending) RollbackLendingData(txhash common.Hash) error {
 	if items != nil {
 		for _, item := range items.([]*lendingstate.LendingItem) {
 			c, ok := l.lendingItemHistory.Get(txhash)
-			log.Debug("tomoxlending reorg: rollback lendingItem", "txhash", txhash.Hex(), "item", lendingstate.ToJSON(item), "lendingItemHistory", c)
+			log.Debug("rupexlending reorg: rollback lendingItem", "txhash", txhash.Hex(), "item", lendingstate.ToJSON(item), "lendingItemHistory", c)
 			if !ok {
-				log.Debug("tomoxlending reorg: remove item due to no lendingItemHistory", "item", lendingstate.ToJSON(item))
+				log.Debug("rupexlending reorg: remove item due to no lendingItemHistory", "item", lendingstate.ToJSON(item))
 				if err := db.DeleteObject(item.Hash, &lendingstate.LendingItem{}); err != nil {
 					return fmt.Errorf("failed to remove reorg LendingItem. Err: %v . Item: %s", err.Error(), lendingstate.ToJSON(item))
 				}
@@ -765,7 +765,7 @@ func (l *Lending) RollbackLendingData(txhash common.Hash) error {
 			cacheAtTxHash := c.(map[common.Hash]lendingstate.LendingItemHistoryItem)
 			lendingItemHistory, _ := cacheAtTxHash[lendingstate.GetLendingItemHistoryKey(item.LendingToken, item.CollateralToken, item.Hash)]
 			if (lendingItemHistory == lendingstate.LendingItemHistoryItem{}) {
-				log.Debug("tomoxlending reorg: remove item due to empty lendingItemHistory", "item", lendingstate.ToJSON(item))
+				log.Debug("rupexlending reorg: remove item due to empty lendingItemHistory", "item", lendingstate.ToJSON(item))
 				if err := db.DeleteObject(item.Hash, &lendingstate.LendingItem{}); err != nil {
 					return fmt.Errorf("failed to remove reorg LendingItem. Err: %v . Item: %s", err.Error(), lendingstate.ToJSON(item))
 				}
@@ -775,7 +775,7 @@ func (l *Lending) RollbackLendingData(txhash common.Hash) error {
 			item.Status = lendingItemHistory.Status
 			item.FilledAmount = lendingstate.CloneBigInt(lendingItemHistory.FilledAmount)
 			item.UpdatedAt = lendingItemHistory.UpdatedAt
-			log.Debug("tomoxlending reorg: update item to the last lendingItemHistory", "item", lendingstate.ToJSON(item), "lendingItemHistory", lendingItemHistory)
+			log.Debug("rupexlending reorg: update item to the last lendingItemHistory", "item", lendingstate.ToJSON(item), "lendingItemHistory", lendingItemHistory)
 			if err := db.PutObject(item.Hash, item); err != nil {
 				return fmt.Errorf("failed to update reorg LendingItem. Err: %v . Item: %s", err.Error(), lendingstate.ToJSON(item))
 			}
@@ -787,9 +787,9 @@ func (l *Lending) RollbackLendingData(txhash common.Hash) error {
 	if items != nil {
 		for _, trade := range items.([]*lendingstate.LendingTrade) {
 			c, ok := l.lendingTradeHistory.Get(txhash)
-			log.Debug("tomoxlending reorg: rollback LendingTrade", "txhash", txhash.Hex(), "trade", lendingstate.ToJSON(trade), "LendingTradeHistory", c)
+			log.Debug("rupexlending reorg: rollback LendingTrade", "txhash", txhash.Hex(), "trade", lendingstate.ToJSON(trade), "LendingTradeHistory", c)
 			if !ok {
-				log.Debug("tomoxlending reorg: remove trade due to no LendingTradeHistory", "trade", lendingstate.ToJSON(trade))
+				log.Debug("rupexlending reorg: remove trade due to no LendingTradeHistory", "trade", lendingstate.ToJSON(trade))
 				if err := db.DeleteObject(trade.Hash, &lendingstate.LendingTrade{}); err != nil {
 					return fmt.Errorf("failed to remove reorg LendingTrade. Err: %v . Trade: %s", err.Error(), lendingstate.ToJSON(trade))
 				}
@@ -798,7 +798,7 @@ func (l *Lending) RollbackLendingData(txhash common.Hash) error {
 			cacheAtTxHash := c.(map[common.Hash]lendingstate.LendingTradeHistoryItem)
 			lendingTradeHistoryItem, _ := cacheAtTxHash[trade.Hash]
 			if (lendingTradeHistoryItem == lendingstate.LendingTradeHistoryItem{}) {
-				log.Debug("tomoxlending reorg: remove trade due to empty LendingTradeHistory", "trade", lendingstate.ToJSON(trade))
+				log.Debug("rupexlending reorg: remove trade due to empty LendingTradeHistory", "trade", lendingstate.ToJSON(trade))
 				if err := db.DeleteObject(trade.Hash, &lendingstate.LendingTrade{}); err != nil {
 					return fmt.Errorf("failed to remove reorg LendingTrade. Err: %v . Trade: %s", err.Error(), lendingstate.ToJSON(trade))
 				}
@@ -809,7 +809,7 @@ func (l *Lending) RollbackLendingData(txhash common.Hash) error {
 			trade.CollateralLockedAmount = lendingstate.CloneBigInt(lendingTradeHistoryItem.CollateralLockedAmount)
 			trade.LiquidationPrice = lendingstate.CloneBigInt(lendingTradeHistoryItem.LiquidationPrice)
 			trade.UpdatedAt = lendingTradeHistoryItem.UpdatedAt
-			log.Debug("tomoxlending reorg: update trade to the last lendingTradeHistoryItem", "trade", lendingstate.ToJSON(trade), "lendingTradeHistoryItem", lendingTradeHistoryItem)
+			log.Debug("rupexlending reorg: update trade to the last lendingTradeHistoryItem", "trade", lendingstate.ToJSON(trade), "lendingTradeHistoryItem", lendingTradeHistoryItem)
 			if err := db.PutObject(trade.Hash, trade); err != nil {
 				return fmt.Errorf("failed to update reorg LendingTrade. Err: %v . Trade: %s", err.Error(), lendingstate.ToJSON(trade))
 			}

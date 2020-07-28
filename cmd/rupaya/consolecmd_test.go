@@ -31,7 +31,7 @@ import (
 )
 
 const (
-	ipcAPIs  = "admin:1.0 debug:1.0 eth:1.0 miner:1.0 net:1.0 personal:1.0 posv:1.0 rpc:1.0 tomox:1.0 tomoxlending:1.0 txpool:1.0 web3:1.0"
+	ipcAPIs  = "admin:1.0 debug:1.0 eth:1.0 miner:1.0 net:1.0 personal:1.0 posv:1.0 rpc:1.0 rupex:1.0 rupexlending:1.0 txpool:1.0 web3:1.0"
 	httpAPIs = "eth:1.0 net:1.0 rpc:1.0 web3:1.0"
 )
 
@@ -40,26 +40,26 @@ const (
 func TestConsoleWelcome(t *testing.T) {
 	coinbase := "0x8605cdbbdb6d264aa742e77020dcbc58fcdce182"
 
-	// Start a tomo console, make sure it's cleaned up and terminate the console
-	tomo := runTomo(t,
-		"--tomox.datadir", tmpdir(t)+"tomox/"+time.Now().String(),
+	// Start a rupaya console, make sure it's cleaned up and terminate the console
+	rupaya := runRupaya(t,
+		"--rupex.datadir", tmpdir(t)+"rupex/"+time.Now().String(),
 		"--port", "0", "--maxpeers", "0", "--nodiscover", "--nat", "none",
 		"--etherbase", coinbase,
 		"console")
 
 	// Gather all the infos the welcome message needs to contain
-	tomo.SetTemplateFunc("goos", func() string { return runtime.GOOS })
-	tomo.SetTemplateFunc("goarch", func() string { return runtime.GOARCH })
-	tomo.SetTemplateFunc("gover", runtime.Version)
-	tomo.SetTemplateFunc("tomover", func() string { return params.Version })
-	tomo.SetTemplateFunc("niltime", func() string { return time.Unix(1544771829, 0).Format(time.RFC1123) })
-	tomo.SetTemplateFunc("apis", func() string { return ipcAPIs })
+	rupaya.SetTemplateFunc("goos", func() string { return runtime.GOOS })
+	rupaya.SetTemplateFunc("goarch", func() string { return runtime.GOARCH })
+	rupaya.SetTemplateFunc("gover", runtime.Version)
+	rupaya.SetTemplateFunc("rupayaver", func() string { return params.Version })
+	rupaya.SetTemplateFunc("niltime", func() string { return time.Unix(1544771829, 0).Format(time.RFC1123) })
+	rupaya.SetTemplateFunc("apis", func() string { return ipcAPIs })
 
 	// Verify the actual welcome message to the required template
-	tomo.Expect(`
-Welcome to the Tomo JavaScript console!
+	rupaya.Expect(`
+Welcome to the Rupaya JavaScript console!
 
-instance: tomo/v{{tomover}}/{{goos}}-{{goarch}}/{{gover}}
+instance: rupaya/v{{rupayaver}}/{{goos}}-{{goarch}}/{{gover}}
 coinbase: {{.Etherbase}}
 at block: 0 ({{niltime}})
  datadir: {{.Datadir}}
@@ -67,7 +67,7 @@ at block: 0 ({{niltime}})
 
 > {{.InputLine "exit"}}
 `)
-	tomo.ExpectExit()
+	rupaya.ExpectExit()
 }
 
 // Tests that a console can be attached to a running node via various means.
@@ -76,58 +76,58 @@ func TestIPCAttachWelcome(t *testing.T) {
 	coinbase := "0x8605cdbbdb6d264aa742e77020dcbc58fcdce182"
 	var ipc string
 	if runtime.GOOS == "windows" {
-		ipc = `\\.\pipe\tomo` + strconv.Itoa(trulyRandInt(100000, 999999))
+		ipc = `\\.\pipe\rupaya` + strconv.Itoa(trulyRandInt(100000, 999999))
 	} else {
 		ws := tmpdir(t)
 		defer os.RemoveAll(ws)
-		ipc = filepath.Join(ws, "tomo.ipc")
+		ipc = filepath.Join(ws, "rupaya.ipc")
 	}
-	tomo := runTomo(t,
-		"--tomox.datadir", tmpdir(t)+"tomox/"+time.Now().String(),
+	rupaya := runRupaya(t,
+		"--rupex.datadir", tmpdir(t)+"rupex/"+time.Now().String(),
 		"--port", "0", "--maxpeers", "0", "--nodiscover", "--nat", "none",
 		"--etherbase", coinbase, "--ipcpath", ipc)
 
 	time.Sleep(2 * time.Second) // Simple way to wait for the RPC endpoint to open
-	testAttachWelcome(t, tomo, "ipc:"+ipc, ipcAPIs)
+	testAttachWelcome(t, rupaya, "ipc:"+ipc, ipcAPIs)
 
-	tomo.Interrupt()
-	tomo.ExpectExit()
+	rupaya.Interrupt()
+	rupaya.ExpectExit()
 }
 
 func TestHTTPAttachWelcome(t *testing.T) {
 	coinbase := "0x8605cdbbdb6d264aa742e77020dcbc58fcdce182"
 	port := strconv.Itoa(trulyRandInt(1024, 65536)) // Yeah, sometimes this will fail, sorry :P
-	tomo := runTomo(t,
-		"--tomox.datadir", tmpdir(t)+"tomox/"+time.Now().String(),
+	rupaya := runRupaya(t,
+		"--rupex.datadir", tmpdir(t)+"rupex/"+time.Now().String(),
 		"--port", "0", "--maxpeers", "0", "--nodiscover", "--nat", "none",
 		"--etherbase", coinbase, "--rpc", "--rpcport", port)
 
 	time.Sleep(2 * time.Second) // Simple way to wait for the RPC endpoint to open
-	testAttachWelcome(t, tomo, "http://localhost:"+port, httpAPIs)
+	testAttachWelcome(t, rupaya, "http://localhost:"+port, httpAPIs)
 
-	tomo.Interrupt()
-	tomo.ExpectExit()
+	rupaya.Interrupt()
+	rupaya.ExpectExit()
 }
 
 func TestWSAttachWelcome(t *testing.T) {
 	coinbase := "0x8605cdbbdb6d264aa742e77020dcbc58fcdce182"
 	port := strconv.Itoa(trulyRandInt(1024, 65536)) // Yeah, sometimes this will fail, sorry :P
 
-	tomo := runTomo(t,
-		"--tomox.datadir", tmpdir(t)+"tomox/"+time.Now().String(),
+	rupaya := runRupaya(t,
+		"--rupex.datadir", tmpdir(t)+"rupex/"+time.Now().String(),
 		"--port", "0", "--maxpeers", "0", "--nodiscover", "--nat", "none",
 		"--etherbase", coinbase, "--ws", "--wsport", port)
 
 	time.Sleep(2 * time.Second) // Simple way to wait for the RPC endpoint to open
-	testAttachWelcome(t, tomo, "ws://localhost:"+port, httpAPIs)
+	testAttachWelcome(t, rupaya, "ws://localhost:"+port, httpAPIs)
 
-	tomo.Interrupt()
-	tomo.ExpectExit()
+	rupaya.Interrupt()
+	rupaya.ExpectExit()
 }
 
-func testAttachWelcome(t *testing.T, tomo *testtomo, endpoint, apis string) {
-	// Attach to a running tomo note and terminate immediately
-	attach := runTomo(t, "attach", endpoint)
+func testAttachWelcome(t *testing.T, rupaya *testrupaya, endpoint, apis string) {
+	// Attach to a running rupaya note and terminate immediately
+	attach := runRupaya(t, "attach", endpoint)
 	defer attach.ExpectExit()
 	attach.CloseStdin()
 
@@ -135,18 +135,18 @@ func testAttachWelcome(t *testing.T, tomo *testtomo, endpoint, apis string) {
 	attach.SetTemplateFunc("goos", func() string { return runtime.GOOS })
 	attach.SetTemplateFunc("goarch", func() string { return runtime.GOARCH })
 	attach.SetTemplateFunc("gover", runtime.Version)
-	attach.SetTemplateFunc("tomover", func() string { return params.Version })
-	attach.SetTemplateFunc("etherbase", func() string { return tomo.Etherbase })
+	attach.SetTemplateFunc("rupayaver", func() string { return params.Version })
+	attach.SetTemplateFunc("etherbase", func() string { return rupaya.Etherbase })
 	attach.SetTemplateFunc("niltime", func() string { return time.Unix(1544771829, 0).Format(time.RFC1123) })
 	attach.SetTemplateFunc("ipc", func() bool { return strings.HasPrefix(endpoint, "ipc") })
-	attach.SetTemplateFunc("datadir", func() string { return tomo.Datadir })
+	attach.SetTemplateFunc("datadir", func() string { return rupaya.Datadir })
 	attach.SetTemplateFunc("apis", func() string { return apis })
 
 	// Verify the actual welcome message to the required template
 	attach.Expect(`
-Welcome to the Tomo JavaScript console!
+Welcome to the Rupaya JavaScript console!
 
-instance: tomo/v{{tomover}}/{{goos}}-{{goarch}}/{{gover}}
+instance: rupaya/v{{rupayaver}}/{{goos}}-{{goarch}}/{{gover}}
 coinbase: {{etherbase}}
 at block: 0 ({{niltime}}){{if ipc}}
  datadir: {{datadir}}{{end}}

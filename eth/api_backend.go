@@ -25,9 +25,9 @@ import (
 	"math/big"
 	"path/filepath"
 
-	tomoxlending "github.com/rupaya-project/rupx/rupexlending"
+	rupexlending "github.com/rupaya-project/rupx/rupexlending"
 
-	tomox "github.com/rupaya-project/rupx/rupex"
+	rupex "github.com/rupaya-project/rupx/rupex"
 
 	"github.com/rupaya-project/rupx/consensus/posv"
 
@@ -426,25 +426,25 @@ func (b *EthApiBackend) AreTwoBlockSamePath(bh1 common.Hash, bh2 common.Hash) bo
 
 // GetOrderNonce get order nonce
 func (b *EthApiBackend) GetOrderNonce(address common.Hash) (uint64, error) {
-	tomoxService := b.eth.GetTomoX()
-	if tomoxService != nil {
+	rupexService := b.eth.GetRupeX()
+	if rupexService != nil {
 		author, err := b.GetEngine().Author(b.CurrentBlock().Header())
 		if err != nil {
 			return 0, err
 		}
-		tomoxState, err := tomoxService.GetTradingState(b.CurrentBlock(), author)
+		rupexState, err := rupexService.GetTradingState(b.CurrentBlock(), author)
 		if err != nil {
 			return 0, err
 		}
-		return tomoxState.GetNonce(address), nil
+		return rupexState.GetNonce(address), nil
 	}
-	return 0, errors.New("cannot find tomox service")
+	return 0, errors.New("cannot find rupex service")
 }
 
-func (b *EthApiBackend) TomoxService() *tomox.TomoX {
-	return b.eth.TomoX
+func (b *EthApiBackend) RupexService() *rupex.RupeX {
+	return b.eth.RupeX
 }
 
-func (b *EthApiBackend) LendingService() *tomoxlending.Lending {
+func (b *EthApiBackend) LendingService() *rupexlending.Lending {
 	return b.eth.Lending
 }
