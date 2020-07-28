@@ -21,12 +21,13 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"github.com/rupaya-project/rupx/tomoxlending"
 	"io/ioutil"
 	"math/big"
 	"path/filepath"
 
-	"github.com/rupaya-project/rupx/tomox"
+	tomoxlending "github.com/rupaya-project/rupx/rupexlending"
+
+	tomox "github.com/rupaya-project/rupx/rupex"
 
 	"github.com/rupaya-project/rupx/consensus/posv"
 

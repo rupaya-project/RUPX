@@ -19,7 +19,7 @@ package miner
 
 import (
 	"fmt"
-	"github.com/rupaya-project/rupx/tomoxlending"
+	"github.com/rupaya-project/rupx/rupexlending"
 	"sync/atomic"
 
 	"github.com/rupaya-project/rupx/accounts"
@@ -33,7 +33,7 @@ import (
 	"github.com/rupaya-project/rupx/event"
 	"github.com/rupaya-project/rupx/log"
 	"github.com/rupaya-project/rupx/params"
-	"github.com/rupaya-project/rupx/tomox"
+	"github.com/rupaya-project/rupx/rupex"
 )
 
 // Backend wraps all methods required for mining.

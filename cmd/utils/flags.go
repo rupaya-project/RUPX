@@ -52,7 +52,7 @@ import (
 	"github.com/rupaya-project/rupx/p2p/nat"
 	"github.com/rupaya-project/rupx/p2p/netutil"
 	"github.com/rupaya-project/rupx/params"
-	"github.com/rupaya-project/rupx/tomox"
+	"github.com/rupaya-project/rupx/rupex"
 	whisper "github.com/rupaya-project/rupx/whisper/whisperv6"
 	"gopkg.in/urfave/cli.v1"
 )

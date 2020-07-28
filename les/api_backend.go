@@ -20,12 +20,12 @@ import (
 	"context"
 	"encoding/json"
 	"errors"
-	"github.com/rupaya-project/rupx/tomoxlending"
+	"github.com/rupaya-project/rupx/rupexlending"
 	"io/ioutil"
 	"math/big"
 	"path/filepath"
 
-	"github.com/rupaya-project/rupx/tomox"
+	"github.com/rupaya-project/rupx/rupex"
 
 	"github.com/rupaya-project/rupx/accounts"
 	"github.com/rupaya-project/rupx/common"

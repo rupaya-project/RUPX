@@ -27,7 +27,7 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/rupaya-project/rupx/tomoxlending"
+	"github.com/rupaya-project/rupx/rupexlending"
 
 	"github.com/rupaya-project/rupx/accounts/abi/bind"
 	"github.com/rupaya-project/rupx/common/hexutil"
@@ -61,7 +61,7 @@ import (
 	"github.com/rupaya-project/rupx/p2p"
 	"github.com/rupaya-project/rupx/params"
 	"github.com/rupaya-project/rupx/rpc"
-	"github.com/rupaya-project/rupx/tomox"
+	"github.com/rupaya-project/rupx/rupex"
 )
 
 type LesServer interface {

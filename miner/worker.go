@@ -22,7 +22,7 @@ import (
 	"fmt"
 
 	"github.com/rupaya-project/rupx/accounts"
-	"github.com/rupaya-project/rupx/tomoxlending/lendingstate"
+	"github.com/rupaya-project/rupx/rupexlending/lendingstate"
 
 	"math/big"
 	"os"
@@ -30,7 +30,7 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/rupaya-project/rupx/tomox/tradingstate"
+	"github.com/rupaya-project/rupx/rupex/tradingstate"
 
 	mapset "github.com/deckarep/golang-set"
 	"github.com/rupaya-project/rupx/common"

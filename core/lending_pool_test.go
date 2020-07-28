@@ -9,7 +9,7 @@ import (
 	"github.com/rupaya-project/rupx/crypto/sha3"
 	"github.com/rupaya-project/rupx/ethclient"
 	"github.com/rupaya-project/rupx/rpc"
-	"github.com/rupaya-project/rupx/tomoxlending/lendingstate"
+	"github.com/rupaya-project/rupx/rupexlending/lendingstate"
 	"log"
 	"math/big"
 	"strconv"

@@ -28,10 +28,10 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/rupaya-project/rupx/tomoxlending/lendingstate"
+	"github.com/rupaya-project/rupx/rupexlending/lendingstate"
 
 	"github.com/rupaya-project/rupx/accounts/abi/bind"
-	"github.com/rupaya-project/rupx/tomox/tradingstate"
+	"github.com/rupaya-project/rupx/rupex/tradingstate"
 
 	lru "github.com/hashicorp/golang-lru"
 	"github.com/rupaya-project/rupx/common"

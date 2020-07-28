@@ -21,13 +21,13 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	"github.com/rupaya-project/rupx/tomoxlending/lendingstate"
+	"github.com/rupaya-project/rupx/rupexlending/lendingstate"
 	"math/big"
 	"sort"
 	"strings"
 	"time"
 
-	"github.com/rupaya-project/rupx/tomox/tradingstate"
+	"github.com/rupaya-project/rupx/rupex/tradingstate"
 
 	"github.com/syndtr/goleveldb/leveldb"
 	"github.com/syndtr/goleveldb/leveldb/util"

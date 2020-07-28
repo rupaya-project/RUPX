@@ -21,7 +21,7 @@ import (
 	"github.com/rupaya-project/rupx/accounts/abi"
 	"github.com/rupaya-project/rupx/common"
 	"github.com/rupaya-project/rupx/consensus"
-	"github.com/rupaya-project/rupx/contracts/tomox/contract"
+	"github.com/rupaya-project/rupx/contracts/rupex/contract"
 	"github.com/rupaya-project/rupx/core/state"
 	"github.com/rupaya-project/rupx/core/vm"
 	"github.com/rupaya-project/rupx/log"

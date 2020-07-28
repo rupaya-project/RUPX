@@ -19,8 +19,8 @@ package console
 import (
 	"bytes"
 	"errors"
-	"github.com/rupaya-project/rupx/tomox"
-	"github.com/rupaya-project/rupx/tomoxlending"
+	"github.com/rupaya-project/rupx/rupex"
+	"github.com/rupaya-project/rupx/rupexlending"
 	"io/ioutil"
 	"os"
 	"strings"

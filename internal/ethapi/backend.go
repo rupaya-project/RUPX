@@ -19,10 +19,10 @@ package ethapi
 
 import (
 	"context"
-	"github.com/rupaya-project/rupx/tomoxlending"
+	"github.com/rupaya-project/rupx/rupexlending"
 	"math/big"
 
-	"github.com/rupaya-project/rupx/tomox"
+	"github.com/rupaya-project/rupx/rupex"
 
 	"github.com/rupaya-project/rupx/accounts"
 	"github.com/rupaya-project/rupx/common"

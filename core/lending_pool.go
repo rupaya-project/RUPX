@@ -27,7 +27,7 @@ import (
 	"github.com/rupaya-project/rupx/consensus/posv"
 
 	"github.com/rupaya-project/rupx/consensus"
-	"github.com/rupaya-project/rupx/tomoxlending/lendingstate"
+	"github.com/rupaya-project/rupx/rupexlending/lendingstate"
 
 	"github.com/rupaya-project/rupx/common"
 	"github.com/rupaya-project/rupx/core/state"

@@ -21,8 +21,8 @@ import (
 	"github.com/rupaya-project/rupx/core/state"
 	"github.com/rupaya-project/rupx/core/types"
 	"github.com/rupaya-project/rupx/core/vm"
-	"github.com/rupaya-project/rupx/tomox/tradingstate"
-	"github.com/rupaya-project/rupx/tomoxlending/lendingstate"
+	"github.com/rupaya-project/rupx/rupex/tradingstate"
+	"github.com/rupaya-project/rupx/rupexlending/lendingstate"
 	"math/big"
 )
 

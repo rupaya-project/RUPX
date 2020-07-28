@@ -6,8 +6,8 @@ import (
 	"github.com/rupaya-project/rupx/ethstats"
 	"github.com/rupaya-project/rupx/les"
 	"github.com/rupaya-project/rupx/node"
-	"github.com/rupaya-project/rupx/tomox"
-	"github.com/rupaya-project/rupx/tomoxlending"
+	"github.com/rupaya-project/rupx/rupex"
+	"github.com/rupaya-project/rupx/rupexlending"
 	whisper "github.com/rupaya-project/rupx/whisper/whisperv6"
 )
 

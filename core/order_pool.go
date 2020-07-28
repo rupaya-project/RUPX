@@ -26,7 +26,7 @@ import (
 
 	"github.com/rupaya-project/rupx/consensus"
 	"github.com/rupaya-project/rupx/consensus/posv"
-	"github.com/rupaya-project/rupx/tomox/tradingstate"
+	"github.com/rupaya-project/rupx/rupex/tradingstate"
 
 	"github.com/rupaya-project/rupx/common"
 	"github.com/rupaya-project/rupx/core/state"

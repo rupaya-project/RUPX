@@ -21,9 +21,6 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"github.com/rupaya-project/rupx/tomox/tradingstate"
-	"github.com/rupaya-project/rupx/tomoxlending/lendingstate"
-	"gopkg.in/karalabe/cookiejar.v2/collections/prque"
 	"io/ioutil"
 	"math/big"
 	"math/rand"
@@ -33,6 +30,10 @@ import (
 	"strconv"
 	"sync"
 	"time"
+
+	"github.com/rupaya-project/rupx/rupex/tradingstate"
+	"github.com/rupaya-project/rupx/rupexlending/lendingstate"
+	"gopkg.in/karalabe/cookiejar.v2/collections/prque"
 
 	lru "github.com/hashicorp/golang-lru"
 	"github.com/rupaya-project/rupx/accounts"

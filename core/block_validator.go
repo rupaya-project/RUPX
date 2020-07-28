@@ -25,8 +25,8 @@ import (
 	"github.com/rupaya-project/rupx/core/types"
 	"github.com/rupaya-project/rupx/log"
 	"github.com/rupaya-project/rupx/params"
-	"github.com/rupaya-project/rupx/tomox/tradingstate"
-	"github.com/rupaya-project/rupx/tomoxlending/lendingstate"
+	"github.com/rupaya-project/rupx/rupex/tradingstate"
+	"github.com/rupaya-project/rupx/rupexlending/lendingstate"
 )
 
 // BlockValidator is responsible for validating block headers, uncles and
