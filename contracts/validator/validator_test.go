@@ -50,7 +50,7 @@ func TestValidator(t *testing.T) {
 	transactOpts := bind.NewKeyedTransactor(key)
 
 	validatorCap := new(big.Int)
-	validatorCap.SetString("50000000000000000000000", 10)
+	validatorCap.SetString("500000000000000000000000", 10)
 	validatorAddress, validator, err := DeployValidator(transactOpts, contractBackend, []common.Address{addr}, []*big.Int{validatorCap}, addr)
 	if err != nil {
 		t.Fatalf("can't deploy root registry: %v", err)
@@ -94,7 +94,7 @@ func TestRewardBalance(t *testing.T) {
 
 	// validatorAddr, _, baseValidator, err := contract.DeployRupayaValidator(transactOpts, contractBackend, big.NewInt(50000), big.NewInt(99), big.NewInt(100), big.NewInt(100))
 	validatorCap := new(big.Int)
-	validatorCap.SetString("50000000000000000000000", 10)
+	validatorCap.SetString("500000000000000000000000", 10)
 	validatorAddr, _, baseValidator, err := contractValidator.DeployRupayaValidator(
 		transactOpts,
 		contractBackend,

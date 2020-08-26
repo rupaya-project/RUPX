@@ -122,7 +122,7 @@ func (w *wizard) makeGenesis() {
 		genesis.Config.Posv.Period = uint64(w.readDefaultInt(2))
 
 		fmt.Println()
-		fmt.Println("How many Ethers should be rewarded to masternode? (default = 10)")
+		fmt.Println("How many Rupaya's should be rewarded to masternode? (default = 10)")
 		genesis.Config.Posv.Reward = uint64(w.readDefaultInt(10))
 
 		fmt.Println()
@@ -152,7 +152,7 @@ func (w *wizard) makeGenesis() {
 			}
 		}
 		validatorCap := new(big.Int)
-		validatorCap.SetString("50000000000000000000000", 10)
+		validatorCap.SetString("500000000000000000000000", 10)
 		var validatorCaps []*big.Int
 		genesis.ExtraData = make([]byte, 32+len(signers)*common.AddressLength+65)
 		for i, signer := range signers {
