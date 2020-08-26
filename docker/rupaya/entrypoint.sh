@@ -51,14 +51,14 @@ done
 # networkid
 if [[ ! -z $NETWORK_ID ]]; then
   case $NETWORK_ID in
-    88 )
+    77 )
       genesisPath="mainnet.json"
       ;;
-    89 )
+    78 )
       genesisPath="testnet.json"
       params="$params --rupaya-testnet --gcmode archive --rpcapi db,eth,net,web3,debug,posv"
       ;;
-    90 )
+    99 )
       genesisPath="devnet.json"
       ;;
     * )
