@@ -158,7 +158,7 @@ func makeConfigNode(ctx *cli.Context) (*node.Node, rupayaConfig) {
 	if ctx.GlobalBool(utils.RupayaTestnetFlag.Name) {
 		common.IsTestnet = true
 		common.RRC21IssuerSMC = common.RRC21IssuerSMCTestNet
-		cfg.Eth.NetworkId = 89
+		cfg.Eth.NetworkId = 78
 		common.RelayerRegistrationSMC = common.RelayerRegistrationSMCTestnet
 		common.TIPRRC21Fee = common.TIPRupeXTestnet
 	}
