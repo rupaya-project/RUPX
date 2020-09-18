@@ -66,11 +66,20 @@
     "0000000000000000000000000000000000000099": {
       "balance": "0x13da329b6336471800000"
     },
-    "aed40140ef2cda372e32e8b7567b8d6bc342864f": {
-      "balance": "0x18d0bf423c03d8de000000"
-    },
     "f1617d2204f0a555226f493b966db7470978ccac": {
-      "balance": "0x152D02C7E14AF6800000"
+      "balance": "0x11A5D1C"
+    },
+    "5f966b1c99393bd3Ef4e28A3D6924874E8f5c3ed": {
+      "balance": "0x16C771C"
+    },
+    "8fc85a532a1ea5b935c95c332704a1453a80dc92": {
+    "balance": "0x3B2493"
+    },
+    "9fa403e23e52b5f171f9aa38457ad2b8207d9ebe": {
+    "balance": "0x2112A5"
+    },
+    "31e1d07361eb1806cda134c12b1bbbdd6ad7008d": {
+    "balance": "0xDE90F"  
     }
   },
   "number": "0x0",
