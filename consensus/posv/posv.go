@@ -585,9 +585,9 @@ func (c *Posv) YourTurn(chain consensus.ChainReader, parent *types.Header, signe
 	if common.IsTestnet {
 		// Only three mns hard code for rupaya testnet.
 		masternodes = []common.Address{
-			common.HexToAddress("0xfFC679Dcdf444D2eEb0491A998E7902B411CcF20"),
-			common.HexToAddress("0xd76fd76F7101811726DCE9E43C2617706a4c45c8"),
-			common.HexToAddress("0x8A97753311aeAFACfd76a68Cf2e2a9808d3e65E8"),
+			common.HexToAddress("0x75665ac30ee5e6be3e9e411afb158e7a756166a4"),
+			common.HexToAddress("0x415e894027910d0cefc73f93b02e66799b96fb95"),
+			common.HexToAddress("0x27ac1f8eefc22019b45c8443e2992d941453a3a8"),
 		}
 	}
 
@@ -1283,9 +1283,9 @@ func (c *Posv) CheckMNTurn(chain consensus.ChainReader, parent *types.Header, si
 	if common.IsTestnet {
 		// Only three mns hard code for rupaya testnet.
 		masternodes = []common.Address{
-			common.HexToAddress("0xfFC679Dcdf444D2eEb0491A998E7902B411CcF20"),
-			common.HexToAddress("0xd76fd76F7101811726DCE9E43C2617706a4c45c8"),
-			common.HexToAddress("0x8A97753311aeAFACfd76a68Cf2e2a9808d3e65E8"),
+			common.HexToAddress("0x75665ac30ee5e6be3e9e411afb158e7a756166a4"),
+			common.HexToAddress("0x415e894027910d0cefc73f93b02e66799b96fb95"),
+			common.HexToAddress("0x27ac1f8eefc22019b45c8443e2992d941453a3a8"),
 		}
 	}
 
