@@ -122,8 +122,8 @@ func (w *wizard) makeGenesis() {
 		genesis.Config.Posv.Period = uint64(w.readDefaultInt(2))
 
 		fmt.Println()
-		fmt.Println("How many Rupaya's should be rewarded to masternode? (default = 10)")
-		genesis.Config.Posv.Reward = uint64(w.readDefaultInt(10))
+		fmt.Println("How many Rupaya's should be rewarded to masternode? (default = 25)")
+		genesis.Config.Posv.Reward = uint64(w.readDefaultInt(25))
 
 		fmt.Println()
 		fmt.Println("Who own the first masternodes? (mandatory)")
@@ -312,10 +312,10 @@ func (w *wizard) makeGenesis() {
 		}
 
 		fmt.Println()
-		fmt.Println("What is swap wallet address for fund 55m rupaya?")
+		fmt.Println("What is swap wallet address for fund 0m rupaya?")
 		swapAddr := *w.readAddress()
 		baseBalance := big.NewInt(0) // 55m
-		baseBalance.Add(baseBalance, big.NewInt(30*1000*1000))
+		baseBalance.Add(baseBalance, big.NewInt(0*1000*1000))
 		baseBalance.Mul(baseBalance, big.NewInt(1000000000000000000))
 		genesis.Alloc[swapAddr] = core.GenesisAccount{
 			Balance: baseBalance,
