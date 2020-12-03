@@ -387,10 +387,10 @@ func TestCmdLineOverridesFile(t *testing.T) {
 	conf, account := getTestAccount(t, dir)
 	node := &testNode{Dir: dir}
 
-	expectNetworkId := uint64(77)
+	expectNetworkId := uint64(499)
 
 	flags := []string{
-		fmt.Sprintf("--%s", SwarmNetworkIdFlag.Name), "77",
+		fmt.Sprintf("--%s", SwarmNetworkIdFlag.Name), "499",
 		fmt.Sprintf("--%s", SwarmPortFlag.Name), httpPort,
 		fmt.Sprintf("--%s", SwarmSyncEnabledFlag.Name),
 		fmt.Sprintf("--%s", SwarmTomlConfigPathFlag.Name), f.Name(),
