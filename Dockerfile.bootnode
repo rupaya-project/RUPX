@@ -17,8 +17,8 @@ COPY --from=builder /rupaya/build/bin/bootnode /usr/local/bin/bootnode
 
 COPY docker/bootnode ./
 
-EXPOSE 30301
+EXPOSE 10707
 
 ENTRYPOINT ["./entrypoint.sh"]
 
-CMD ["-verbosity", "6", "-nodekey", "bootnode.key", "--addr", ":30301"]
+CMD ["-verbosity", "6", "-nodekey", "bootnode.key", "--addr", ":10707"]
