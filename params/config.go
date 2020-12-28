@@ -42,7 +42,7 @@ var (
 		Posv: &PosvConfig{
 			Period:              2,
 			Epoch:               900,
-			Reward:              250,
+			Reward:              25,
 			RewardCheckpoint:    900,
 			Gap:                 5,
 			FoudationWalletAddr: common.HexToAddress("0x0000000000000000000000000000000000000068"),
