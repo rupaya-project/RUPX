@@ -27,17 +27,17 @@ const (
 	LiquidateLendingTradeBlock = uint64(100)
 )
 
-var Rewound = uint64(0)
+var Rewound = uint64(1)
 
 // hardforks
-var TIP2019Block = big.NewInt(0)
-var TIPSigning = big.NewInt(0)
-var TIPRandomize = big.NewInt(0)
+var TIP2019Block = big.NewInt(5)
+var TIPSigning = big.NewInt(6)
+var TIPRandomize = big.NewInt(7)
 
 var BlackListHFNumber = uint64(0)
-var TIPRupeX = big.NewInt(0)
-var TIPRupeXTestnet = big.NewInt(0)
-var TIPRupeXLending = big.NewInt(0)
+var TIPRupeX = big.NewInt(99999999999)
+var TIPRupeXTestnet = big.NewInt(999999999)
+var TIPRupeXLending = big.NewInt(999999999)
 
 var IsTestnet bool = false
 var StoreRewardFolder string
@@ -130,5 +130,5 @@ var Blacklist = map[Address]bool{
 	//HexToAddress("0xe187cf86c2274b1f16e8225a7da9a75aba4f1f5f"): true,
 	//HexToAddress("0x0000000000000000000000000000000000000011"): true,
 }
-var TIPRRC21Fee = big.NewInt(13523400)
+var TIPRRC21Fee = big.NewInt(9999999)
 var LimitTimeFinality = uint64(30) // limit in 30 block
