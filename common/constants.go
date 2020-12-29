@@ -30,14 +30,14 @@ const (
 var Rewound = uint64(1)
 
 // hardforks
-var TIP2019Block = big.NewInt(5)
-var TIPSigning = big.NewInt(6)
-var TIPRandomize = big.NewInt(7)
+var TIP2019Block = big.NewInt(0)
+var TIPSigning = big.NewInt(0)
+var TIPRandomize = big.NewInt(0)
 
-var BlackListHFNumber = uint64(0)
-var TIPRupeX = big.NewInt(99999999999)
+var BlackListHFNumber = uint64(99999999)
+var TIPRupeX = big.NewInt(0)
 var TIPRupeXTestnet = big.NewInt(999999999)
-var TIPRupeXLending = big.NewInt(999999999)
+var TIPRupeXLending = big.NewInt(0)
 
 var IsTestnet bool = false
 var StoreRewardFolder string
