@@ -27,7 +27,7 @@ const (
 	LiquidateLendingTradeBlock = uint64(100)
 )
 
-var Rewound = uint64(7251521)
+var Rewound = uint64(7264801)
 
 // hardforks
 var TIP2019Block = big.NewInt(0)
