@@ -668,12 +668,12 @@ func (pool *TxPool) validateTx(tx *types.Transaction, local bool) error {
 			return ErrUnderMinGasPrice
 		}
 	}
-
+       /*
 	minGasDeploySMC := new(big.Int).Mul(new(big.Int).SetUint64(10), new(big.Int).SetUint64(params.Ether))
 	if tx.To() == nil && (tx.Cost().Cmp(minGasDeploySMC) < 0 || tx.GasPrice().Cmp(new(big.Int).SetUint64(10000*params.Shannon)) < 0) {
 		return ErrMinDeploySMC
 	}
-
+       */
 	// validate minFee slot for RupayaZ
 	if tx.IsRupayaZApplyTransaction() {
 		copyState := pool.currentState.Copy()
